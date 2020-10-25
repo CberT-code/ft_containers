@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 09:22:09 by cbertola          #+#    #+#             */
-/*   Updated: 2020/10/21 14:53:31 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/10/21 17:19:00 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,15 @@ int main(int argc, char const *argv[])
 	std::cout << "*************** Test ft list ***************" << std::endl;
 	tata.pop_back();
 	tata.aff();
-
+	std::cout << "*************** Test ft list ***************" << std::endl;
+	tata.clear();
+	tata.aff();
+	std::cout << "*************** Test ft list ***************" << std::endl;
+	tata.assign(10,5);
+	tata.aff();
+	std::cout << "*************** Test ft list ***************" << std::endl;
+	tata.resize(2);
+	tata.aff();
 	// ft::list<int>::Iterator it;
 	// std::cout << &it << std::endl;
 	// for (size_t i = 0; i < tata.size(); i++)
