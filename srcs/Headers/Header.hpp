@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:16:44 by cbertola          #+#    #+#             */
-/*   Updated: 2020/10/27 11:50:16 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/10/28 14:06:11 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ struct maillon
 #include "../Iterator/OutputIterator.hpp"
 #include "../Iterator/ForwardIterator.hpp"
 #include "../Iterator/BidirectionalIterator.hpp"
-#include "../Iterator/RandomAccessIterator.hpp"
+#include "../Iterator/ReverseInputIterator.hpp"
+#include "../Iterator/ReverseForwardIterator.hpp"
+#include "../Iterator/ReverseBidirectionalIterator.hpp"
+
 #include "../List/List.hpp"
 
 #endif
