@@ -17,7 +17,7 @@ class OutputIterator
 			this->it == NULL;
 		}
 		OutputIterator(T elem){
-			iterator_struct<T> *iter = new iterator_struct<T>;
+			maillon<T> *iter = new maillon<T>;
 			if (this->it != NULL){}
 				this->it->next = iter;
 			iter->element == elem;
@@ -35,7 +35,7 @@ class OutputIterator
 			return (this);
 		}
 		virtual ~OutputIterator(void){
-			iterator_struct<T>	*cpy;
+			maillon<T>	*cpy;
 			while (this->it != NULL)
 			{
 				cpy = this->it;
@@ -80,7 +80,7 @@ class OutputIterator
 		}
 
 	private:
-		iterator_struct<T>				*it;
+		maillon<T>				*it;
 };
 
 #endif

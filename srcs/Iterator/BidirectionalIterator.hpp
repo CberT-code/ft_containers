@@ -5,7 +5,7 @@
 #include "./Iterator.hpp"
 
 template <typename T>
-class BidirectionalIterator
+class BidirectionalIterator : public ForwardIterator<T>
 {
 	public:
 
@@ -24,96 +24,35 @@ class BidirectionalIterator
 			}
 			return (*this);
 		}
-		virtual ~BidirectionalIterator(void){
-			iterator_struct<T>	*cpy;
-			while (this->it != NULL)
-			{
-				cpy = this->it;
-				this->it = this->it->next;
-				delete cpy;
-			}			
-		}
-		
-		/**************************************************
-		*************** operator '==' '!=' ****************
-		**************************************************/
-		bool					operator==(const BidirectionalIterator &src) const{
-			if (this->it == &src.it)
-				return (true);
-			return (false);
-		}
-		bool					operator!=(const BidirectionalIterator &src) const{
-			if (this->it != &src.it)
-				return (true);
-			return (false);
+		virtual ~BidirectionalIterator(void){}
+
+		BidirectionalIterator(maillon<T> *src){
+			this->it = src;
 		}
 
-		/**************************************************
-		************* operator '*a' 'a->m' ****************
-		**************************************************/
-		T							&operator*(void){
-				return (this->it->element);
-		}
-		T							*operator->(void){
-			if (this->it != NULL)
-				return (this->it);
-			return (NULL);
-		}
-
-		/**************************************************
-		********* operator '++a' 'a++' '*a++' *************
-		**************************************************/
-		BidirectionalIterator				operator++(int) const{
-			if (this->it != NULL){
-				this->it = this->it->next;
-				return(this->it);
-			}
-			return (NULL);
-		}
-		BidirectionalIterator				&operator++(void) const{
-			if (this->it != NULL){
-				void *ptr = this->it;
-				this->it = this->it->next;
-				return(ptr);
-			}
-			return (NULL);
-		}
-		T							*operator++(void){
-			if (this->it != NULL){
-				this->it->element =+ 1;
-				return (this->it->element);
-			}
-			return (NULL);
-		}
 
 		/**************************************************
 		********* operator '--a' 'a--' '*a--' *************
 		**************************************************/
-		BidirectionalIterator				operator--(int) const{
-			if (this->it != NULL){
+		BidirectionalIterator				operator--(int){
+			BidirectionalIterator I = *this;
+			if (this->it && this->it->prev)
 				this->it = this->it->prev;
-				return(this->it);
-			}
-			return (NULL);
+			return (I);
 		}
-		BidirectionalIterator				&operator--(void) const{
-			if (this->it != NULL){
-				void *ptr = this->it;
+		BidirectionalIterator				&operator--(void){
+			if (this->it && this->it->prev)
 				this->it = this->it->prev;
-				return(ptr);
-			}
-			return (NULL);
+			return (*this);
 		}
-		T							*operator--(void){
-			if (this->it != NULL){
-				this->it->element -= 1;
-				return (this->it->element);
-			}
-			return (NULL);
-		}
-			
-	private:
-		iterator_struct<T>				*it;
+		// T							*operator--(void){
+		// 	if (this->it != NULL){
+		// 		this->it->ptr -= 1;
+		// 		return (this->it->ptr);
+		// 	}
+		// 	return (NULL);
+		// }
+
 };
 
 #endif

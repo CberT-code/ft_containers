@@ -5,13 +5,13 @@
 #include "./Iterator.hpp"
 
 template <typename T>
-struct ForwardIterator : InputIterator
+struct ForwardIterator : public InputIterator<T>
 {
 	/**************************************************
 	****************** Form Coplien *******************
 	**************************************************/
-
-	ForwardIterator(void){}
+	public :
+		ForwardIterator(void){}
 
 	
 
