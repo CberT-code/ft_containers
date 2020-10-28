@@ -14,69 +14,43 @@ namespace ft
 		
 		public:
 
-			struct maillon
-			{
-				maillon					*prev;
-				maillon					*next;	
-				T						*ptr;		
-			};
-
-			typedef T 							value_type;
-			typedef BidirectionalIterator<T>	Iterator;
-			typedef T &							reference;
-			typedef const T&					const_reference;
-			typedef T*							pointer;
-			typedef const T*					const_pointer;
-			typedef const Iterator 				const_iterator;
-			typedef size_t						size_type;
-			// typedef ReverseIterator<iterator> 	reverse_iterator;
-			// typedef ReverseIterator<const_iterator> const_reverse_iterator;
-			typedef std::ptrdiff_t 				difference_type;
+			typedef T 									value_type;
+			typedef BidirectionalIterator<T>			Iterator;
+			typedef T &									reference;
+			typedef const T&							const_reference;
+			typedef T*									pointer;
+			typedef const T*							const_pointer;
+			typedef const Iterator 						const_Iterator;
+			// typedef InputIterator<T>					InputIterator;
+			typedef size_t								size_type;
+			typedef BidirectionalIterator<T> 			reverse_Iterator;
+			typedef BidirectionalIterator< const T>		const_reverse_Iterator;
+			typedef std::ptrdiff_t 						difference_type;
 
 
 			/**************************************************
 			****************** Form Coplien *******************
 			**************************************************/
-			list(void){
+			explicit list(void){
+				*this->_endsize->ptr = 0;
 				this->_size = 0;
-				this->_unit = NULL;
+				this->_begin = NULL;
 			}
 
-			list(size_t n, T val){
-				if (n > 0){
-					this->_unit = new maillon;
-					this->_unit->ptr = this->_al->allocate(1);
-					this->_al->construct(this->_unit->ptr, val);
-					this->_unit->prev = NULL;
-					this->_unit->next = NULL;
-					this->_begin = this->_unit;
-					this->_end = this->_unit;
-					this->_size = 1;
-					for (size_t i = 1; i < n; i++)
-						push_back(val);
-				}
+			explicit list(size_type n,  const value_type& val = value_type()){
+				this->_begin = NULL;
+				assign(n, val);
 			}
 
-			// list(InputIterator first, InputIterator last){
-			// 	size_t				i = 0;
+			template <class InputIterator>
+			list(InputIterator first, InputIterator last){
+				this->_begin = NULL;
+				assign(first,last);
+			}
 
-			// 	while (first + i != last)
-			// 		i++;
-
-			// 	//Initialisation de la structure du container
-			// 	this->_begin = first;
-			// 	this->_end = last;
-			// 	this->_size = i;
-
-			// 	//Initialisation du premier maillon
-			// 	this->_unit = new maillon;
-			// 	this->_unit->prev = NULL;
-			// 	this->_unit->next = NULL;
-			// 	this->_unit->ptr = first;
-			// }
-
-			list(list const &src){
-				operator=(src);
+			list(const list& x){
+				this->_begin = NULL;
+				operator=(x);
 			}
 			list &	operator=( list const &src){             // DEEP COPY A FAIRE
 				if (this != &src){
@@ -85,13 +59,13 @@ namespace ft
 				return (*this);
 			}
 			virtual ~list(void){
-				
+				// clear();
 			}
 
 			void	aff(void){
-				maillon *cpy = this->_unit;
+				maillon<T> *cpy = this->_begin;
 
-				while (cpy)
+				while (cpy != this->_endsize && cpy)
 				{
 					std::cout << *(cpy->ptr) << std::endl;
 					cpy = cpy->next;
@@ -103,26 +77,26 @@ namespace ft
 			**************************************************/
 
 			Iterator						begin(){
+				return (Iterator(this->_begin));
+			}
+			const_Iterator					begin() const{
 				return (this->_begin);
 			}
-			const_iterator					begin() const{
-				return (this->_begin);
+			Iterator						end(){	
+				return (this->_endsize);
 			}
-			Iterator						end(){
-				return (this->_end);
+			const_Iterator					end() const{
+				return (this->_endsize);
 			}
-			const_iterator					end() const{
-				return (this->_end);
-			}
-			// reverse_iterator 				rbegin(){
+			// reverse_Iterator 				rbegin(){
 			// 	return (this->_cont->size + this->_n);
 			// }
-			// const_reverse_iterator 		rbegin() const;
-			// reverse_iterator 			rend(){}
-			// const_reverse_iterator 		rend() const;
+			// const_reverse_Iterator 		rbegin() const;
+			// reverse_Iterator 			rend(){}
+			// const_reverse_Iterator 		rend() const;
 
 			/**************************************************
-			*************** empty size max_size ***************
+			*************** empty size max_endsize->ptr ***************
 			**************************************************/
 			
 			bool							empty() const{
@@ -141,162 +115,167 @@ namespace ft
 			******************** front back *******************
 			**************************************************/
 			reference 					front(){
-				return (this->_begin());
+				return (this->begin());
 			}
 			const_reference 			front() const{
-				return (this->_begin());
+				return (this->begin());
 			}
 			reference					back(){
-				return (this->_end());
+				return (this->end());
 			}
 			const_reference				back() const{
-				return (this->_end());
+				return (this->end());
 			}
 
 			/**************************************************
 			* assign push_front pop_front push_back pop_back  *
 			********* insert erase swap resize clear **********
 			**************************************************/
-			// template <class InputIterator>
-			// void 						assign (InputIterator first, InputIterator last){}
-		
-			void						assign (size_type n, const value_type& val){
-				clear();
-				this = ft::list(n, val);
-			}
-			void						push_front (const value_type& val){
-				maillon *start =  new maillon;
 
-				//Initialisation du nouveau premier maillon
-				start->ptr = this->_al->allocate(1);
-				this->_al->construct(start->ptr, val);
-				start->prev = NULL;
-				start->next = this->_begin;
-				start->size = 1;
+		
+			void						assign(size_type n, const value_type& val){
+				if (this->_begin != NULL)
+					this->clear();
+				if (n > 0){
+					this->_begin = new maillon<T>;
+					this->_begin->ptr = this->_al->allocate(1);
+					this->_al->construct(this->_begin->ptr, val);
+					this->_endsize = new maillon<T>;
+					this->_begin->prev = this->_endsize;
+					this->_begin->next = this->_endsize;
+					this->_endsize->prev = this->_begin;
+					this->_endsize->next = this->_begin;
+					this->_endsize->ptr = this->_al->allocate(1);
+					this->_al->construct(this->_endsize->ptr, 1);
+					this->_size = 1;
+					for (size_t i = 1; i < n; i++)
+						push_back(val);
+				}
+			}
+
+			template <class InputIterator>
+			void 						assign(InputIterator first, InputIterator last){
+				this->clear();
+				while (first != last){
+					this->push_back(*first);
+					first++;
+				}
+
+			}
+			
+			void						push_front (const value_type& val){
+				maillon<T> *new_start =  new maillon<T>;
+
+				//Initialisation du nouveau premier maillon<T>
+				new_start->ptr = this->_al->allocate(1);
+				this->_al->construct(new_start->ptr, val);
+				new_start->prev = this->_endsize;
+				new_start->next = this->_begin;
+				this->_begin->prev = new_start;
 
 				//Modification des variables
-				this->_unit->prev = start;
-				this->_begin = start;
+				this->_begin = new_start;
+				*this->_endsize->ptr += 1;
 				this->_size += 1;
-				this->_unit = start;
 			}
 			void						pop_front(void){
-				this->_begin = this->_unit->next;
-				this->_al->deallocate(this->_unit->ptr, 1);
-				delete this->_unit;
-				this->_unit = this->_begin;
+				maillon<T>	*cpy = this->_begin;
+
+				this->_al->deallocate(cpy->ptr, 1);
+				this->_begin = cpy->next;
+				delete cpy;
+				this->_begin->prev = this->_endsize;
+				*this->_endsize->ptr -= 1;
 				this->_size -= 1;
 			}
 			void 						push_back (const value_type& val){
-				maillon *end =  new maillon;
+				if (this->_begin == NULL){
+					std::cout << "1st" << std::endl;
+					list(static_cast<size_t>(1), val);
+				}
+				else
+				{
+					maillon<T> *new_end =  new maillon<T>;
+					maillon<T> *old_end =  this->_endsize->prev;
 
-				//Initialisation du nouveau dernier maillon
-				end->ptr = this->_al->allocate(1);
-				this->_al->construct(end->ptr, val);
-				end->prev = this->_end;;
-				end->next = NULL;
-				end->size = 1;
+					old_end->next = new_end;
 
-				//Modification des variables
-				this->_end->next = end;
-				this->_end = end;
-				this->_size += 1;
+					//Initialisation du nouveau dernier maillon<T>
+					new_end->ptr = this->_al->allocate(1);
+					this->_al->construct(new_end->ptr, val);
+					new_end->prev = old_end;
+					new_end->next = this->_endsize;
+
+					//Modification des variables
+					this->_endsize->prev = new_end;
+					*this->_endsize->ptr += 1;
+					this->_size += 1;
+				}
+				
+
 			}
 			void 						pop_back(void){
-				if (this->_unit->size == 1)
-				{
-					maillon *p;
-
-					p = this->_end->prev;
-					this->_al->deallocate(this->_end->ptr, 1);
-					delete this->_end;
-					this->_end = p;
-					p->next = NULL;
+					maillon<T> *replaced = this->_endsize->prev;
+					maillon<T> *new_end = this->_endsize->prev->prev;
+					
+					this->_al->destroy(replaced->ptr);
+					std::cout << "toto" << std::endl;
+					this->_endsize->prev = new_end;
+					new_end->next = this->_endsize;
+					delete (replaced);
+					*this->_endsize->ptr -= 1;
 					this->_size -= 1;
-				}
-				else{
-					this->_al->destroy(this->_end->ptr + this->_end->size);
-					this->_end->size -= 1;
-					this->_size -= 1;
-				}
 			}
 
 			// Iterator					insert (Iterator position, const value_type& val){
 			// }	
-			// void						insert (iterator position, size_type n, const value_type& val){
+			// void						insert (Iterator position, size_type n, const value_type& val){
 
 			// }
 
 			// template <class InputIterator>
-			// void						insert (iterator position, InputIterator first, InputIterator last){}
+			// void						insert (Iterator position, InputIterator first, InputIterator last){}
 
-			// iterator					erase (iterator position){}
-			// iterator					erase (iterator first, iterator last){}
+			Iterator					erase (Iterator position){
+				position.it->prev->next = position.it->next;
+				position.it->next->prev = position.it->prev;
+				this->_al->destroy(position.ptr);
+				delete (position);
+			}
+			// Iterator					erase (Iterator first, Iterator last){}
 			void						swap (list& x){
-				maillon				*cpy_unit;
-				maillon				*cpy_begin;
-				maillon				*cpy_end;
-				size_t				cpy_size;	
+				maillon<T>				*cpy_begin;
+				maillon<T>				*cpy_end;
 
-				cpy_unit = x->_unit;
-				cpy_begin = x->_begin;
-				cpy_end = x->_end;
-				cpy_size = x->_size;
-				x->_unit = this->_unit;
-				x->_begin = this->_begin;
-				x->_end = this->_end;
-				x->_size = this->_size;
-				this->_unit = cpy_unit;
+				cpy_begin = x._begin;
+				cpy_end = x._endsize;
+				x._begin = this->_begin;
+				x._endsize = this->_endsize;
 				this->_begin = cpy_begin;
-				this->_end = cpy_end;
-				this->_size = cpy_size;
+				this->_endsize = cpy_end;
 			}
 			void						resize (size_type n, value_type val = value_type()){
-				size_t 				ind = 0;
-				maillon				*cpy;
-				maillon				*tmp;
-
-				cpy = this->_unit;
-				if (n < this->_size){
-					ind += cpy->size;
-					while (ind < n && cpy->next){
-						cpy = cpy->next;
-						ind += cpy->size;
-					}
-					ind -= n;
-					for (size_t i = 0; i < ind; i++){
-						this->_al->destroy(cpy->ptr + (cpy->size - i));
-					}
-					cpy->size -= ind;
-					tmp = cpy;
-					cpy = cpy->next;
-					tmp->next = 0;
-					while (cpy){
-
-						tmp = cpy;
-						cpy = cpy->next;
-						this->_al->deallocate(cpy->ptr, cpy->size);
-						delete tmp;
-					}
-				}
-				// si plus grand, faire avec le insert;
-					
+			while (this->_size > n)
+				this->pop_back();
+			while (this->_size < n)
+				this->push_back(val);
 			}
 			void						clear(void){
-				maillon *cpy;
+				maillon<T> *cpy = NULL;
 
-				while (this->_unit)
-				{
-					cpy = this->_unit;
-					this->_unit = this->_unit->next;
-					this->_al->deallocate(cpy->ptr, cpy->size);
-					delete cpy;
+				if (this->_begin != NULL){
+					while (cpy != this->_endsize)
+					{
+						cpy = this->_begin;
+						this->_begin = cpy->next;
+						this->_al->deallocate(cpy->ptr, 1);
+						delete cpy;
+					}
+					this->_begin = NULL;
+					this->_endsize = NULL;
 				}
-				this->_begin = NULL;
-				this->_end = NULL;
-				this->_size = 0;
-			}
 
+			}
 			/**************************************************
 			**** splice remove remove_if unique merge sort ****
 			********************* reverse *********************
@@ -304,13 +283,9 @@ namespace ft
 
 			private :
 				std::allocator<T>				*_al;
-				maillon							*_unit;
-				maillon							*_begin;
-				maillon							*_end;
-				size_t							_size;	
-
-
-
+				maillon<T>						*_begin;
+				maillon<T>						*_endsize;
+				size_t							_size;
 
 
 

@@ -6,12 +6,20 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:16:44 by cbertola          #+#    #+#             */
-/*   Updated: 2020/10/19 18:01:10 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/10/27 11:50:16 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 #define HEADER_H
+
+template <class T>
+struct maillon
+{
+	maillon					*prev;
+	maillon					*next;	
+	T						*ptr;		
+};
 
 # define RESET   		"\033[0m"
 # define BLACK   		"\033[30m"				/* Black */
