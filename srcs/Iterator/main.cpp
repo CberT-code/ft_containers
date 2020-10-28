@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 09:22:09 by cbertola          #+#    #+#             */
-/*   Updated: 2020/10/28 20:56:35 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/10/28 21:11:58 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,12 +273,16 @@ int main ()
 		ft::list<int>::Iterator it;
 
 		// set some initial values:
-		for (int i=1; i<=5; ++i)
-		{
+		// for (int i=1; i<=5; ++i)
+		// {
 
 			std::cout << "test" << std::endl;
-			mylist.push_back(i); // 1 2 3 4 5
-		}
+			mylist.push_back(1); // 1 2 3 4 5
+			mylist.push_back(2); // 1 2 3 4 5
+			mylist.push_back(3); // 1 2 3 4 5
+			mylist.push_back(4); // 1 2 3 4 5
+			mylist.push_back(5); // 1 2 3 4 5
+		// }
 
 		it = mylist.begin();
 		++it;       // it points now to number 2           ^
