@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:16:44 by cbertola          #+#    #+#             */
-/*   Updated: 2020/10/28 14:06:11 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/10/30 13:57:38 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ struct maillon
 #include <fstream>
 #include <string>
 #include <iomanip>
-#include <deque>
+#include <memory>
+#include <limits>
+#include <algorithm>
 
 #include "../Iterator/InputIterator.hpp"
 #include "../Iterator/OutputIterator.hpp"
