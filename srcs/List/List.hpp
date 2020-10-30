@@ -347,7 +347,7 @@ namespace ft
 			********************* reverse *********************
 			**************************************************/
 
-				void splice (Iterator position, list& x){
+			void splice (Iterator position, list& x){
 				maillon<T> *cpy = this->_begin;
 				ft::list<int>::Iterator it = this->begin();
 
@@ -385,11 +385,11 @@ namespace ft
 			}
 			
 			
-
+*/
 			void splice (Iterator position, list& x, Iterator first, Iterator last){
 
 			}
-*/
+
 			void sort(void){
 				maillon<T> 		*start = this->_begin;
 				maillon<T> 		*end = this->_endsize->prev;
