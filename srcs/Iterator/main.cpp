@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 09:22:09 by cbertola          #+#    #+#             */
-/*   Updated: 2020/10/30 17:07:50 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/10/30 17:44:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,18 @@ int main ()
 		ft::list<int> fourth (third);                       // a copy of third
 
 		// the iterator constructor can also be used to construct from arrays:
-		int myints[] = {16,2,77,29};
-		ft::list<int> fifth (myints, myints + sizeof(myints) / sizeof(int) );
-
-		std::cout << "The contents of fifth are: ";
-		for (ft::list<int>::Iterator it = fifth.begin(); it != fifth.end(); it++)
+		int myints[] = {16,2,2,29};
+		for (int i = 0; i < 4; i++)
+			first.push_back(myints[i]);
+		first.unique();
+		std::cout << "The contents of first are: ";
+		for (ft::list<int>::Iterator it = first.begin(); it != first.end(); it++)
 			std::cout << *it << ' ';
 
 		std::cout << '\n';
 	}catch(const std::exception &e){};
 
+	return (0);
 
 	std::cout << std::endl << BLUE << "*************** Test opeartor= ***************" << RESET << std::endl;
 	try{
