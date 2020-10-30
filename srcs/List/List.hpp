@@ -364,6 +364,41 @@ namespace ft
 			// void sort (Compare comp){
 
 			// }
+
+			void remove(const value_type& val) {
+				maillon<T>		*tmp = this->_begin;
+				if (tmp != NULL)
+				{
+					while (tmp != this->_endsize)
+					{
+						if (*tmp->ptr == val)
+						{
+							tmp->prev->next = tmp->next;
+							tmp->next->prev = tmp->prev;
+							_al.deallocate(tmp->ptr, 1);
+							if (tmp == this->_begin)
+								this->_begin = tmp->next;
+							delete tmp;
+							tmp = NULL;
+							this->size -= 1;
+							return ;
+						}
+						tmp = tmp->next;
+					}
+				}
+			}
+
+			template <class Predicate>
+			void remove_if(Predicate pred) {
+				maillon<T>		*tmp = this->_begin;
+				while (tmp != this->_endsize)
+				{
+					if (*tmp->ptr == pred)
+						this->remove(pred);
+					tmp = tmp->next;
+				}
+			}
+
 			void 							reverse(void){
 				maillon<T> 		*start = this->_begin;
 				maillon<T> 		*end = this->_endsize->prev;
