@@ -298,6 +298,7 @@ namespace ft
 				maillon<T> *pos = position.get_it();
 				pos->prev->next = pos->next;
 				pos->next->prev = pos->prev;
+				this->_al->deallocate(pos->ptr, 1);
 				this->_al->destroy(pos->ptr);
 				delete (pos);
 				position++;
@@ -357,10 +358,6 @@ namespace ft
 				maillon<T>						*_begin;
 				maillon<T>						*_endsize;
 				size_t							_size;
-
-
-
-
 	};
 }
 
