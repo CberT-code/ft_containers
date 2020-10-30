@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 09:22:09 by cbertola          #+#    #+#             */
-/*   Updated: 2020/10/30 15:06:30 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/10/30 17:07:50 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,10 +182,11 @@ int main ()
 	try{
 		ft::list<int> mylist;
 
-		mylist.push_back(10);
+		mylist.push_back(15);
 
-		while (mylist.back() != 0)
-		{
+		ft::list<int>::Iterator it1 = mylist.begin();
+
+		while (mylist.back() != 0){
 			mylist.push_back ( mylist.back() -1 );
 		}
 
@@ -310,40 +311,40 @@ int main ()
 	}catch(const std::exception &e){};
 
 
-	std::cout << std::endl << BLUE << "*************** Test Erase ***************" << RESET << std::endl;
-	try{
-		ft::list<int> mylist;
-		ft::list<int>::Iterator it1,it2;
+	// std::cout << std::endl << BLUE << "*************** Test Erase ***************" << RESET << std::endl;
+	// try{
+	// 	ft::list<int> mylist;
+	// 	ft::list<int>::Iterator it1,it2;
 
-		// set some values:
-		for (int i=1; i<10; ++i) mylist.push_back(i*10);
+	// 	// set some values:
+	// 	for (int i=1; i<10; ++i) mylist.push_back(i*10);
 
-									// 10 20 30 40 50 60 70 80 90
-		it1 = it2 = mylist.begin(); // ^^
-		//std::advance (it2,6);
-		for (int i = 0; i < 6; i++){
-			it2++;
-		}
-							        // ^                 ^
-		++it1;                      //    ^              ^
+	// 								// 10 20 30 40 50 60 70 80 90
+	// 	it1 = it2 = mylist.begin(); // ^^
+	// 	//std::advance (it2,6);
+	// 	for (int i = 0; i < 6; i++){
+	// 		it2++;
+	// 	}
+	// 						        // ^                 ^
+	// 	++it1;                      //    ^              ^
 
-		it1 = mylist.erase (it1);   // 10 30 40 50 60 70 80 90
-									//    ^           ^
+	// 	it1 = mylist.erase (it1);   // 10 30 40 50 60 70 80 90
+	// 								//    ^           ^
 
-		it2 = mylist.erase (it2);   // 10 30 40 50 60 80 90
-									//    ^           ^
+	// 	it2 = mylist.erase (it2);   // 10 30 40 50 60 80 90
+	// 								//    ^           ^
 
-		++it1;                      //       ^        ^
-		--it2;                      //       ^     ^
+	// 	++it1;                      //       ^        ^
+	// 	--it2;                      //       ^     ^
 
-		mylist.erase (it1,it2);     // 10 30 60 80 90
-									//        ^
+	// 	mylist.erase (it1,it2);     // 10 30 60 80 90
+	// 								//        ^
 
-		std::cout << "mylist contains:";
-		for (it1=mylist.begin(); it1!=mylist.end(); ++it1)
-			std::cout << ' ' << *it1;
-		std::cout << '\n';
-	}catch(const std::exception &e){};
+	// 	std::cout << "mylist contains:";
+	// 	for (it1=mylist.begin(); it1!=mylist.end(); ++it1)
+	// 		std::cout << ' ' << *it1;
+	// 	std::cout << '\n';
+	// }catch(const std::exception &e){};
 
 
 	std::cout << std::endl << BLUE << "*************** TEST SWAP ***************" << RESET << std::endl;
@@ -427,32 +428,32 @@ int main ()
 
 	
 
-	// std::cout << std::endl << BLUE << "***************  TEST SORT ***************" << RESET << std::endl;
-	// try{
+	std::cout << std::endl << BLUE << "***************  TEST SORT ***************" << RESET << std::endl;
+	try{
 
 
-	// 	ft::list<std::string> mylist;
-	// 	ft::list<std::string>::Iterator it;
+		ft::list<std::string> mylist;
+		ft::list<std::string>::Iterator it;
 		
-	// 	mylist.push_back ("one");
-	// 	mylist.push_back ("two");
-	// 	mylist.push_back ("Three");
+		mylist.push_back ("one");
+		mylist.push_back ("two");
+		mylist.push_back ("Three");
 
-	// 	mylist.sort();
+		mylist.sort();
 
-	// 	std::cout << "mylist contains:";
-	// 	for (it=mylist.begin(); it!=mylist.end(); ++it)
-	// 		std::cout << ' ' << *it;
-	// 	std::cout << '\n';
+		std::cout << "mylist contains:";
+		for (it=mylist.begin(); it!=mylist.end(); ++it)
+			std::cout << ' ' << *it;
+		std::cout << '\n';
 
-	// 	// mylist.sort(compare_nocase);
+		// mylist.sort(compare_nocase);
 
-	// 	// std::cout << "mylist contains:";
-	// 	// for (it=mylist.begin(); it!=mylist.end(); ++it)
-	// 	// 	std::cout << ' ' << *it;
-	// 	// std::cout << '\n';
+		// std::cout << "mylist contains:";
+		// for (it=mylist.begin(); it!=mylist.end(); ++it)
+		// 	std::cout << ' ' << *it;
+		// std::cout << '\n';
 
-	// }catch(const std::exception &e){};
+	}catch(const std::exception &e){};
 
 
 	// std::cout << std::endl << BLUE << "***************  ***************" << RESET << std::endl;
