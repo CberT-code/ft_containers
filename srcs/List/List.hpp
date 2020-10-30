@@ -346,6 +346,50 @@ namespace ft
 			**** splice remove remove_if unique merge sort ****
 			********************* reverse *********************
 			**************************************************/
+
+				void splice (Iterator position, list& x){
+				maillon<T> *cpy = this->_begin;
+				ft::list<int>::Iterator it = this->begin();
+
+				while (it++ != position)
+					cpy = cpy->next;
+				maillon<T> *cpy2 = cpy->prev;
+				maillon<T> *cpy3 = this->_begin;
+				for (int i = -1; i < *x._endsize->ptr; ++i)
+					++it;
+				cpy2->next = x._begin;
+				x._begin->prev = cpy2;
+				cpy->prev = x._endsize->prev;
+				x._endsize->prev->next = cpy;
+				x.clear();
+				while (this->_begin != this->_endsize)
+				{
+					std::cout << *this->_begin->ptr << std::endl;
+					this->_begin = this->_begin->next;
+				}
+			}
+			
+/*
+			void splice (Iterator position, list& x, Iterator i){
+			maillon<T> *cpy = x._begin;
+			maillon<T> *cpythis = this->_begin;
+			ft::list<int>::Iterator it = x.begin();
+			ft::list<int>::Iterator itthis = this->begin();
+			while (it++ != i)
+					cpy = cpy->next;
+			while (itthis++ != i)
+					cpythis = cpythis->next;
+			cpythis = cpy;
+			cpy->prev->next = cpythis->next;
+			std::cout << *this->_begin->ptr << std::endl;
+			}
+			
+			
+
+			void splice (Iterator position, list& x, Iterator first, Iterator last){
+
+			}
+*/
 			void sort(void){
 				maillon<T> 		*start = this->_begin;
 				maillon<T> 		*end = this->_endsize->prev;

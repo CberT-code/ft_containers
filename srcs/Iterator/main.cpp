@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 09:22:09 by cbertola          #+#    #+#             */
-/*   Updated: 2020/10/30 18:01:14 by cbertola         ###   ########.fr       */
+/*   Created: 2020/10/19 09:22:09 by moi          #+#    #+#             */
+/*   Updated: 2020/10/30 18:24:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int main ()
 
 		std::cout << '\n';
 	}catch(const std::exception &e){};
+
+	return (0);
 
 	std::cout << std::endl << BLUE << "*************** Test opeartor= ***************" << RESET << std::endl;
 	try{
