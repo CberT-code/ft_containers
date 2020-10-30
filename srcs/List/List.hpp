@@ -8,13 +8,14 @@
 
 namespace ft
 {
-	template<typename T>
+	template<typename T, class Alloc = std::allocator<T> >
 	class list
 	{
 		
 		public:
 
 			typedef T 											value_type;
+			typedef Alloc 										allocator_type;
 			typedef BidirectionalIterator<T>					Iterator;
 			typedef T &											reference;
 			typedef const T&									const_reference;
@@ -30,34 +31,45 @@ namespace ft
 			/**************************************************
 			****************** Form Coplien *******************
 			**************************************************/
-			explicit list(void){
-				this->_endsize = NULL;
+			explicit list (const allocator_type& alloc = allocator_type()){
+				(void)alloc;
 				this->_begin = NULL;
+				this->_endsize = NULL;
 				this->_size = 0;
 			}
 
-			explicit list(size_type n,  const value_type& val = value_type()){
+			explicit list (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()){
+				(void)alloc;
 				this->_begin = NULL;
+				this->_endsize = NULL;
 				this->_size = 0;
 				assign(n, val);
 			}
 
-			explicit list(int n,  const value_type& val = value_type()){
+			explicit list (int n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()){
+				(void)alloc;
 				this->_begin = NULL;
+				this->_endsize = NULL;
 				this->_size = 0;
 				assign(n, val);
 			}
 			template <class InputIterator>
-			list(InputIterator first, InputIterator last){
+			list (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()){
+				(void)alloc;
 				this->_begin = NULL;
+				this->_endsize = NULL;
 				this->_size = 0;
 				assign(first,last);
 			}
 
 			list(const list& x){
 				this->_begin = NULL;
+				this->_endsize = NULL;
 				this->_size = 0;
 				operator=(x);
+			}
+			virtual ~list(void){
+				clear();
 			}
 			list &	operator=( list const &src){             // DEEP COPY A FAIRE
 				if (this != &src){
@@ -65,19 +77,16 @@ namespace ft
 				}
 				return (*this);
 			}
-			virtual ~list(void){
-				clear();
-			}
 
-			void	aff(void){
-				maillon<T> *cpy = this->_begin;
+			// void	aff(void){
+			// 	maillon<T> *cpy = this->_begin;
 
-				while (cpy != this->_endsize && cpy)
-				{
-					std::cout << *(cpy->ptr) << std::endl;
-					cpy = cpy->next;
-				}
-			}
+			// 	while (cpy != this->_endsize && cpy)
+			// 	{
+			// 		std::cout << *(cpy->ptr) << std::endl;
+			// 		cpy = cpy->next;
+			// 	}
+			// }
 			
 			/**************************************************
 			************** begin end rbegin rend **************
@@ -181,13 +190,16 @@ namespace ft
 					this->_endsize->ptr = this->_al->allocate(1);
 					this->_al->construct(this->_endsize->ptr, 1);
 					this->_size = 1;
-					for (int i = 1; i < n; i++)
+					for (int i = 1; i < n; i++){
 						push_back(val);
+					}
 				}
 			}
 			template <class InputIterator>
 			void 						assign(InputIterator first, InputIterator last){
-				this->clear();
+				if (this->_begin != NULL){
+					this->clear();
+				}
 				while (first != last){
 					this->push_back(*first);
 					first++;
@@ -223,6 +235,7 @@ namespace ft
 					assign(1, val);
 				else
 				{
+					
 					maillon<T> *new_end =  new maillon<T>;
 					maillon<T> *old_end =  this->_endsize->prev;
 
@@ -317,16 +330,21 @@ namespace ft
 			void						clear(void){
 				maillon<T> *cpy = NULL;
 
-				if (this->_begin != NULL){
-					while (cpy != this->_endsize)
+				if (cpy != NULL){
+					cpy = this->_endsize->prev;
+					while (cpy->prev)
 					{
-						cpy = this->_begin;
-						this->_begin = cpy->next;
-						this->_al->deallocate(cpy->ptr, 1);
-						delete cpy;
+						this->_al->deallocate(this->_endsize->ptr, 1);
+						this->_al->destroy(this->_endsize->ptr);
+						delete this->_endsize;
+						this->_endsize = cpy;
+						cpy = cpy->prev;
 					}
+					delete this->_endsize;
+					delete cpy;
 					this->_begin = NULL;
 					this->_endsize = NULL;
+					this->_size = 0;
 				}
 			}
 			/**************************************************
