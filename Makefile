@@ -6,14 +6,14 @@
 #    By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/21 15:12:58 by cbertola          #+#    #+#              #
-#    Updated: 2020/10/14 16:51:21 by cbertola         ###   ########.fr        #
+#    Updated: 2020/10/30 18:02:46 by cbertola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= ex00
+NAME		= ft_containers
 SRCS_PATH	= ./
-OBJS_PATH	= ./objs/
-SRCSC		= whatever.cpp
+OBJS_PATH	= ./srcs/Iterator/
+SRCSC		= main.cpp
 
 SRCSH		=
 SRCS		= $(addprefix $(SRCS_PATH),$(SRCSC))
@@ -27,7 +27,7 @@ LOGFILE		= $(LOGPATH) `date +'%y.%m.%d %H:%M:%S'`
 all:		${NAME}
 
 .c.o: 		${OBJS}
-			@clang++ ${CXXFLAGS} -cpp $< -o ${<:.cpp=.o}
+			@clang++ ${CXXFLAGS} -cpp $< -o ${<:.cpp=.o} -fsanitize -g
 
 $(NAME):	${OBJS} ${SRCSH}
 			@${CXX} ${CXXFLAGS} ${OBJS} ${LIBS} -o ${NAME}

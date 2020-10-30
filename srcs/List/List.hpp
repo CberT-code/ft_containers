@@ -132,7 +132,7 @@ namespace ft
 			/**************************************************
 			******************** front back *******************
 			**************************************************/
-		
+
 			reference 						front(){
 				return (*this->_begin->ptr);
 			}
@@ -367,12 +367,9 @@ namespace ft
 
 			void remove(const value_type& val) {
 				maillon<T>		*tmp = this->_begin;
-				if (tmp != NULL)
-				{
-					while (tmp != this->_endsize)
-					{
-						if (*tmp->ptr == val)
-						{
+				if (tmp != NULL){
+					while (tmp != this->_endsize){
+						if (*tmp->ptr == val){
 							tmp->prev->next = tmp->next;
 							tmp->next->prev = tmp->prev;
 							_al.deallocate(tmp->ptr, 1);
@@ -404,15 +401,12 @@ namespace ft
 				int				i = 0;
 
 				if (tmp) {
-					while (tmp != this->_endsize && tmp)
-					{
+					while (tmp != this->_endsize && tmp){
 						i = 0;
-						for (maillon<T> *j = tmp; j != this->_endsize; j = j->next)
-						{
+						for (maillon<T> *j = tmp; j != this->_endsize; j = j->next){
 							if (*j->ptr == *tmp->ptr)
 								i += 1;
-							if (i > 1)
-							{
+							if (i > 1){
 								j->prev->next = j->next;
 								j->next->prev = j->prev;
 								_al.deallocate(j->ptr, 1);
