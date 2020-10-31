@@ -249,8 +249,10 @@ namespace ft
 			void 							pop_back(void){
 				if (this->_size == 2)
 				{
-					this->_al.deallocate(this->_begin->ptr, 1);
-					this->_al.destroy(this->_begin->ptr);
+					if (this->_begin->ptr) {
+						this->_al.deallocate(this->_begin->ptr, 1);
+						this->_al.destroy(this->_begin->ptr);
+					}
 					delete (this->_begin);
 					this->_al.deallocate(this->_endsize->ptr, 1);
 					this->_al.destroy(this->_endsize->ptr);
@@ -264,8 +266,10 @@ namespace ft
 					maillon<T> *replaced = this->_endsize->prev;
 					maillon<T> *new_end = this->_endsize->prev->prev;
 					
-					this->_al.deallocate(replaced->ptr, 1);
-					this->_al.destroy(replaced->ptr);
+					if (replaced->ptr) {
+						this->_al.deallocate(replaced->ptr, 1);
+						this->_al.destroy(replaced->ptr);
+					}
 					this->_endsize->prev = new_end;
 					new_end->next = this->_endsize;
 					delete (replaced);
@@ -350,26 +354,37 @@ namespace ft
 
 
 			void splice (Iterator position, list& x){
+				Iterator	first = x.begin();
+				Iterator 	last  = x.end();
 
-				ft::list<int>::Iterator it = x.begin();
-				while (it != x.end())
-				{
-					this->insert(position, *it);
-					x.erase(it);
-					it++;
+				for (int i = 0; i < x._size; i++) {
+					while (first != last) {
+						maillon<T>	*stock = new maillon<T>;
+						stock->ptr = first.get_it()->ptr;
+						first.get_it()->ptr = NULL;
+						stock->prev = position.get_it()->prev;
+						stock->next = position.get_it();
+						position.get_it()->prev->next = stock;
+						position.get_it()->prev = stock;
+						this->_size += 1;
+						first++;
+					}
 				}
 			}
 
 			void splice (Iterator position, list& x, Iterator i){
-				this->insert(position, *i);
-				//x.erase(i);
-				std::cout << "list1" << std::endl;
-				while (x._begin != x._endsize)
-				{
-					std::cout << *x._begin->ptr << std::endl;
-					x._begin = x._begin->next;
-				}
-				std::cout << "list2 = " << this->size() << std::endl;
+				Iterator	first = x.begin();
+				Iterator 	last  = x.end();
+
+				
+				maillon<T>	*stock = new maillon<T>;
+				stock->ptr = i.get_it()->ptr;
+				first.get_it()->ptr = NULL;
+				stock->prev = position.get_it()->prev;
+				stock->next = position.get_it();
+				i.get_it()->prev->next = stock;
+				i.get_it()->prev = stock;
+				this->_size += 1;
 			}
 
 /*
@@ -506,26 +521,22 @@ namespace ft
 			}
 
 			void							merge(list &x) {
-				maillon<T>	*tmp = this->_begin;
-				maillon<T>	*tmpi = x._begin;
+				Iterator	first = x.begin();
+				Iterator 	last  = x.end();
 
-				while (tmp->next != this->_endsize) {
-					std::cout << *tmp->ptr << std::endl;
-					tmp = tmp->next;
+				for (int i = 0; i < x._size; i++) {
+					while (first != last) {
+						maillon<T>	*stock = new maillon<T>;
+						stock->ptr = first.get_it()->ptr;
+						first.get_it()->ptr = NULL;
+						stock->prev = this->_endsize->prev;
+						stock->next = this->_endsize;
+						this->_endsize->prev->next = stock;
+						this->_endsize->prev = stock;
+						this->_size += 1;
+						first++;
+					}
 				}
-				tmp->next = x._begin;
-				x._begin->prev = tmp;
-				if (x._begin->next == x._endsize)
-					x._begin->next = this->_endsize;
-				else
-					x._endsize->prev->next = this->_endsize;
-				this->_endsize->prev = x._endsize->prev;
-				this->_size += x._size;
-				*this->_endsize->ptr += *x._endsize->ptr;
-				x._size = 0;
-				*x._endsize->ptr = 0;
-				x._endsize->prev = NULL;
-				x._endsize->next = NULL;
 				this->sort();
 			}
 
