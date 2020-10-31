@@ -448,12 +448,12 @@ int main ()
 			std::cout << ' ' << *it;
 		std::cout << '\n';
 
-		// mylist.sort(compare_nocase);
+		mylist.sort(compare_nocase);
 
-		// std::cout << "mylist contains:";
-		// for (it=mylist.begin(); it!=mylist.end(); ++it)
-		// 	std::cout << ' ' << *it;
-		// std::cout << '\n';
+		std::cout << "mylist contains:";
+		for (it=mylist.begin(); it!=mylist.end(); ++it)
+			std::cout << ' ' << *it;
+		std::cout << '\n';
 
 	}catch(const std::exception &e){};
 
