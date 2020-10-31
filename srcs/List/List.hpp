@@ -249,8 +249,10 @@ namespace ft
 			void 							pop_back(void){
 				if (this->_size == 2)
 				{
-					this->_al.deallocate(this->_begin->ptr, 1);
-					this->_al.destroy(this->_begin->ptr);
+					if (this->_begin->ptr) {
+						this->_al.deallocate(this->_begin->ptr, 1);
+						this->_al.destroy(this->_begin->ptr);
+					}
 					delete (this->_begin);
 					this->_al.deallocate(this->_endsize->ptr, 1);
 					this->_al.destroy(this->_endsize->ptr);
@@ -264,8 +266,10 @@ namespace ft
 					maillon<T> *replaced = this->_endsize->prev;
 					maillon<T> *new_end = this->_endsize->prev->prev;
 					
-					this->_al.deallocate(replaced->ptr, 1);
-					this->_al.destroy(replaced->ptr);
+					if (replaced->ptr) {
+						this->_al.deallocate(replaced->ptr, 1);
+						this->_al.destroy(replaced->ptr);
+					}
 					this->_endsize->prev = new_end;
 					new_end->next = this->_endsize;
 					delete (replaced);
@@ -350,26 +354,37 @@ namespace ft
 
 
 			void splice (Iterator position, list& x){
+				Iterator	first = x.begin();
+				Iterator 	last  = x.end();
 
-				ft::list<int>::Iterator it = x.begin();
-				while (it != x.end())
-				{
-					this->insert(position, *it);
-					x.erase(it);
-					it++;
+				for (int i = 0; i < x._size; i++) {
+					while (first != last) {
+						maillon<T>	*stock = new maillon<T>;
+						stock->ptr = first.get_it()->ptr;
+						first.get_it()->ptr = NULL;
+						stock->prev = position.get_it()->prev;
+						stock->next = position.get_it();
+						position.get_it()->prev->next = stock;
+						position.get_it()->prev = stock;
+						this->_size += 1;
+						first++;
+					}
 				}
 			}
 
 			void splice (Iterator position, list& x, Iterator i){
-				this->insert(position, *i);
-				//x.erase(i);
-				std::cout << "list1" << std::endl;
-				while (x._begin != x._endsize)
-				{
-					std::cout << *x._begin->ptr << std::endl;
-					x._begin = x._begin->next;
-				}
-				std::cout << "list2 = " << this->size() << std::endl;
+				Iterator	first = x.begin();
+				Iterator 	last  = x.end();
+
+				
+				maillon<T>	*stock = new maillon<T>;
+				stock->ptr = i.get_it()->ptr;
+				first.get_it()->ptr = NULL;
+				stock->prev = position.get_it()->prev;
+				stock->next = position.get_it();
+				i.get_it()->prev->next = stock;
+				i.get_it()->prev = stock;
+				this->_size += 1;
 			}
 
 /*
@@ -429,17 +444,29 @@ namespace ft
 				}
 			}
 
-			// template <class Predicate>
-			// void remove_if(Predicate pred) {
-			// 	Iterator		*tmp = this->begin;
+			template <class Predicate>
+			void remove_if(Predicate pred) {
+				maillon<T>		*tmp = this->_begin;
+				maillon<T>		*cpy = tmp;
 			
-			// 	while (tmp != this->_endsize)
-			// 	{
-			// 		if (pred(*tmp->ptr))
-			// 			this->erase(tmp);
-			// 		tmp++;
-			// 	}
-			// }
+				if (tmp != NULL) {
+					while (tmp != this->_endsize)
+					{
+						if (pred(*tmp->ptr)) {
+							cpy = tmp;
+							if (tmp == this->_begin)
+								this->_begin = tmp->next;
+							tmp = tmp->next;
+							cpy->prev->next = cpy->next;
+							cpy->next->prev = cpy->prev;
+							this->_al.deallocate(cpy->ptr, 1);
+							delete cpy;
+							this->_size -= 1;
+						} else
+							tmp = tmp->next;
+					}
+				}
+			}
 
 			void unique() {
 				maillon<T>		*tmp = this->_begin;
@@ -466,30 +493,52 @@ namespace ft
 				}
 			}
 
-			// template <class BinaryPredicate>
-			// void					unique(BinaryPredicate binary_pred)
-			// {
-			// 	maillon<T>		*tmp = this->_begin;
-			// 	int				i = 0;
+			template <class BinaryPredicate>
+			void					unique(BinaryPredicate binary_pred)
+			{
+				maillon<T>		*tmp = this->_begin;
+				int				i = 0;
 
-			// 	while (tmp != this->_endsize && tmp) {
-			// 		i = 0;
-			// 		for (maillon<T> *j = tmp; j != this->_endsize; j = j->next) {
-			// 			if (*j->ptr == *tmp->ptr)
-			// 				i += 1;
-			// 			if (binary_pred(*j->ptr, *tmp->ptr)){
-			// 				j->prev->next = j->next;
-			// 				j->next->prev = j->prev;
-			// 				_al.deallocate(j->ptr, 1);
-			// 				this->_size -= 1;
-			// 				delete j;
-			// 				j = NULL;
-			// 				break;
-			// 			}
-			// 		}
-			// 		tmp = tmp->next;
-			// 	}
-			// }
+				if (tmp) {
+					while (tmp != this->_endsize && tmp) {
+						i = 0;
+						for (maillon<T> *j = tmp; j != this->_endsize; j = j->next) {
+							if (*j->ptr == *tmp->ptr)
+								i += 1;
+							if (binary_pred(*j->ptr, *tmp->ptr)){
+								j->prev->next = j->next;
+								j->next->prev = j->prev;
+								_al.deallocate(j->ptr, 1);
+								this->_size -= 1;
+								delete j;
+								j = NULL;
+								break;
+							}
+						}
+						tmp = tmp->next;
+					}
+				}
+			}
+
+			void							merge(list &x) {
+				Iterator	first = x.begin();
+				Iterator 	last  = x.end();
+
+				for (int i = 0; i < x._size; i++) {
+					while (first != last) {
+						maillon<T>	*stock = new maillon<T>;
+						stock->ptr = first.get_it()->ptr;
+						first.get_it()->ptr = NULL;
+						stock->prev = this->_endsize->prev;
+						stock->next = this->_endsize;
+						this->_endsize->prev->next = stock;
+						this->_endsize->prev = stock;
+						this->_size += 1;
+						first++;
+					}
+				}
+				this->sort();
+			}
 
 			void 							reverse(void){
 				maillon<T> 		*start = this->_begin;
