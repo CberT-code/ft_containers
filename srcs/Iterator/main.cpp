@@ -53,6 +53,8 @@ int main ()
 		std::cout << '\n';
 	}catch(const std::exception &e){};
 
+	return (0);
+
 	std::cout << std::endl << BLUE << "*************** Test opeartor= ***************" << RESET << std::endl;
 	try{
 		ft::list<int> first (3);      // list of 3 zero-initialized ints
