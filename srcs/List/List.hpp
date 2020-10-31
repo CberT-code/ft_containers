@@ -123,7 +123,7 @@ namespace ft
 				return (false);
 			}
 			size_type						size() const{
-				return (this->_size);
+				return (this->_size - 1);
 			}
 			size_type						max_size() const{
 				return (std::numeric_limits<std::size_t>::max() / sizeof(value_type));
@@ -222,9 +222,8 @@ namespace ft
 					this->_endsize->prev = this->_begin;
 					this->_endsize->next = this->_begin;
 					this->_endsize->ptr = this->_al.allocate(1);
-					this->_al.construct(this->_endsize->ptr, static_cast<T>(0));
-					*this->_endsize->ptr = static_cast<int>(this->_size);
 					this->_size = 2;
+					*this->_endsize->ptr = static_cast<int>(this->_size);
 				}
 				else
 				{
@@ -386,9 +385,9 @@ namespace ft
 			
 			
 */
-			void splice (Iterator position, list& x, Iterator first, Iterator last){
+			// void splice (Iterator position, list& x, Iterator first, Iterator last){
 
-			}
+			// }
 
 			void sort(void){
 				maillon<T> 		*start = this->_begin;
@@ -404,10 +403,21 @@ namespace ft
 					start = start->next;
 				}
 			}
-			// template <class Compare>
-			// void sort (Compare comp){
+			template <class Compare>
+			void sort (Compare comp){
+				maillon<T> 		*start = this->_begin;
+				maillon<T> 		*end = this->_endsize->prev;
 
-			// }
+				while (start != end){
+					while (start != end){
+						if (comp)
+							std::swap(start->ptr, end->ptr);
+						end = end->prev;
+					}
+					end = this->_endsize->prev;
+					start = start->next;
+				}
+			}
 
 			void remove(const value_type& val) {
 				maillon<T>		*tmp = this->_begin;

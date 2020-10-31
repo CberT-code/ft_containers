@@ -53,8 +53,6 @@ int main ()
 		std::cout << '\n';
 	}catch(const std::exception &e){};
 
-	return (0);
-
 	std::cout << std::endl << BLUE << "*************** Test opeartor= ***************" << RESET << std::endl;
 	try{
 		ft::list<int> first (3);      // list of 3 zero-initialized ints
@@ -448,12 +446,12 @@ int main ()
 			std::cout << ' ' << *it;
 		std::cout << '\n';
 
-		// mylist.sort(compare_nocase);
+		mylist.sort(compare_nocase);
 
-		// std::cout << "mylist contains:";
-		// for (it=mylist.begin(); it!=mylist.end(); ++it)
-		// 	std::cout << ' ' << *it;
-		// std::cout << '\n';
+		std::cout << "mylist contains:";
+		for (it=mylist.begin(); it!=mylist.end(); ++it)
+			std::cout << ' ' << *it;
+		std::cout << '\n';
 
 	}catch(const std::exception &e){};
 
