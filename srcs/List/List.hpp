@@ -421,6 +421,7 @@ namespace ft
 
 			void remove(const value_type& val) {
 				maillon<T>		*tmp = this->_begin;
+
 				if (tmp != NULL){
 					while (tmp != this->_endsize){
 						if (*tmp->ptr == val){
@@ -441,12 +442,13 @@ namespace ft
 
 			template <class Predicate>
 			void remove_if(Predicate pred) {
-				maillon<T>		*tmp = this->_begin;
+				Iterator		*tmp = this->_begin;
+			
 				while (tmp != this->_endsize)
 				{
-					if (*tmp->ptr == pred)
-						this->remove(pred);
-					tmp = tmp->next;
+					if (pred(*tmp->ptr))
+						this->erase(tmp);
+					tmp++;
 				}
 			}
 
@@ -461,6 +463,33 @@ namespace ft
 							if (*j->ptr == *tmp->ptr)
 								i += 1;
 							if (i > 1){
+								j->prev->next = j->next;
+								j->next->prev = j->prev;
+								_al.deallocate(j->ptr, 1);
+								this->_size -= 1;
+								delete j;
+								j = NULL;
+								break;
+							}
+						}
+						tmp = tmp->next;
+					}
+				}
+			}
+
+			template <class BinaryPredicate>
+			void					unique(BinaryPredicate binary_pred)
+			{
+				maillon<T>		*tmp = this->_begin;
+				int				i = 0;
+
+				if (tmp) {
+					while (tmp != this->_endsize && tmp) {
+						i = 0;
+						for (maillon<T> *j = tmp; j != this->_endsize; j = j->next) {
+							if (*j->ptr == *tmp->ptr)
+								i += 1;
+							if (binary_pred(*j->ptr, *tmp->ptr)){
 								j->prev->next = j->next;
 								j->next->prev = j->prev;
 								_al.deallocate(j->ptr, 1);
