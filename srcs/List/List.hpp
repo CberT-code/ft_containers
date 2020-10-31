@@ -225,7 +225,8 @@ namespace ft
 					this->_endsize->next = this->_begin;
 					this->_endsize->ptr = this->_al.allocate(1);
 					this->_size = 2;
-					*this->_endsize->ptr = static_cast<int>(this->_size);
+					printf("We are here\n");
+					*this->_endsize->ptr = static_cast<std::string>(this->_size);
 				}
 				else
 				{

@@ -64,35 +64,35 @@ bool mycomparison (double first, double second)
 
 int main ()
 {
-	std::list<int> toto;
-	toto.push_back(41);
-	toto.push_back(31);
-	toto.push_back(33);
-	toto.push_back(27);
-	toto.push_back(18);
-	std::list<int>::iterator it;
-	it = toto.begin();
-	for (size_t i = 0; i < 12; i++)
-	{
-		std::cout << *it << std::endl;
-		it++;
-		/* code */
-	}
+	// std::list<int> toto;
+	// toto.push_back(41);
+	// toto.push_back(31);
+	// toto.push_back(33);
+	// toto.push_back(27);
+	// toto.push_back(18);
+	// std::list<int>::iterator it;
+	// it = toto.begin();
+	// for (size_t i = 0; i < 12; i++)
+	// {
+	// 	std::cout << *it << std::endl;
+	// 	it++;
+	// 	/* code */
+	// }
 	
 
-	std::list<std::string> tutu;
-	tutu.push_back("popooiii");
-	tutu.push_back("popod");
-	tutu.push_back("popo|||");
-	std::list<std::string>::iterator ite;
-	ite = tutu.begin();
-	for (size_t i = 0; i < 12; i++)
-	{
-		std::cout << *ite << std::endl;
-		ite++;
-		/* code */
-	}
-	tutu.sort();
+	// std::list<std::string> tutu;
+	// tutu.push_back("popooiii");
+	// tutu.push_back("popod");
+	// tutu.push_back("popo|||");
+	// std::list<std::string>::iterator ite;
+	// ite = tutu.begin();
+	// for (size_t i = 0; i < 12; i++)
+	// {
+	// 	std::cout << *ite << std::endl;
+	// 	ite++;
+	// 	/* code */
+	// }
+	// tutu.sort();
 
 	std::cout << std::endl << BLUE << "*************** Test Constructor ***************" << RESET << std::endl;
 	try{
