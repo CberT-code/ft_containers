@@ -550,11 +550,14 @@ namespace ft
 			}
 
 			void							merge(list &x) {
-				Iterator	first = x.begin();
-				Iterator 	last  = x.end();
-
-				this->splice(x.begin,x);
+				this->splice(x.begin(), x);
 				this->sort();
+			}
+
+			template<class Compare>
+			void merge (list& x, Compare comp) {
+				this->splice(x.begin(), x);
+				this->sort(comp);
 			}
 
 			void 							reverse(void){
