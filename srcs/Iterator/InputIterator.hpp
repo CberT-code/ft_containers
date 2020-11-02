@@ -21,6 +21,7 @@ class InputIterator
 		InputIterator &	operator=( InputIterator const &src){
 			if (this != &src)
 				this->it = src.it;
+				this->begin = &src;
 			return (*this);
 		}
 		
@@ -77,6 +78,7 @@ class InputIterator
 
 	protected :
 		maillon<T>					*it;
+		maillon<T>					**begin;
 };
 
 #include "./Iterator.hpp"
