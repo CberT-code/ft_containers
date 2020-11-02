@@ -529,11 +529,13 @@ int main ()
 
 		it = mylist1.begin();
 		++it;                          // points to 2
+		std::cout << "get_it 1 = " << it.get_it() << std::endl;
 
 		mylist1.splice (it, mylist2);   // mylist1: 1 10 20 30 2 3 4
 										// mylist2 (empty)
 										// "it" still points to 2 (the 5th element)
 
+		std::cout << "get_it 2 = " << it.get_it() << std::endl;
 		std::cout << "Mylist 1" << std::endl;
 		mylist1.aff(); // a vire
 		std::cout << std::endl;
@@ -543,7 +545,8 @@ int main ()
 		std::cout << "begin = " << mylist2.begin().get_it() << std::endl;
 
 		std::cout << std::endl;
-		std::cout << *it << std::endl;		
+		std::cout << "iterator position should be 2 : " << *it << std::endl;		
+		std::cout << std::endl;
 		mylist2.splice (mylist2.begin(),mylist1, it);
 										// mylist1: 1 10 20 30 3 4
 										// mylist2: 2

@@ -381,14 +381,14 @@ namespace ft
 				else{
 					//creation du maillon
 					maillon<T>	*stock = new maillon<T>;
-					stock->ptr = i.get_it()->ptr;
+					stock->ptr  = position.get_it()->ptr;
+					position.get_it()->ptr = i.get_it()->ptr;
 					i.get_it()->ptr = NULL;
-					stock->prev = position.get_it()->prev;
-					stock->next = position.get_it();
+					stock->prev = position.get_it();
+					stock->next = position.get_it()->next;
 
 					//ajout du maillon a la nouvelle position
-					position.get_it()->prev->next = stock;
-					position.get_it()->prev = stock;
+					position.get_it()->next = stock;
 					this->_size += 1;
 				}
 
@@ -408,7 +408,6 @@ namespace ft
 					}
 					delete i.get_it();
 				}
-				
 			}
 
 
@@ -416,6 +415,7 @@ namespace ft
 				while (first != last){
 					splice(position, x, first);
 					first++;
+					position++;
 				}
 			}
 
