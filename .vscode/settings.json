@@ -44,9 +44,6 @@
 		"stdexcept": "cpp",
 		"streambuf": "cpp",
 		"typeinfo": "cpp",
-		"complex": "cpp",
-		"cstring": "cpp",
-		"functional": "cpp",
-		"map": "cpp"
+		"complex": "cpp"
 	}
 }
