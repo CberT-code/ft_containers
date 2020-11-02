@@ -74,8 +74,10 @@ class InputIterator
 		// 	;
 		// 	return (this->it->ptr += 1);
 		// }
+
 	protected :
-		maillon<T>				*it;
+		maillon<T>					*it;
+		maillon<T>					**begin;
 };
 
 #include "./Iterator.hpp"
