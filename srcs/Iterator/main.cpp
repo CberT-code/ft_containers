@@ -54,135 +54,135 @@ bool 			mycomparison (double first, double second)
 
 int main ()
 {
-	std::cout << std::endl << BLUE << "*************** Test Constructor ***************" << RESET << std::endl;
-	try{
-		// constructors used in the same order as described above:
-		ft::list<int> first;                                // empty list of ints
-		ft::list<int> second (4,100);                       // four ints with value 100
-		ft::list<int> third (second.begin(),second.end());  // iterating through second
-		ft::list<int> fourth (third);                       // a copy of third
-		std::stringstream res;
+	// std::cout << std::endl << BLUE << "*************** Test Constructor ***************" << RESET << std::endl;
+	// try{
+	// 	// constructors used in the same order as described above:
+	// 	ft::list<int> first;                                // empty list of ints
+	// 	ft::list<int> second (4,100);                       // four ints with value 100
+	// 	ft::list<int> third (second.begin(),second.end());  // iterating through second
+	// 	ft::list<int> fourth (third);                       // a copy of third
+	// 	std::stringstream res;
 
-		// the iterator constructor can also be used to construct from arrays:
-		int myints[] = {16,2,77,29};
-		for (int i = 0; i < 4; i++)
-			first.push_back(myints[i]);
-		first.unique();
-		res << "The contents of fifth are: ";
-		for (ft::list<int>::Iterator it = first.begin(); it != first.end(); it++)
-			res << *it << ' ';
+	// 	// the iterator constructor can also be used to construct from arrays:
+	// 	int myints[] = {16,2,77,29};
+	// 	for (int i = 0; i < 4; i++)
+	// 		first.push_back(myints[i]);
+	// 	first.unique();
+	// 	res << "The contents of fifth are: ";
+	// 	for (ft::list<int>::Iterator it = first.begin(); it != first.end(); it++)
+	// 		res << *it << ' ';
 
-		compare_result(res.str(), "The contents of fifth are: 16 2 77 29 ");
-		std::cout << '\n';
-	}catch(const std::exception &e){};
+	// 	compare_result(res.str(), "The contents of fifth are: 16 2 77 29 ");
+	// 	std::cout << '\n';
+	// }catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test operator= ***************" << RESET << std::endl;
-	try{
-		ft::list<int> first (3);      // list of 3 zero-initialized ints
-		ft::list<int> second (5);     // list of 5 zero-initialized ints
-		std::stringstream res;
-		std::stringstream res1;
+	// std::cout << std::endl << BLUE << "*************** Test operator= ***************" << RESET << std::endl;
+	// try{
+	// 	ft::list<int> first (3);      // list of 3 zero-initialized ints
+	// 	ft::list<int> second (5);     // list of 5 zero-initialized ints
+	// 	std::stringstream res;
+	// 	std::stringstream res1;
 
-		second = first;
-		first = ft::list<int>();
+	// 	second = first;
+	// 	first = ft::list<int>();
 
-		res << "Size of first: " << int (first.size());
-		compare_result(res.str(), "Size of first: 0");
-		res1 << "Size of second: " << int (second.size());
-		compare_result(res1.str(), "Size of second: 3");
-	}catch(const std::exception &e){};
+	// 	res << "Size of first: " << int (first.size());
+	// 	compare_result(res.str(), "Size of first: 0");
+	// 	res1 << "Size of second: " << int (second.size());
+	// 	compare_result(res1.str(), "Size of second: 3");
+	// }catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test begin ***************" << RESET << std::endl;
-	try{
-		int myints[] = {75,23,65,42,13};
-		ft::list<int> mylist (myints,myints+5);
-		std::stringstream res;
+	// std::cout << std::endl << BLUE << "*************** Test begin ***************" << RESET << std::endl;
+	// try{
+	// 	int myints[] = {75,23,65,42,13};
+	// 	ft::list<int> mylist (myints,myints+5);
+	// 	std::stringstream res;
 
-		res << "mylist contains:";
-		for (ft::list<int>::Iterator it=mylist.begin(); it != mylist.end(); ++it)
-			res << ' ' << *it;
-		compare_result(res.str(), "mylist contains: 75 23 65 42 13");
-	}catch(const std::exception &e){};
+	// 	res << "mylist contains:";
+	// 	for (ft::list<int>::Iterator it=mylist.begin(); it != mylist.end(); ++it)
+	// 		res << ' ' << *it;
+	// 	compare_result(res.str(), "mylist contains: 75 23 65 42 13");
+	// }catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test end ***************" << RESET << std::endl;
-	try{
-		int myints[] = {75,23,65,42,13};
-		ft::list<int> mylist (myints,myints+5);
-		std::stringstream res;
+	// std::cout << std::endl << BLUE << "*************** Test end ***************" << RESET << std::endl;
+	// try{
+	// 	int myints[] = {75,23,65,42,13};
+	// 	ft::list<int> mylist (myints,myints+5);
+	// 	std::stringstream res;
 
-		res << "mylist contains:";
-		for (ft::list<int>::Iterator it=mylist.begin() ; it != mylist.end(); ++it)
-			res << ' ' << *it;
+	// 	res << "mylist contains:";
+	// 	for (ft::list<int>::Iterator it=mylist.begin() ; it != mylist.end(); ++it)
+	// 		res << ' ' << *it;
 
-		compare_result(res.str(), "mylist contains: 75 23 65 42 13");
-	}catch(const std::exception &e){};
+	// 	compare_result(res.str(), "mylist contains: 75 23 65 42 13");
+	// }catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test rbegin ***************" << RESET << std::endl;
-	try{
-		ft::list<int> mylist;
-		std::stringstream res;
-		for (int i=1; i<=5; ++i) mylist.push_back(i);
+	// std::cout << std::endl << BLUE << "*************** Test rbegin ***************" << RESET << std::endl;
+	// try{
+	// 	ft::list<int> mylist;
+	// 	std::stringstream res;
+	// 	for (int i=1; i<=5; ++i) mylist.push_back(i);
 
-		res << "mylist backwards:";
-		for (ft::list<int>::reverse_Iterator rit=mylist.rbegin(); rit!=mylist.rend(); ++rit)
-			res << ' ' << *rit;
+	// 	res << "mylist backwards:";
+	// 	for (ft::list<int>::reverse_Iterator rit=mylist.rbegin(); rit!=mylist.rend(); ++rit)
+	// 		res << ' ' << *rit;
 
-		compare_result(res.str(), "mylist backwards: 5 4 3 2 1");
-	}catch(const std::exception &e){};
+	// 	compare_result(res.str(), "mylist backwards: 5 4 3 2 1");
+	// }catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test rend ***************" << RESET << std::endl;
-	try{
-		 ft::list<int> mylist;
-		 std::stringstream res;
-		for (int i=1; i<=5; ++i) mylist.push_back(i);
+	// std::cout << std::endl << BLUE << "*************** Test rend ***************" << RESET << std::endl;
+	// try{
+	// 	 ft::list<int> mylist;
+	// 	 std::stringstream res;
+	// 	for (int i=1; i<=5; ++i) mylist.push_back(i);
 
-		res << "mylist backwards:";
-		for (ft::list<int>::reverse_Iterator rit=mylist.rbegin(); rit!=mylist.rend(); ++rit)
-			res << ' ' << *rit;
+	// 	res << "mylist backwards:";
+	// 	for (ft::list<int>::reverse_Iterator rit=mylist.rbegin(); rit!=mylist.rend(); ++rit)
+	// 		res << ' ' << *rit;
 
-		compare_result(res.str(), "mylist backwards: 5 4 3 2 1");
-	}catch(const std::exception &e){};
+	// 	compare_result(res.str(), "mylist backwards: 5 4 3 2 1");
+	// }catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test empty ***************" << RESET << std::endl;
-	try{
-		ft::list<int> mylist;
-		std::stringstream res;
-		int sum (0);
+	// std::cout << std::endl << BLUE << "*************** Test empty ***************" << RESET << std::endl;
+	// try{
+	// 	ft::list<int> mylist;
+	// 	std::stringstream res;
+	// 	int sum (0);
 
-		for (int i=1 ;i <= 10; ++i) mylist.push_back(i);
+	// 	for (int i=1 ;i <= 10; ++i) mylist.push_back(i);
 
-		while (!mylist.empty())
-		{
-			sum += mylist.front();
-			mylist.pop_front();
-		}
-		res << "total: " << sum;
-		compare_result(res.str(), "total: 55");
-	}catch(const std::exception &e){};
+	// 	while (!mylist.empty())
+	// 	{
+	// 		sum += mylist.front();
+	// 		mylist.pop_front();
+	// 	}
+	// 	res << "total: " << sum;
+	// 	compare_result(res.str(), "total: 55");
+	// }catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test size ***************" << RESET << std::endl;
-	try{
-		ft::list<int> myints;
-		std::stringstream res;
-		std::stringstream res1;
-		std::stringstream res2;
-		std::stringstream res3;
-		res << "0. size: " << myints.size();
-		compare_result(res.str(), "0. size: 0");
+	// std::cout << std::endl << BLUE << "*************** Test size ***************" << RESET << std::endl;
+	// try{
+	// 	ft::list<int> myints;
+	// 	std::stringstream res;
+	// 	std::stringstream res1;
+	// 	std::stringstream res2;
+	// 	std::stringstream res3;
+	// 	res << "0. size: " << myints.size();
+	// 	compare_result(res.str(), "0. size: 0");
 
-		for (int i=0; i<10; i++) myints.push_back(i);
-		res1 << "1. size: " << myints.size();
-		compare_result(res1.str(), "1. size: 10");
+	// 	for (int i=0; i<10; i++) myints.push_back(i);
+	// 	res1 << "1. size: " << myints.size();
+	// 	compare_result(res1.str(), "1. size: 10");
 
-		myints.insert (myints.begin(),10,100);
-		res2 << "2. size: " << myints.size();
-		compare_result(res2.str(), "2. size: 20");
+	// 	myints.insert (myints.begin(),10,100);
+	// 	res2 << "2. size: " << myints.size();
+	// 	compare_result(res2.str(), "2. size: 20");
 
-		myints.pop_back();
-		res3 << "3. size: " << myints.size();
-		compare_result(res3.str(), "3. size: 19");
+	// 	myints.pop_back();
+	// 	res3 << "3. size: " << myints.size();
+	// 	compare_result(res3.str(), "3. size: 19");
 
-	}catch(const std::exception &e){};
+	// }catch(const std::exception &e){};
 
 	// // std::cout << std::endl << BLUE << "*************** Test max_size ***************" << RESET << std::endl;
 	// // try{
@@ -197,161 +197,161 @@ int main ()
 	// // 	else std::cout << "That size exceeds the limit.\n";
 	// // }catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************    Test front    ***************" << RESET << std::endl;
-	try{
-		ft::list<int> mylist;
-		std::stringstream res;
+	// std::cout << std::endl << BLUE << "***************    Test front    ***************" << RESET << std::endl;
+	// try{
+	// 	ft::list<int> mylist;
+	// 	std::stringstream res;
 
-		mylist.push_back(77);
-		mylist.push_back(22);
+	// 	mylist.push_back(77);
+	// 	mylist.push_back(22);
 
-		// now front equals 77, and back 22
+	// 	// now front equals 77, and back 22
 
-		mylist.front() -= mylist.back();
+	// 	mylist.front() -= mylist.back();
 
-		res << "mylist.front() is now " << mylist.front();
-		compare_result(res.str(), "mylist.front() is now 55");
+	// 	res << "mylist.front() is now " << mylist.front();
+	// 	compare_result(res.str(), "mylist.front() is now 55");
 
-	}catch(const std::exception &e){};
+	// }catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************    Test back    ***************" << RESET << std::endl;
-	try{
-		ft::list<int> mylist;
-		std::stringstream res;
+	// std::cout << std::endl << BLUE << "***************    Test back    ***************" << RESET << std::endl;
+	// try{
+	// 	ft::list<int> mylist;
+	// 	std::stringstream res;
 
-		mylist.push_back(10);
+	// 	mylist.push_back(10);
 
-		ft::list<int>::Iterator it1 = mylist.begin();
+	// 	ft::list<int>::Iterator it1 = mylist.begin();
 
-		while (mylist.back() != 0){
-			mylist.push_back ( mylist.back() -1 );
-		}
+	// 	while (mylist.back() != 0){
+	// 		mylist.push_back ( mylist.back() -1 );
+	// 	}
 
-		res << "mylist contains:";
-		for (ft::list<int>::Iterator it=mylist.begin(); it!=mylist.end() ; ++it)
-			res << ' ' << *it;
-		compare_result(res.str(), "mylist contains: 10 9 8 7 6 5 4 3 2 1 0");
+	// 	res << "mylist contains:";
+	// 	for (ft::list<int>::Iterator it=mylist.begin(); it!=mylist.end() ; ++it)
+	// 		res << ' ' << *it;
+	// 	compare_result(res.str(), "mylist contains: 10 9 8 7 6 5 4 3 2 1 0");
 
-	}catch(const std::exception &e){};
+	// }catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************    Test assign  ***************" << RESET << std::endl;
-	try{
-		ft::list<int> first;
-		ft::list<int> second;
-		std::stringstream res;
-		std::stringstream res1;
+	// std::cout << std::endl << BLUE << "***************    Test assign  ***************" << RESET << std::endl;
+	// try{
+	// 	ft::list<int> first;
+	// 	ft::list<int> second;
+	// 	std::stringstream res;
+	// 	std::stringstream res1;
 
-		first.assign (7,100);                      // 7 ints with value 100
+	// 	first.assign (7,100);                      // 7 ints with value 100
 
-		second.assign (first.begin(),first.end()); // a copy of first
+	// 	second.assign (first.begin(),first.end()); // a copy of first
 
-		int myints[]={1776,7,4};
-		first.assign (myints,myints+3);            // assigning from array
+	// 	int myints[]={1776,7,4};
+	// 	first.assign (myints,myints+3);            // assigning from array
 
-		res << "Size of first: " << int (first.size());
-		compare_result(res.str(), "Size of first: 3");
-		res1 << "Size of second: " << int (second.size());
-		compare_result(res1.str(), "Size of second: 7");
+	// 	res << "Size of first: " << int (first.size());
+	// 	compare_result(res.str(), "Size of first: 3");
+	// 	res1 << "Size of second: " << int (second.size());
+	// 	compare_result(res1.str(), "Size of second: 7");
 
-	}catch(const std::exception &e){};
+	// }catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test push_front ***************" << RESET << std::endl;
-	try{
-		std::stringstream res;
-		ft::list<int> mylist (2,100);         // two ints with a value of 100
-		mylist.push_front (200);
-		mylist.push_front (300);
+	// std::cout << std::endl << BLUE << "*************** Test push_front ***************" << RESET << std::endl;
+	// try{
+	// 	std::stringstream res;
+	// 	ft::list<int> mylist (2,100);         // two ints with a value of 100
+	// 	mylist.push_front (200);
+	// 	mylist.push_front (300);
 
-		res << "mylist contains:";
-		for (ft::list<int>::Iterator it=mylist.begin(); it!=mylist.end(); ++it)
-			res << ' ' << *it;
-		compare_result(res.str(), "mylist contains: 300 200 100 100");
-	}catch(const std::exception &e){};
+	// 	res << "mylist contains:";
+	// 	for (ft::list<int>::Iterator it=mylist.begin(); it!=mylist.end(); ++it)
+	// 		res << ' ' << *it;
+	// 	compare_result(res.str(), "mylist contains: 300 200 100 100");
+	// }catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test pop_front  ***************" << RESET << std::endl;
-	try{
-		std::stringstream res;
-		std::stringstream res1;
-		ft::list<int> mylist;
-		mylist.push_back (100);
-		mylist.push_back (200);
-		mylist.push_back (300);
+	// std::cout << std::endl << BLUE << "*************** Test pop_front  ***************" << RESET << std::endl;
+	// try{
+	// 	std::stringstream res;
+	// 	std::stringstream res1;
+	// 	ft::list<int> mylist;
+	// 	mylist.push_back (100);
+	// 	mylist.push_back (200);
+	// 	mylist.push_back (300);
 
-		res << "Popping out the elements in mylist:";
-		while (!mylist.empty())
-		{
-			res << ' ' << mylist.front();
-			mylist.pop_front();
-		}
-		compare_result(res.str(), "Popping out the elements in mylist: 100 200 300");
-		res1 << "Final size of mylist is " << mylist.size();
-		compare_result(res1.str(), "Final size of mylist is 0");
-	}catch(const std::exception &e){};
+	// 	res << "Popping out the elements in mylist:";
+	// 	while (!mylist.empty())
+	// 	{
+	// 		res << ' ' << mylist.front();
+	// 		mylist.pop_front();
+	// 	}
+	// 	compare_result(res.str(), "Popping out the elements in mylist: 100 200 300");
+	// 	res1 << "Final size of mylist is " << mylist.size();
+	// 	compare_result(res1.str(), "Final size of mylist is 0");
+	// }catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test Push_back  ***************" << RESET << std::endl;
-	try{
-		ft::list<int> mylist;
-		std::stringstream res;
-		int myint;
+	// std::cout << std::endl << BLUE << "*************** Test Push_back  ***************" << RESET << std::endl;
+	// try{
+	// 	ft::list<int> mylist;
+	// 	std::stringstream res;
+	// 	int myint;
 
-		std::cout << "Please enter some integers (enter 0 to end):\n";
+	// 	std::cout << "Please enter some integers (enter 0 to end):\n";
 
-		do {
-			std::cin >> myint;
-			mylist.push_back (myint);
-		} while (myint);
+	// 	do {
+	// 		std::cin >> myint;
+	// 		mylist.push_back (myint);
+	// 	} while (myint);
 
-		std::cout << "mylist stores " << mylist.size() << " numbers.\n";
-	}catch(const std::exception &e){};
+	// 	std::cout << "mylist stores " << mylist.size() << " numbers.\n";
+	// }catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test Pop_back   ***************" << RESET << std::endl;
-	try{
-		ft::list<int> mylist;
-		std::stringstream res;
-		int sum (0);
-		mylist.push_back (100);
-		mylist.push_back (200);
-		mylist.push_back (300);
+	// std::cout << std::endl << BLUE << "*************** Test Pop_back   ***************" << RESET << std::endl;
+	// try{
+	// 	ft::list<int> mylist;
+	// 	std::stringstream res;
+	// 	int sum (0);
+	// 	mylist.push_back (100);
+	// 	mylist.push_back (200);
+	// 	mylist.push_back (300);
 
-		while (!mylist.empty())
-		{
-			sum+=mylist.back();
-			mylist.pop_back();
-		}
+	// 	while (!mylist.empty())
+	// 	{
+	// 		sum+=mylist.back();
+	// 		mylist.pop_back();
+	// 	}
 
-		res << "The elements of mylist summed " << sum;
-		compare_result(res.str(), "The elements of mylist summed 600");
-	}catch(const std::exception &e){};
+	// 	res << "The elements of mylist summed " << sum;
+	// 	compare_result(res.str(), "The elements of mylist summed 600");
+	// }catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test Insert  A verifier lorsque l'on aura les vecteurs***************" << RESET << std::endl;
-	try{
-		ft::list<int> mylist;
-		ft::list<int>::Iterator it;
-		std::stringstream res;
+	// std::cout << std::endl << BLUE << "*************** Test Insert  A verifier lorsque l'on aura les vecteurs***************" << RESET << std::endl;
+	// try{
+	// 	ft::list<int> mylist;
+	// 	ft::list<int>::Iterator it;
+	// 	std::stringstream res;
 
-		// set some initial values:
-		for (int i=1; i<=5; ++i)
-			mylist.push_back(i); // 1 2 3 4 5
+	// 	// set some initial values:
+	// 	for (int i=1; i<=5; ++i)
+	// 		mylist.push_back(i); // 1 2 3 4 5
 
-		it = mylist.begin();
-		++it;       // it points now to number 2           ^
+	// 	it = mylist.begin();
+	// 	++it;       // it points now to number 2           ^
 
-		mylist.insert (it,10);                        // 1 10 2 3 4 5
-		// "it" still points to number 2                      ^
-		mylist.insert (it,2,20);                      // 1 10 20 20 2 3 4 5
+	// 	mylist.insert (it,10);                        // 1 10 2 3 4 5
+	// 	// "it" still points to number 2                      ^
+	// 	mylist.insert (it,2,20);                      // 1 10 20 20 2 3 4 5
 
-		--it;       // it points now to the second 20            ^
+	// 	--it;       // it points now to the second 20            ^
 
-		// std::vector<int> myvector (2,30);
-		// mylist.insert (it,myvector.begin(),myvector.end());
-														// 1 10 20 30 30 20 2 3 4 5
-														//               ^
-		res << "mylist contains:";
-		for (it=mylist.begin(); it!=mylist.end(); ++it)
-			res << ' ' << *it;
-		compare_result(res.str(), "mylist contains: 1 10 20 30 30 20 2 3 4 5");
+	// 	// std::vector<int> myvector (2,30);
+	// 	// mylist.insert (it,myvector.begin(),myvector.end());
+	// 													// 1 10 20 30 30 20 2 3 4 5
+	// 													//               ^
+	// 	res << "mylist contains:";
+	// 	for (it=mylist.begin(); it!=mylist.end(); ++it)
+	// 		res << ' ' << *it;
+	// 	compare_result(res.str(), "mylist contains: 1 10 20 30 30 20 2 3 4 5");
 		
-	}catch(const std::exception &e){};
+	// }catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "***************    Test Erase   ***************" << RESET << std::endl;
 	try{
@@ -474,6 +474,7 @@ int main ()
 		mylist1.splice (it, mylist2);   // mylist1: 1 10 20 30 2 3 4
 										// mylist2 (empty)
 										// "it" still points to 2 (the 5th element)
+
 		mylist2.splice (mylist2.begin(),mylist1, it);
 										// mylist1: 1 10 20 30 3 4
 										// mylist2: 2

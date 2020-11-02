@@ -253,7 +253,6 @@ namespace ft
 					}
 					delete (this->_begin);
 					this->_al.deallocate(this->_endsize->ptr, 1);
-					this->_al.destroy(this->_endsize->ptr);
 					delete (this->_endsize);
 					this->_begin = NULL;
 					this->_endsize = NULL;
@@ -343,7 +342,6 @@ namespace ft
 			void								clear(void){
 				while (this->_size)
 					this->pop_back();
-
 			}
 
 			/**************************************************
@@ -365,6 +363,7 @@ namespace ft
 					this->_begin->ptr = i.get_it()->ptr;
 					i.get_it()->ptr = NULL;
 					this->_endsize = new maillon<T>;
+					this->_endsize->ptr = NULL;
 					this->_begin->prev = this->_endsize;
 					this->_begin->next = this->_endsize;
 					this->_endsize->prev = this->_begin;
@@ -375,8 +374,9 @@ namespace ft
 					//creation du maillon
 					maillon<T>	*stock = new maillon<T>;
 					stock->ptr = i.get_it()->ptr;
-					if (this->_begin == position.get_it())
+					if (this->_begin == position.get_it()){
 						this->_begin = stock;
+					}
 					i.get_it()->ptr = NULL;
 					stock->prev = position.get_it()->prev;
 					stock->next = position.get_it();
