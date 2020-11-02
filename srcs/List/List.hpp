@@ -76,15 +76,19 @@ namespace ft
 				return (*this);
 			}
 
-			// void	aff(void){
-			// 	maillon<T> *cpy = this->_begin;
+			void	aff(void){
+				maillon<T> *cpy = this->_begin;
 
-			// 	while (cpy != this->_endsize && cpy)
-			// 	{
-			// 		std::cout << *(cpy->ptr) << std::endl;
-			// 		cpy = cpy->next;
-			// 	}
-			// }
+				while (cpy != this->_endsize && cpy)
+				{
+					std::cout << *(cpy->ptr) << std::endl;
+					cpy = cpy->next;
+				}
+				std::cout << "begin->prev    = " << this->_begin->prev << std::endl;
+				std::cout << "begin->next    = " << this->_begin->next << std::endl;
+				std::cout << "endsize->prev  = " << this->_endsize->prev << std::endl;
+				std::cout << "endsize->next  = " << this->_endsize->next << std::endl;
+			}
 			
 			/**************************************************
 			************** begin end rbegin rend **************
@@ -225,8 +229,7 @@ namespace ft
 					this->_endsize->next = this->_begin;
 					this->_endsize->ptr = this->_al.allocate(1);
 					this->_size = 2;
-					printf("We are here\n");
-					*this->_endsize->ptr = static_cast<std::string>(this->_size);
+					//*this->_endsize->ptr = static_cast<int>(this->_size);
 				}
 				else
 				{
@@ -275,7 +278,7 @@ namespace ft
 					new_end->next = this->_endsize;
 					delete (replaced);
 					this->_size -= 1;
-					*this->_endsize->ptr = static_cast<int>(this->_size);
+					//*this->_endsize->ptr = static_cast<int>(this->_size);
 				}
 				
 			}
@@ -295,7 +298,7 @@ namespace ft
 				new_maillon->prev->next = new_maillon;
 
 				this->_size += 1;
-				*this->_endsize->ptr = static_cast<int>(this->_size);
+				//*this->_endsize->ptr = static_cast<int>(this->_size);
 				return (position);
 			}	
 			void							insert (Iterator position, size_type n, const value_type& val){
@@ -358,24 +361,10 @@ namespace ft
 				Iterator	first = x.begin();
 				Iterator 	last  = x.end();
 
-				for (int i = 0; i < x._size; i++) {
-					while (first != last) {
-						maillon<T>	*stock = new maillon<T>;
-						stock->ptr = first.get_it()->ptr;
-						first.get_it()->ptr = NULL;
-						stock->prev = position.get_it()->prev;
-						stock->next = position.get_it();
-						position.get_it()->prev->next = stock;
-						position.get_it()->prev = stock;
-						this->_size += 1;
-						first++;
-					}
-				}
+				splice(position, x, first, last);
 			}
 
 			void splice (Iterator position, list& x, Iterator i){
-				Iterator	first = x.begin();
-				Iterator 	last  = x.end();
 
 
 				if (position.get_it() == NULL){
@@ -431,7 +420,6 @@ namespace ft
 					first++;
 				}
 			}
-
 
 			void sort(void){
 				maillon<T> 		*start = this->_begin;
@@ -564,7 +552,7 @@ namespace ft
 				Iterator	first = x.begin();
 				Iterator 	last  = x.end();
 
-				for (int i = 0; i < x._size; i++) {
+				for (size_t i = 0; i < x._size; i++) {
 					while (first != last) {
 						maillon<T>	*stock = new maillon<T>;
 						stock->ptr = first.get_it()->ptr;
