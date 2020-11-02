@@ -518,6 +518,7 @@ int main ()
 
 	std::cout << std::endl << BLUE << "***************  TEST REMOVE IF ***************" << RESET << std::endl;
 	try{
+		std::stringstream res;
 		int myints[]= {15,36,7,17,20,39,4,1};
 		ft::list<int> mylist (myints,myints+8);   // 15 36 7 17 20 39 4 1
 
@@ -525,14 +526,16 @@ int main ()
 
 		mylist.remove_if(is_odd());               // 36 20
 
-		std::cout << "mylist contains:";
+		res << "mylist contains:";
 		for (ft::list<int>::Iterator it=mylist.begin(); it!=mylist.end(); ++it)
-			std::cout << ' ' << *it;
+			res << ' ' << *it;
+		compare_result(res.str(), "mylist contains: 36 20");
 		std::cout << '\n';
 	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "***************  TEST UNIQUE    ***************" << RESET << std::endl;
 	try{
+		std::stringstream res;
 		double mydoubles[]={ 12.15,  2.72, 73.0,  12.77,  3.14,
                        12.77, 73.35, 72.25, 15.3,  72.25 };
 		ft::list<double> mylist (mydoubles,mydoubles+10);
@@ -548,14 +551,16 @@ int main ()
 
 		mylist.unique (is_near());           //  2.72, 12.15, 72.25
 
-		std::cout << "mylist contains:";
+		res << "mylist contains:";
 		for (ft::list<double>::Iterator it=mylist.begin(); it!=mylist.end(); ++it)
-			std::cout << ' ' << *it;
+			res << ' ' << *it;
+		compare_result(res.str(), "mylist contains: 2.72 12.15 72.25");
 		std::cout << '\n';
 	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "*************** TEST MERGE ***************" << RESET << std::endl;
 	try{
+		std::stringstream res;
 		ft::list<double> first, second;
 
 		first.push_back (3.1);
@@ -577,9 +582,10 @@ int main ()
 
 		first.merge(second,mycomparison);
 
-		std::cout << "first contains:";
+		res << "first contains:";
 		for (ft::list<double>::Iterator it=first.begin(); it!=first.end(); ++it)
-			std::cout << ' ' << *it;
+			res << ' ' << *it;
+		compare_result(res.str(), "first contains: 1.4 2.2 2.9 2.1 3.1 3.7 7.1");
 		std::cout << '\n';
 	}catch(const std::exception &e){};
 
@@ -626,15 +632,46 @@ int main ()
 	}catch(const std::exception &e){};
 
 
-	// // std::cout << std::endl << BLUE << "***************  ***************" << RESET << std::endl;
-	// // try{
-		
-	// // }catch(const std::exception &e){};
+	std::cout << std::endl << BLUE << "*************** Operators NON MEMBER ***************" << RESET << std::endl;
+	try{
+		ft::list<int> a;
+		a.push_back(10);
+		a.push_back(20);
+		a.push_back(30);
+		ft::list<int> b;
+		b.push_back(10);
+		b.push_back(20);
+		b.push_back(30);
+		ft::list<int> c;
+		c.push_back(30);
+		c.push_back(20);
+		c.push_back(10);
+
+		if (a==b) std::cout << "a and b are equal\n";
+		if (b!=c) std::cout << "b and c are not equal\n";
+		if (b<c) std::cout << "b is less than c\n";
+		if (c>b) std::cout << "c is greater than b\n";
+		if (a<=b) std::cout << "a is less than or equal to b\n";
+		if (a>=b) std::cout << "a is greater than or equal to b\n";
+	}catch(const std::exception &e){};
 
 
-	// // std::cout << std::endl << BLUE << "***************  ***************" << RESET << std::endl;
-	// // try{
-		
-	// // }catch(const std::exception &e){};
+	std::cout << std::endl << BLUE << "*************** SWAP NON MEMBER ***************" << RESET << std::endl;
+	try{
+		std::list<int> foo (3,100);   // three ints with a value of 100
+		std::list<int> bar (5,200);   // five ints with a value of 200
+
+		foo.swap(bar);
+
+		std::cout << "foo contains:";
+		for (std::list<int>::iterator it = foo.begin(); it!=foo.end(); ++it)
+			std::cout << ' ' << *it;
+		std::cout << '\n';
+
+		std::cout << "bar contains:";
+		for (std::list<int>::iterator it = bar.begin(); it!=bar.end(); ++it)
+			std::cout << ' ' << *it;
+		std::cout << '\n';
+	}catch(const std::exception &e){};
 	return 0;
 }

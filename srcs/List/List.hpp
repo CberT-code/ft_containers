@@ -643,4 +643,9 @@ template <class T, class Alloc>
 			return (true);
 		return (false);
 	}
+
+template <class T, class Alloc>
+  void swap (ft::list<T,Alloc>& x, ft::list<T,Alloc>& y){
+	  x->swap(y);
+  }
 #endif
