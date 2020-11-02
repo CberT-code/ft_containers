@@ -501,12 +501,12 @@ namespace ft
 				int				i = 0;
 
 				if (tmp) {
-					while (tmp != this->_endsize && tmp){
+					while (tmp != this->_endsize && tmp) {
 						i = 0;
-						for (maillon<T> *j = tmp; j != this->_endsize; j = j->next){
+						for (maillon<T> *j = tmp; j != this->_endsize; j = j->next) {
 							if (*j->ptr == *tmp->ptr)
 								i += 1;
-							if (i > 1){
+							if (i > 1) {
 								j->prev->next = j->next;
 								j->next->prev = j->prev;
 								_al.deallocate(j->ptr, 1);
@@ -530,16 +530,17 @@ namespace ft
 				if (tmp) {
 					while (tmp != this->_endsize && tmp) {
 						i = 0;
-						for (maillon<T> *j = tmp; j != this->_endsize; j = j->next) {
-							if (*j->ptr == *tmp->ptr)
-								i += 1;
-							if (binary_pred(*j->ptr, *tmp->ptr)){
+						for (maillon<T> *j = tmp->next; j != this->_endsize; j = j->next) {
+							if (binary_pred(*j->ptr, *tmp->ptr)) {
 								j->prev->next = j->next;
 								j->next->prev = j->prev;
 								_al.deallocate(j->ptr, 1);
 								this->_size -= 1;
 								delete j;
 								j = NULL;
+								break;
+							} else if (j->next == this->_endsize) {
+								tmp = tmp->next;
 								break;
 							}
 						}
@@ -552,19 +553,7 @@ namespace ft
 				Iterator	first = x.begin();
 				Iterator 	last  = x.end();
 
-				for (size_t i = 0; i < x._size; i++) {
-					while (first != last) {
-						maillon<T>	*stock = new maillon<T>;
-						stock->ptr = first.get_it()->ptr;
-						first.get_it()->ptr = NULL;
-						stock->prev = this->_endsize->prev;
-						stock->next = this->_endsize;
-						this->_endsize->prev->next = stock;
-						this->_endsize->prev = stock;
-						this->_size += 1;
-						first++;
-					}
-				}
+				this->splice(x.begin,x);
 				this->sort();
 			}
 
