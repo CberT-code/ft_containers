@@ -395,11 +395,13 @@ namespace ft
 					stock->ptr = i.get_it()->ptr;
 					if (position.get_it() == this->_begin)
 						this->_begin = stock;
-					first.get_it()->ptr = NULL;
+					i.get_it()->ptr = NULL;
 					stock->prev = position.get_it()->prev;
 					stock->next = position.get_it();
-					i.get_it()->prev->next = stock;
-					i.get_it()->prev = stock;
+
+					//ajout du maillon a la nouvelle position
+					position.get_it()->prev->next = stock;
+					position.get_it()->prev = stock;
 					this->_size += 1;
 				}
 
@@ -420,18 +422,16 @@ namespace ft
 					delete i.get_it();
 				}
 				
-				
 			}
 
-/*
+
 			void splice (Iterator position, list& x, Iterator first, Iterator last){
 				while (first != last){
 					splice(position, x, first);
 					first++;
-					position++;
 				}
 			}
-*/
+
 
 			void sort(void){
 				maillon<T> 		*start = this->_begin;
