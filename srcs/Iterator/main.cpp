@@ -513,128 +513,106 @@ int main ()
 	}catch(const std::exception &e){};
 
 
-		std::cout << std::endl << BLUE << "*************** TEST SPLICE ***************" << RESET << std::endl;
+	// 	std::cout << std::endl << BLUE << "*************** TEST SPLICE ***************" << RESET << std::endl;
+	// try{
+	// 	ft::list<int> mylist1, mylist2;
+	// 	ft::list<int>::Iterator it;
+	// 	std::stringstream res;
+	// 	std::stringstream res1;
+
+	// 	// set some initial values:
+	// 	for (int i=1; i<=4; ++i)
+	// 		mylist1.push_back(i);      // mylist1: 1 2 3 4
+
+	// 	for (int i=1; i<=3; ++i)
+	// 		mylist2.push_back(i*10);   // mylist2: 10 20 30
+
+	// 	it = mylist1.begin();
+	// 	++it;                          // points to 2
+
+	// 	mylist1.splice (it, mylist2);   // mylist1: 1 10 20 30 2 3 4
+	// 									// mylist2 (empty)
+	// 									// "it" still points to 2 (the 5th element)
+	// 	mylist2.splice (mylist2.begin(),mylist1, it);
+	// 									// mylist1: 1 10 20 30 3 4
+	// 									// mylist2: 2
+	// 									// "it" is now invalid.
+
+	// 	it = mylist1.begin();
+	// 	it++;          // "it" points now to 30
+	// 	it++;          // "it" points now to 30
+	// 	it++;          // "it" points now to 30
+	// 					// mylist1: 1 10 20 30 3 4
+	// 					// 					^
+
+	// 	mylist1.splice ( mylist1.begin(), mylist1, it, mylist1.end());
+	// 									// mylist1: 30 3 4 1 10 20
+	// 	res << "mylist1 contains:";
+	// 	for (it = mylist1.begin(); it!=mylist1.end(); ++it){
+	// 		res << ' ' << *it;
+	// 	}
+	// 	compare_result(res.str(), "mylist1 contains: 30 3 4 1 10 20");
+
+	// 	res1 << "mylist2 contains:";
+	// 	for (it=mylist2.begin(); it!=mylist2.end(); ++it)
+	// 		res1 << ' ' << *it;
+	// 	compare_result(res1.str(), "mylist2 contains: 2");
+
+	// }catch(const std::exception &e){};
+
+
+	std::cout << std::endl << BLUE << "*************** TEST REMOVE ***************" << RESET << std::endl;
 	try{
-		ft::list<int> mylist1, mylist2;
-		ft::list<int>::Iterator it;
+		int myints[]= {17,89,7,14};
+		ft::list<int> mylist (myints,myints+4);
 		std::stringstream res;
-		std::stringstream res1;
 
-		// set some initial values:
-		for (int i=1; i<=4; ++i)
-			mylist1.push_back(i);      // mylist1: 1 2 3 4
+		mylist.remove(89);
 
-		for (int i=1; i<=3; ++i)
-			mylist2.push_back(i*10);   // mylist2: 10 20 30
-
-		it = mylist1.begin();
-		++it;                          // points to 2
-		std::cout << "get_it 1 = " << it.get_it() << std::endl;
-
-		mylist1.splice (it, mylist2);   // mylist1: 1 10 20 30 2 3 4
-										// mylist2 (empty)
-										// "it" still points to 2 (the 5th element)
-
-		std::cout << "get_it 2 = " << it.get_it() << std::endl;
-		std::cout << "Mylist 1" << std::endl;
-		mylist1.aff(); // a vire
-		std::cout << std::endl;
-		std::cout << "Mylist 2" << std::endl;
-		// mylist2.aff(); // a vire
-		std::cout << "size = " << mylist2.size() << std::endl;
-		std::cout << "begin = " << mylist2.begin().get_it() << std::endl;
-
-		std::cout << std::endl;
-		std::cout << "iterator position should be 2 : " << *it << std::endl;		
-		std::cout << std::endl;
-		mylist2.splice (mylist2.begin(),mylist1, it);
-										// mylist1: 1 10 20 30 3 4
-										// mylist2: 2
-										// "it" is now invalid.
-		std::cout << "Mylist 1" << std::endl;
-		mylist1.aff(); // a vire
-		std::cout << std::endl;
-		std::cout << "Mylist 2" << std::endl;
-		mylist2.aff(); // a vire
-		std::cout << "size = " << mylist2.size() << std::endl;
-		std::cout << std::endl;
-
-		it = mylist1.begin();
-		it++;          // "it" points now to 30
-		it++;          // "it" points now to 30
-		it++;          // "it" points now to 30
-		std::cout << *it << std::endl;
-						// mylist1: 1 10 20 30 3 4
-						// 					^
-
-		mylist1.splice ( mylist1.begin(), mylist1, it, mylist1.end());
-										// mylist1: 30 3 4 1 10 20
-		res << "mylist1 contains:";
-		for (it = mylist1.begin(); it!=mylist1.end(); ++it){
+		res << "mylist contains:";
+		for (ft::list<int>::Iterator it=mylist.begin(); it!=mylist.end(); ++it)
 			res << ' ' << *it;
-		}
-		compare_result(res.str(), "mylist1 contains: 30 3 4 1 10 20");
-
-		res1 << "mylist2 contains:";
-		for (it=mylist2.begin(); it!=mylist2.end(); ++it)
-			res1 << ' ' << *it;
-		compare_result(res1.str(), "mylist2 contains: 2");
-
+		compare_result(res.str(), "mylist contains: 17 7 14");
 	}catch(const std::exception &e){};
 
 
-	// std::cout << std::endl << BLUE << "*************** TEST REMOVE ***************" << RESET << std::endl;
-	// try{
-	// 	int myints[]= {17,89,7,14};
-	// 	ft::list<int> mylist (myints,myints+4);
-	// 	std::stringstream res;
+	std::cout << std::endl << BLUE << "*************** TEST REMOVE IF ***************" << RESET << std::endl;
+	try{
+		int myints[]= {15,36,7,17,20,39,4,1};
+		ft::list<int> mylist (myints,myints+8);   // 15 36 7 17 20 39 4 1
 
-	// 	mylist.remove(89);
+		mylist.remove_if(single_digit);           // 15 36 17 20 39
 
-	// 	res << "mylist contains:";
-	// 	for (ft::list<int>::Iterator it=mylist.begin(); it!=mylist.end(); ++it)
-	// 		res << ' ' << *it;
-	// 	compare_result(res.str(), "mylist contains: 17 7 14");
-	// }catch(const std::exception &e){};
+		mylist.remove_if(is_odd());               // 36 20
 
+		std::cout << "mylist contains:";
+		for (ft::list<int>::Iterator it=mylist.begin(); it!=mylist.end(); ++it)
+			std::cout << ' ' << *it;
+		std::cout << '\n';
+	}catch(const std::exception &e){};
 
-	// std::cout << std::endl << BLUE << "*************** TEST REMOVE IF ***************" << RESET << std::endl;
-	// try{
-	// 	int myints[]= {15,36,7,17,20,39,4,1};
-	// 	ft::list<int> mylist (myints,myints+8);   // 15 36 7 17 20 39 4 1
-
-	// 	mylist.remove_if(single_digit);           // 15 36 17 20 39
-
-	// 	mylist.remove_if(is_odd());               // 36 20
-
-	// 	std::cout << "mylist contains:";
-	// 	for (ft::list<int>::Iterator it=mylist.begin(); it!=mylist.end(); ++it)
-	// 		std::cout << ' ' << *it;
-	// 	std::cout << '\n';
-	// }catch(const std::exception &e){};
-
-	// std::cout << std::endl << BLUE << "*************** TEST UNIQUE ***************" << RESET << std::endl;
-	// try{
-	// 	double mydoubles[]={ 12.15,  2.72, 73.0,  12.77,  3.14,
-    //                    12.77, 73.35, 72.25, 15.3,  72.25 };
-	// 	ft::list<double> mylist (mydoubles,mydoubles+10);
+	std::cout << std::endl << BLUE << "*************** TEST UNIQUE ***************" << RESET << std::endl;
+	try{
+		double mydoubles[]={ 12.15,  2.72, 73.0,  12.77,  3.14,
+                       12.77, 73.35, 72.25, 15.3,  72.25 };
+		ft::list<double> mylist (mydoubles,mydoubles+10);
 		
-	// 	mylist.sort();             //  2.72,  3.14, 12.15, 12.77, 12.77,
-	// 								// 15.3,  72.25, 72.25, 73.0,  73.35
+		mylist.sort();             //  2.72,  3.14, 12.15, 12.77, 12.77,
+									// 15.3,  72.25, 72.25, 73.0,  73.35
 
-	// 	mylist.unique();           //  2.72,  3.14, 12.15, 12.77
-	// 								// 15.3,  72.25, 73.0,  73.35
+		mylist.unique();           //  2.72,  3.14, 12.15, 12.77
+									// 15.3,  72.25, 73.0,  73.35
 
-	// 	mylist.unique (same_integral_part);  //  2.72,  3.14, 12.15
-	// 										// 15.3,  72.25, 73.0
+		mylist.unique (same_integral_part);  //  2.72,  3.14, 12.15
+											// 15.3,  72.25, 73.0
 
-	// 	mylist.unique (is_near());           //  2.72, 12.15, 72.25
+		mylist.unique (is_near());           //  2.72, 12.15, 72.25
 
-	// 	std::cout << "mylist contains:";
-	// 	for (ft::list<double>::Iterator it=mylist.begin(); it!=mylist.end(); ++it)
-	// 		std::cout << ' ' << *it;
-	// 	std::cout << '\n';
-	// }catch(const std::exception &e){};
+		std::cout << "mylist contains:";
+		for (ft::list<double>::Iterator it=mylist.begin(); it!=mylist.end(); ++it)
+			std::cout << ' ' << *it;
+		std::cout << '\n';
+	}catch(const std::exception &e){};
 
 
 	// std::cout << std::endl << BLUE << "*************** TEST MERGE ***************" << RESET << std::endl;
