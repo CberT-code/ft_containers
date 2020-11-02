@@ -68,21 +68,27 @@ namespace ft
 				clear();
 			}
 			list &	operator=( list const &src){             // DEEP COPY A FAIRE
+				this->clear();
 				if (this != &src){
-					
+					this->_size = src._size;
+					assign(src.begin(), src.end());
 				}
 				return (*this);
 			}
 
-			// void	aff(void){
-			// 	maillon<T> *cpy = this->_begin;
+			void	aff(void){
+				maillon<T> *cpy = this->_begin;
 
-			// 	while (cpy != this->_endsize && cpy)
-			// 	{
-			// 		std::cout << *(cpy->ptr) << std::endl;
-			// 		cpy = cpy->next;
-			// 	}
-			// }
+				while (cpy != this->_endsize && cpy)
+				{
+					std::cout << *(cpy->ptr) << std::endl;
+					cpy = cpy->next;
+				}
+				std::cout << "begin->prev    = " << this->_begin->prev << std::endl;
+				std::cout << "begin->next    = " << this->_begin->next << std::endl;
+				std::cout << "endsize->prev  = " << this->_endsize->prev << std::endl;
+				std::cout << "endsize->next  = " << this->_endsize->next << std::endl;
+			}
 			
 			/**************************************************
 			************** begin end rbegin rend **************
@@ -123,7 +129,7 @@ namespace ft
 				return (false);
 			}
 			size_type						size() const{
-				return (this->_size - 1);
+				return (this->_size < 2 ? 0 : this->_size - 1);
 			}
 			size_type						max_size() const{
 				return (std::numeric_limits<std::size_t>::max() / sizeof(value_type));
@@ -155,13 +161,13 @@ namespace ft
 			void							assign(size_type n, const value_type& val){
 				if (this->_begin != NULL)
 					this->clear();
-				for (size_t i = 1; i < n; i++)
+				for (size_t i = 0; i < n; i++)
 					push_back(val);
 			}
 			void							assign(int n, const value_type& val){
 				if (this->_begin != NULL)
 					this->clear();
-				for (int i = 1; i < n; i++)
+				for (int i = 0; i < n; i++)
 					push_back(val);
 			}
 			template <class InputIterator>
@@ -223,7 +229,7 @@ namespace ft
 					this->_endsize->next = this->_begin;
 					this->_endsize->ptr = this->_al.allocate(1);
 					this->_size = 2;
-					*this->_endsize->ptr = static_cast<int>(this->_size);
+					//*this->_endsize->ptr = static_cast<int>(this->_size);
 				}
 				else
 				{
@@ -247,8 +253,10 @@ namespace ft
 			void 							pop_back(void){
 				if (this->_size == 2)
 				{
-					this->_al.deallocate(this->_begin->ptr, 1);
-					this->_al.destroy(this->_begin->ptr);
+					if (this->_begin->ptr) {
+						this->_al.deallocate(this->_begin->ptr, 1);
+						this->_al.destroy(this->_begin->ptr);
+					}
 					delete (this->_begin);
 					this->_al.deallocate(this->_endsize->ptr, 1);
 					this->_al.destroy(this->_endsize->ptr);
@@ -262,13 +270,15 @@ namespace ft
 					maillon<T> *replaced = this->_endsize->prev;
 					maillon<T> *new_end = this->_endsize->prev->prev;
 					
-					this->_al.deallocate(replaced->ptr, 1);
-					this->_al.destroy(replaced->ptr);
+					if (replaced->ptr) {
+						this->_al.deallocate(replaced->ptr, 1);
+						this->_al.destroy(replaced->ptr);
+					}
 					this->_endsize->prev = new_end;
 					new_end->next = this->_endsize;
 					delete (replaced);
 					this->_size -= 1;
-					*this->_endsize->ptr = static_cast<int>(this->_size);
+					//*this->_endsize->ptr = static_cast<int>(this->_size);
 				}
 				
 			}
@@ -288,7 +298,7 @@ namespace ft
 				new_maillon->prev->next = new_maillon;
 
 				this->_size += 1;
-				*this->_endsize->ptr = static_cast<int>(this->_size);
+				//*this->_endsize->ptr = static_cast<int>(this->_size);
 				return (position);
 			}	
 			void							insert (Iterator position, size_type n, const value_type& val){
@@ -348,33 +358,66 @@ namespace ft
 
 
 			void splice (Iterator position, list& x){
+				Iterator	first = x.begin();
+				Iterator 	last  = x.end();
 
-				ft::list<int>::Iterator it = x.begin();
-				while (it != x.end())
-				{
-					this->insert(position, *it);
-					x.erase(it);
-					it++;
-				}
+				splice(position, x, first, last);
 			}
 
 			void splice (Iterator position, list& x, Iterator i){
-				this->insert(position, *i);
-				//x.erase(i);
-				std::cout << "list1" << std::endl;
-				while (x._begin != x._endsize)
-				{
-					std::cout << *x._begin->ptr << std::endl;
-					x._begin = x._begin->next;
+
+
+				if (position.get_it() == NULL){
+					this->_begin = new maillon<T>;
+					this->_begin->ptr = i.get_it()->ptr;
+					i.get_it()->ptr = NULL;
+					this->_endsize = new maillon<T>;
+					this->_begin->prev = this->_endsize;
+					this->_begin->next = this->_endsize;
+					this->_endsize->prev = this->_begin;
+					this->_endsize->next = this->_begin;
+					this->_size = 2;
 				}
-				std::cout << "list2 = " << this->size() << std::endl;
+				else{
+					//creation du maillon
+					maillon<T>	*stock = new maillon<T>;
+					stock->ptr  = position.get_it()->ptr;
+					position.get_it()->ptr = i.get_it()->ptr;
+					i.get_it()->ptr = NULL;
+					stock->prev = position.get_it();
+					stock->next = position.get_it()->next;
+
+					//ajout du maillon a la nouvelle position
+					position.get_it()->next = stock;
+					this->_size += 1;
+				}
+
+
+				//suppression du maillon dans la list initiale
+				if (i.get_it() == x._begin && x._begin == x._endsize->prev){
+					x.clear();
+				}
+				else{
+					i.get_it()->prev->next = i.get_it()->next;
+					i.get_it()->next->prev = i.get_it()->prev;
+					//rectification des size
+					x._size -= 1;
+					if (i.get_it() == x._begin){
+						x._begin = x._begin->next;
+						x._endsize->next = x._begin;
+					}
+					delete i.get_it();
+				}
 			}
 
-/*
+
 			void splice (Iterator position, list& x, Iterator first, Iterator last){
-
+				while (first != last){
+					splice(position, x, first);
+					first++;
+					position++;
+				}
 			}
-*/
 
 			void sort(void){
 				maillon<T> 		*start = this->_begin;
@@ -429,13 +472,25 @@ namespace ft
 
 			template <class Predicate>
 			void remove_if(Predicate pred) {
-				Iterator		*tmp = this->_begin;
+				maillon<T>		*tmp = this->_begin;
+				maillon<T>		*cpy = tmp;
 			
-				while (tmp != this->_endsize)
-				{
-					if (pred(*tmp->ptr))
-						this->erase(tmp);
-					tmp++;
+				if (tmp != NULL) {
+					while (tmp != this->_endsize)
+					{
+						if (pred(*tmp->ptr)) {
+							cpy = tmp;
+							if (tmp == this->_begin)
+								this->_begin = tmp->next;
+							tmp = tmp->next;
+							cpy->prev->next = cpy->next;
+							cpy->next->prev = cpy->prev;
+							this->_al.deallocate(cpy->ptr, 1);
+							delete cpy;
+							this->_size -= 1;
+						} else
+							tmp = tmp->next;
+					}
 				}
 			}
 
@@ -489,6 +544,26 @@ namespace ft
 						tmp = tmp->next;
 					}
 				}
+			}
+
+			void							merge(list &x) {
+				Iterator	first = x.begin();
+				Iterator 	last  = x.end();
+
+				for (int i = 0; i < x._size; i++) {
+					while (first != last) {
+						maillon<T>	*stock = new maillon<T>;
+						stock->ptr = first.get_it()->ptr;
+						first.get_it()->ptr = NULL;
+						stock->prev = this->_endsize->prev;
+						stock->next = this->_endsize;
+						this->_endsize->prev->next = stock;
+						this->_endsize->prev = stock;
+						this->_size += 1;
+						first++;
+					}
+				}
+				this->sort();
 			}
 
 			void 							reverse(void){
