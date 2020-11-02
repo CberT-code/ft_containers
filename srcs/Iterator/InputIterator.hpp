@@ -77,6 +77,7 @@ class InputIterator
 
 	protected :
 		maillon<T>					*it;
+		maillon<T>					**begin;
 };
 
 #include "./Iterator.hpp"

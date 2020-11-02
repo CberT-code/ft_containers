@@ -1,5 +1,8 @@
 {
 	"files.associations": {
+<<<<<<< HEAD
+		"*.tcc": "cpp"
+=======
 		"array": "cpp",
 		"atomic": "cpp",
 		"*.tcc": "cpp",
@@ -44,9 +47,7 @@
 		"stdexcept": "cpp",
 		"streambuf": "cpp",
 		"typeinfo": "cpp",
-		"complex": "cpp",
-		"cstring": "cpp",
-		"functional": "cpp",
-		"map": "cpp"
+		"complex": "cpp"
+>>>>>>> 365a7411bbb532c931ca33c01a12bd75abb7591b
 	}
 }
