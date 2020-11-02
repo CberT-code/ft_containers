@@ -382,6 +382,8 @@ namespace ft
 					//creation du maillon
 					maillon<T>	*stock = new maillon<T>;
 					stock->ptr = i.get_it()->ptr;
+					if (this->_begin == position.get_it())
+						this->_begin = stock;
 					i.get_it()->ptr = NULL;
 					stock->prev = position.get_it()->prev;
 					stock->next = position.get_it();
