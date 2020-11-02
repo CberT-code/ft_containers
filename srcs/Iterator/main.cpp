@@ -376,7 +376,7 @@ int main ()
 	}catch(const std::exception &e){};
 
 
-	std::cout << std::endl << BLUE << "*************** Test Insert ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "*************** Test Insert  A verifier lorsque l'on aura les vecteurs***************" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		ft::list<int>::Iterator it;
@@ -390,7 +390,6 @@ int main ()
 		++it;       // it points now to number 2           ^
 
 		mylist.insert (it,10);                        // 1 10 2 3 4 5
-
 		// "it" still points to number 2                      ^
 		mylist.insert (it,2,20);                      // 1 10 20 20 2 3 4 5
 
@@ -513,52 +512,52 @@ int main ()
 	}catch(const std::exception &e){};
 
 
-	// 	std::cout << std::endl << BLUE << "*************** TEST SPLICE ***************" << RESET << std::endl;
-	// try{
-	// 	ft::list<int> mylist1, mylist2;
-	// 	ft::list<int>::Iterator it;
-	// 	std::stringstream res;
-	// 	std::stringstream res1;
+		std::cout << std::endl << BLUE << "*************** TEST SPLICE ***************" << RESET << std::endl;
+	try{
+		ft::list<int> mylist1, mylist2;
+		ft::list<int>::Iterator it;
+		std::stringstream res;
+		std::stringstream res1;
 
-	// 	// set some initial values:
-	// 	for (int i=1; i<=4; ++i)
-	// 		mylist1.push_back(i);      // mylist1: 1 2 3 4
+		// set some initial values:
+		for (int i=1; i<=4; ++i)
+			mylist1.push_back(i);      // mylist1: 1 2 3 4
 
-	// 	for (int i=1; i<=3; ++i)
-	// 		mylist2.push_back(i*10);   // mylist2: 10 20 30
+		for (int i=1; i<=3; ++i)
+			mylist2.push_back(i*10);   // mylist2: 10 20 30
 
-	// 	it = mylist1.begin();
-	// 	++it;                          // points to 2
+		it = mylist1.begin();
+		++it;                          // points to 2
 
-	// 	mylist1.splice (it, mylist2);   // mylist1: 1 10 20 30 2 3 4
-	// 									// mylist2 (empty)
-	// 									// "it" still points to 2 (the 5th element)
-	// 	mylist2.splice (mylist2.begin(),mylist1, it);
-	// 									// mylist1: 1 10 20 30 3 4
-	// 									// mylist2: 2
-	// 									// "it" is now invalid.
+		mylist1.splice (it, mylist2);   // mylist1: 1 10 20 30 2 3 4
+										// mylist2 (empty)
+										// "it" still points to 2 (the 5th element)
+		mylist2.splice (mylist2.begin(),mylist1, it);
+										// mylist1: 1 10 20 30 3 4
+										// mylist2: 2
+										// "it" is now invalid.
 
-	// 	it = mylist1.begin();
-	// 	it++;          // "it" points now to 30
-	// 	it++;          // "it" points now to 30
-	// 	it++;          // "it" points now to 30
-	// 					// mylist1: 1 10 20 30 3 4
-	// 					// 					^
+		it = mylist1.begin();
+		it++;          // "it" points now to 30
+		it++;          // "it" points now to 30
+		it++;          // "it" points now to 30
+						// mylist1: 1 10 20 30 3 4
+						// 					^
 
-	// 	mylist1.splice ( mylist1.begin(), mylist1, it, mylist1.end());
-	// 									// mylist1: 30 3 4 1 10 20
-	// 	res << "mylist1 contains:";
-	// 	for (it = mylist1.begin(); it!=mylist1.end(); ++it){
-	// 		res << ' ' << *it;
-	// 	}
-	// 	compare_result(res.str(), "mylist1 contains: 30 3 4 1 10 20");
+		mylist1.splice ( mylist1.begin(), mylist1, it, mylist1.end());
+										// mylist1: 30 3 4 1 10 20
+		res << "mylist1 contains:";
+		for (it = mylist1.begin(); it!=mylist1.end(); ++it){
+			res << ' ' << *it;
+		}
+		compare_result(res.str(), "mylist1 contains: 30 3 4 1 10 20");
 
-	// 	res1 << "mylist2 contains:";
-	// 	for (it=mylist2.begin(); it!=mylist2.end(); ++it)
-	// 		res1 << ' ' << *it;
-	// 	compare_result(res1.str(), "mylist2 contains: 2");
+		res1 << "mylist2 contains:";
+		for (it=mylist2.begin(); it!=mylist2.end(); ++it)
+			res1 << ' ' << *it;
+		compare_result(res1.str(), "mylist2 contains: 2");
 
-	// }catch(const std::exception &e){};
+	}catch(const std::exception &e){};
 
 
 	std::cout << std::endl << BLUE << "*************** TEST REMOVE ***************" << RESET << std::endl;

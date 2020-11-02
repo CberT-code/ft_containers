@@ -10,7 +10,7 @@ namespace ft
 	template<typename T, class Alloc = std::allocator<T> >
 	class list
 	{
-		
+
 		public:
 
 			typedef T 											value_type;
@@ -26,24 +26,24 @@ namespace ft
 			typedef ReverseBidirectionalIterator< const T>		const_reverse_Iterator;
 			typedef std::ptrdiff_t 								difference_type;
 
-
 			/**************************************************
 			****************** Form Coplien *******************
 			**************************************************/
-			explicit list (const allocator_type& alloc = allocator_type()){
+
+			explicit 							list (const allocator_type& alloc = allocator_type()){
 				this->_al = alloc;
 				this->_begin = NULL;
 				this->_endsize = NULL;
 				this->_size = 0;
 			}
-			explicit list (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()){
+			explicit 							list (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()){
 				this->_al = alloc;
 				this->_begin = NULL;
 				this->_endsize = NULL;
 				this->_size = 0;
 				assign(n, val);
 			}
-			explicit list (int n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()){
+			explicit 							list (int n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()){
 				this->_al = alloc;
 				this->_begin = NULL;
 				this->_endsize = NULL;
@@ -51,23 +51,23 @@ namespace ft
 				assign(n, val);
 			}
 			template <class InputIterator>
-			list (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()){
+												list (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()){
 				this->_al = alloc;
 				this->_begin = NULL;
 				this->_endsize = NULL;
 				this->_size = 0;
 				assign(first,last);
 			}
-			list(const list& x){
+												list(const list& x){
 				this->_begin = NULL;
 				this->_endsize = NULL;
 				this->_size = 0;
 				operator=(x);
 			}
-			virtual ~list(void){
+			virtual 							~list(void){
 				clear();
 			}
-			list &	operator=( list const &src){             // DEEP COPY A FAIRE
+			list &								operator=( list const &src){
 				this->clear();
 				if (this != &src){
 					this->_size = src._size;
@@ -75,8 +75,7 @@ namespace ft
 				}
 				return (*this);
 			}
-
-			void	aff(void){
+			void								aff(void){
 				maillon<T> *cpy = this->_begin;
 
 				while (cpy != this->_endsize && cpy)
@@ -84,54 +83,50 @@ namespace ft
 					std::cout << *(cpy->ptr) << std::endl;
 					cpy = cpy->next;
 				}
-				std::cout << "begin->prev    = " << this->_begin->prev << std::endl;
-				std::cout << "begin->next    = " << this->_begin->next << std::endl;
-				std::cout << "endsize->prev  = " << this->_endsize->prev << std::endl;
-				std::cout << "endsize->next  = " << this->_endsize->next << std::endl;
 			}
-			
+
 			/**************************************************
 			************** begin end rbegin rend **************
 			**************************************************/
 
-			Iterator						begin(){
+			Iterator							begin(){
 				return (this->_begin);
 			}
-			const_Iterator					begin() const{
+			const_Iterator						begin() const{
 				return (this->_begin);
 			}
-			Iterator						end(){	
+			Iterator							end(){	
 				return (this->_endsize);
 			}
-			const_Iterator					end() const{
+			const_Iterator						end() const{
 				return (this->_endsize);
 			}
-			reverse_Iterator 				rbegin(){
+			reverse_Iterator 					rbegin(){
 				return (this->_endsize->prev);
 			}
-			const_reverse_Iterator 			rbegin() const{
+			const_reverse_Iterator 				rbegin() const{
 				return (this->_endsize->prev);
 			}
-			reverse_Iterator 				rend(){
+			reverse_Iterator 					rend(){
 				return (this->_endsize);
 			}
-			const_reverse_Iterator 			rend() const{
+			const_reverse_Iterator 				rend() const{
 				return (this->_endsize);
 			}
 
 			/**************************************************
 			*************** empty size max_endsize->ptr *******
 			**************************************************/
-			
-			bool							empty() const{
+
+			bool								empty() const{
 				if (this->_size == 0)
 					return  (true);
 				return (false);
 			}
-			size_type						size() const{
+			size_type							size() const{
 				return (this->_size < 2 ? 0 : this->_size - 1);
 			}
-			size_type						max_size() const{
+			size_type							max_size() const{
 				return (std::numeric_limits<std::size_t>::max() / sizeof(value_type));
 			}
 
@@ -139,16 +134,16 @@ namespace ft
 			******************** front back *******************
 			**************************************************/
 
-			reference 						front(){
+			reference 							front(){
 				return (*this->_begin->ptr);
 			}
-			const_reference 				front() const{
+			const_reference 					front() const{
 				return (*this->_begin->ptr);
 			}
-			reference						back(){
+			reference							back(){
 				return (*this->_endsize->prev->ptr);
 			}
-			const_reference					back() const{
+			const_reference						back() const{
 				return (*this->_endsize->prev->ptr);
 			}
 
@@ -157,21 +152,20 @@ namespace ft
 			********* insert erase swap resize clear **********
 			**************************************************/
 
-		
-			void							assign(size_type n, const value_type& val){
+			void								assign(size_type n, const value_type& val){
 				if (this->_begin != NULL)
 					this->clear();
 				for (size_t i = 0; i < n; i++)
 					push_back(val);
 			}
-			void							assign(int n, const value_type& val){
+			void								assign(int n, const value_type& val){
 				if (this->_begin != NULL)
 					this->clear();
 				for (int i = 0; i < n; i++)
 					push_back(val);
 			}
 			template <class InputIterator>
-			void 							assign(InputIterator first, InputIterator last){
+			void 								assign(InputIterator first, InputIterator last){
 				if (this->_begin != NULL)
 					this->clear();
 				while (first != last){
@@ -179,7 +173,7 @@ namespace ft
 					first++;
 				}
 			}
-			void							push_front (const value_type& val){
+			void								push_front (const value_type& val){
 				maillon<T> *new_start =  new maillon<T>;
 
 				//Initialisation du nouveau premier maillon<T>
@@ -194,7 +188,7 @@ namespace ft
 				*this->_endsize->ptr += 1;
 				this->_size += 1;
 			}
-			void							pop_front(void){
+			void								pop_front(void){
 				if (this->_size == 2){
 					this->_al.deallocate(this->_begin->ptr, 1);
 					this->_al.destroy(this->_begin->ptr);
@@ -217,7 +211,7 @@ namespace ft
 					this->_size -= 1;
 				}
 			}
-			void 							push_back (const value_type& val){
+			void 								push_back (const value_type& val){
 				if (this->_begin == NULL){
 					this->_begin = new maillon<T>;
 					this->_begin->ptr = this->_al.allocate(1);
@@ -250,7 +244,7 @@ namespace ft
 					this->_size += 1;
 				}
 			}
-			void 							pop_back(void){
+			void 								pop_back(void){
 				if (this->_size == 2)
 				{
 					if (this->_begin->ptr) {
@@ -282,7 +276,7 @@ namespace ft
 				}
 				
 			}
-			Iterator						insert (Iterator position, const value_type& val){
+			Iterator							insert (Iterator position, const value_type& val){
 				maillon<T> *new_maillon = new maillon<T>;
 
 				new_maillon->ptr = this->_al.allocate(1);
@@ -301,24 +295,24 @@ namespace ft
 				//*this->_endsize->ptr = static_cast<int>(this->_size);
 				return (position);
 			}	
-			void							insert (Iterator position, size_type n, const value_type& val){
+			void								insert (Iterator position, size_type n, const value_type& val){
 				while (n--){
 					insert(position, val);
 				}
 			}
-			void							insert (Iterator position, int n, const value_type& val){
+			void								insert (Iterator position, int n, const value_type& val){
 				while (n--){
 					insert(position, val);
 				}
 			}
 			template <class InputIterator>
-			void							insert (Iterator position, InputIterator first, InputIterator last){
+			void								insert (Iterator position, InputIterator first, InputIterator last){
 				while (first != last){
 					insert(position, first);
 					first++;
 				}
 			}
-			Iterator						erase (Iterator position){
+			Iterator							erase (Iterator position){
 				maillon<T> *pos = position.get_it();
 				pos->prev->next = pos->next;
 				pos->next->prev = pos->prev;
@@ -330,41 +324,40 @@ namespace ft
 				*this->_endsize->ptr = static_cast<int>(this->_size);
 				return (position);
 			}
-			Iterator						erase (Iterator first, Iterator last){
+			Iterator							erase (Iterator first, Iterator last){
 				while (first != last)
 					first = erase(first);
 				return (last);
 			}
-			void							swap (list& x){
+			void								swap (list& x){
 				std::swap(x._begin, this->_begin);
 				std::swap(x._endsize, this->_endsize);
 				std::swap(x._size, this->_size);
 			}
-			void							resize (size_type n, value_type val = value_type()){
-			while (this->_size > n)
+			void								resize (size_type n, value_type val = value_type()){
+			while (this->_size - 1 > n)
 				this->pop_back();
-			while (this->_size < n)
+			while (this->_size - 1 < n)
 				this->push_back(val);
 			}
-			void							clear(void){
+			void								clear(void){
 				while (this->_size)
 					this->pop_back();
 
 			}
+
 			/**************************************************
 			**** splice remove remove_if unique merge sort ****
 			********************* reverse *********************
 			**************************************************/
 
-
-			void splice (Iterator position, list& x){
+			void 								splice (Iterator position, list& x){
 				Iterator	first = x.begin();
 				Iterator 	last  = x.end();
 
 				splice(position, x, first, last);
 			}
-
-			void splice (Iterator position, list& x, Iterator i){
+			void 								splice (Iterator position, list& x, Iterator i){
 
 
 				if (position.get_it() == NULL){
@@ -412,16 +405,13 @@ namespace ft
 				}
 				
 			}
-
-
-			void splice (Iterator position, list& x, Iterator first, Iterator last){
+			void 								splice (Iterator position, list& x, Iterator first, Iterator last){
 				while (first != last){
 					splice(position, x, first);
 					first++;
 				}
 			}
-
-			void sort(void){
+			void 								sort(void){
 				maillon<T> 		*start = this->_begin;
 				maillon<T> 		*end = this->_endsize->prev;
 
@@ -436,7 +426,7 @@ namespace ft
 				}
 			}
 			template <class Compare>
-			void sort (Compare comp){
+			void 								sort (Compare comp){
 				maillon<T> 		*start = this->_begin;
 				maillon<T> 		*end = this->_endsize->prev;
 
@@ -450,8 +440,7 @@ namespace ft
 					start = start->next;
 				}
 			}
-
-			void remove(const value_type& val) {
+			void 								remove(const value_type& val) {
 				maillon<T>		*tmp = this->_begin;
 
 				if (tmp != NULL){
@@ -471,9 +460,8 @@ namespace ft
 					}
 				}
 			}
-
 			template <class Predicate>
-			void remove_if(Predicate pred) {
+			void 								remove_if(Predicate pred) {
 				maillon<T>		*tmp = this->_begin;
 				maillon<T>		*cpy = tmp;
 			
@@ -495,8 +483,7 @@ namespace ft
 					}
 				}
 			}
-
-			void unique() {
+			void 								unique() {
 				maillon<T>		*tmp = this->_begin;
 				int				i = 0;
 
@@ -520,9 +507,8 @@ namespace ft
 					}
 				}
 			}
-
 			template <class BinaryPredicate>
-			void					unique(BinaryPredicate binary_pred)
+			void								unique(BinaryPredicate binary_pred)
 			{
 				maillon<T>		*tmp = this->_begin;
 				int				i = 0;
@@ -547,8 +533,7 @@ namespace ft
 					}
 				}
 			}
-
-			void							merge(list &x) {
+			void								merge(list &x) {
 				Iterator	first = x.begin();
 				Iterator 	last  = x.end();
 
@@ -567,8 +552,7 @@ namespace ft
 				}
 				this->sort();
 			}
-
-			void 							reverse(void){
+			void 								reverse(void){
 				maillon<T> 		*start = this->_begin;
 				maillon<T> 		*end = this->_endsize->prev;
 
@@ -578,11 +562,12 @@ namespace ft
 					end = end->prev;
 				}
 			}
-			private :
-				allocator_type					_al;
-				maillon<T>						*_begin;
-				maillon<T>						*_endsize;
-				size_t							_size;
+		
+		private :
+			allocator_type						_al;
+			maillon<T>							*_begin;
+			maillon<T>							*_endsize;
+			size_t								_size;
 	};
 }
 
