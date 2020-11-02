@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "../Headers/Header.hpp"
-
 #include <iostream>
 #include <sstream>
 #include <iomanip>
@@ -22,8 +19,7 @@
 #include <tgmath.h>
 #include <list>
 
-
-void  compare_result(std::string res1, std::string res2)
+void 			compare_result(std::string res1, std::string res2)
 {
 	if (!res1.compare(res2)) 
 		std::cout << GREEN << res1  << RESET << std::endl;
@@ -32,7 +28,7 @@ void  compare_result(std::string res1, std::string res2)
 		std::cout << RED << "Real one : " << res2  << RESET << std::endl;
 	}
 }
-bool compare_nocase (const std::string& first, const std::string& second)
+bool 			compare_nocase (const std::string& first, const std::string& second)
 {
 	unsigned int i=0;
 	while ( (i<first.length()) && (i<second.length()) )
@@ -43,57 +39,21 @@ bool compare_nocase (const std::string& first, const std::string& second)
 	}
 	return ( first.length() < second.length() );
 }
-
-bool single_digit (const int& value) { return (value<10); }
-
-struct is_odd {
+bool 			single_digit (const int& value) { return (value<10); }
+struct 			is_odd {
 	bool operator() (const int& value) { return (value%2)==1; }
 };
-
-bool same_integral_part (double first, double second)
+bool 			same_integral_part (double first, double second)
 { return ( int(first)==int(second) ); }
-
-// a binary predicate implemented as a class:
-struct is_near {
+struct 			is_near {
   bool operator() (double first, double second)
   { return (fabs(first-second)<5.0); }
 };
-
-bool mycomparison (double first, double second)
+bool 			mycomparison (double first, double second)
 { return ( int(first)<int(second) ); }
 
 int main ()
 {
-	// std::list<int> toto;
-	// toto.push_back(41);
-	// toto.push_back(31);
-	// toto.push_back(33);
-	// toto.push_back(27);
-	// toto.push_back(18);
-	// std::list<int>::iterator it;
-	// it = toto.begin();
-	// for (size_t i = 0; i < 12; i++)
-	// {
-	// 	std::cout << *it << std::endl;
-	// 	it++;
-	// 	/* code */
-	// }
-	
-
-	// std::list<std::string> tutu;
-	// tutu.push_back("popooiii");
-	// tutu.push_back("popod");
-	// tutu.push_back("popo|||");
-	// std::list<std::string>::iterator ite;
-	// ite = tutu.begin();
-	// for (size_t i = 0; i < 12; i++)
-	// {
-	// 	std::cout << *ite << std::endl;
-	// 	ite++;
-	// 	/* code */
-	// }
-	// tutu.sort();
-
 	std::cout << std::endl << BLUE << "*************** Test Constructor ***************" << RESET << std::endl;
 	try{
 		// constructors used in the same order as described above:
@@ -114,7 +74,6 @@ int main ()
 
 		compare_result(res.str(), "The contents of fifth are: 16 2 77 29 ");
 		std::cout << '\n';
-
 	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "*************** Test operator= ***************" << RESET << std::endl;
@@ -133,7 +92,6 @@ int main ()
 		compare_result(res1.str(), "Size of second: 3");
 	}catch(const std::exception &e){};
 
-
 	std::cout << std::endl << BLUE << "*************** Test begin ***************" << RESET << std::endl;
 	try{
 		int myints[] = {75,23,65,42,13};
@@ -145,7 +103,6 @@ int main ()
 			res << ' ' << *it;
 		compare_result(res.str(), "mylist contains: 75 23 65 42 13");
 	}catch(const std::exception &e){};
-
 
 	std::cout << std::endl << BLUE << "*************** Test end ***************" << RESET << std::endl;
 	try{
@@ -160,8 +117,7 @@ int main ()
 		compare_result(res.str(), "mylist contains: 75 23 65 42 13");
 	}catch(const std::exception &e){};
 
-
-		std::cout << std::endl << BLUE << "*************** Test rbegin ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "*************** Test rbegin ***************" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		std::stringstream res;
@@ -174,8 +130,7 @@ int main ()
 		compare_result(res.str(), "mylist backwards: 5 4 3 2 1");
 	}catch(const std::exception &e){};
 
-
-		std::cout << std::endl << BLUE << "*************** Test rend ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "*************** Test rend ***************" << RESET << std::endl;
 	try{
 		 ft::list<int> mylist;
 		 std::stringstream res;
@@ -188,8 +143,7 @@ int main ()
 		compare_result(res.str(), "mylist backwards: 5 4 3 2 1");
 	}catch(const std::exception &e){};
 
-
-		std::cout << std::endl << BLUE << "*************** Test empty ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "*************** Test empty ***************" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		std::stringstream res;
@@ -206,8 +160,7 @@ int main ()
 		compare_result(res.str(), "total: 55");
 	}catch(const std::exception &e){};
 
-
-		std::cout << std::endl << BLUE << "*************** Test size ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "*************** Test size ***************" << RESET << std::endl;
 	try{
 		ft::list<int> myints;
 		std::stringstream res;
@@ -244,7 +197,7 @@ int main ()
 	// // 	else std::cout << "That size exceeds the limit.\n";
 	// // }catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test front ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************    Test front    ***************" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		std::stringstream res;
@@ -261,8 +214,7 @@ int main ()
 
 	}catch(const std::exception &e){};
 
-
-		std::cout << std::endl << BLUE << "*************** Test back ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************    Test back    ***************" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		std::stringstream res;
@@ -282,7 +234,7 @@ int main ()
 
 	}catch(const std::exception &e){};
 
-		std::cout << std::endl << BLUE << "*************** Test assign ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************    Test assign  ***************" << RESET << std::endl;
 	try{
 		ft::list<int> first;
 		ft::list<int> second;
@@ -303,7 +255,6 @@ int main ()
 
 	}catch(const std::exception &e){};
 
-
 	std::cout << std::endl << BLUE << "*************** Test push_front ***************" << RESET << std::endl;
 	try{
 		std::stringstream res;
@@ -317,8 +268,7 @@ int main ()
 		compare_result(res.str(), "mylist contains: 300 200 100 100");
 	}catch(const std::exception &e){};
 
-
-	std::cout << std::endl << BLUE << "*************** Test pop_front ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "*************** Test pop_front  ***************" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		std::stringstream res1;
@@ -338,8 +288,7 @@ int main ()
 		compare_result(res1.str(), "Final size of mylist is 0");
 	}catch(const std::exception &e){};
 
-
-	std::cout << std::endl << BLUE << "*************** Test Push_back ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "*************** Test Push_back  ***************" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		std::stringstream res;
@@ -355,8 +304,7 @@ int main ()
 		std::cout << "mylist stores " << mylist.size() << " numbers.\n";
 	}catch(const std::exception &e){};
 
-
-	std::cout << std::endl << BLUE << "*************** Test Pop_back ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "*************** Test Pop_back   ***************" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		std::stringstream res;
@@ -374,7 +322,6 @@ int main ()
 		res << "The elements of mylist summed " << sum;
 		compare_result(res.str(), "The elements of mylist summed 600");
 	}catch(const std::exception &e){};
-
 
 	std::cout << std::endl << BLUE << "*************** Test Insert  A verifier lorsque l'on aura les vecteurs***************" << RESET << std::endl;
 	try{
@@ -406,8 +353,7 @@ int main ()
 		
 	}catch(const std::exception &e){};
 
-
-	std::cout << std::endl << BLUE << "*************** Test Erase ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************    Test Erase   ***************" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		ft::list<int>::Iterator it1,it2;
@@ -443,8 +389,7 @@ int main ()
 		compare_result(res.str(), "mylist contains: 10 30 60 80 90");
 	}catch(const std::exception &e){};
 
-
-	std::cout << std::endl << BLUE << "*************** TEST SWAP ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************    TEST SWAP    ***************" << RESET << std::endl;
 	try{
 		ft::list<int> first (3,100);   // three ints with a value of 100
 		ft::list<int> second (5,200);  // five ints with a value of 200
@@ -464,8 +409,7 @@ int main ()
 		compare_result(res1.str(), "second contains: 100 100 100");
 	}catch(const std::exception &e){};
 
-
-	std::cout << std::endl << BLUE << "*************** TEST RESIZE ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************   TEST RESIZE   ***************" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		std::stringstream res;
@@ -484,8 +428,7 @@ int main ()
 		compare_result(res.str(), "mylist contains: 1 2 3 4 5 100 100 100 0 0 0 0");
 	}catch(const std::exception &e){};
 
-
-	std::cout << std::endl << BLUE << "***************  TEST CLEAR ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************    TEST CLEAR   ***************" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		ft::list<int>::Iterator it;
@@ -511,8 +454,7 @@ int main ()
 		compare_result(res1.str(), "mylist contains: 1101 2202");
 	}catch(const std::exception &e){};
 
-
-		std::cout << std::endl << BLUE << "*************** TEST SPLICE ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************   TEST SPLICE   ***************" << RESET << std::endl;
 	try{
 		ft::list<int> mylist1, mylist2;
 		ft::list<int>::Iterator it;
@@ -559,8 +501,7 @@ int main ()
 
 	}catch(const std::exception &e){};
 
-
-	std::cout << std::endl << BLUE << "*************** TEST REMOVE ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************   TEST REMOVE   ***************" << RESET << std::endl;
 	try{
 		int myints[]= {17,89,7,14};
 		ft::list<int> mylist (myints,myints+4);
@@ -574,8 +515,7 @@ int main ()
 		compare_result(res.str(), "mylist contains: 17 7 14");
 	}catch(const std::exception &e){};
 
-
-	std::cout << std::endl << BLUE << "*************** TEST REMOVE IF ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************  TEST REMOVE IF ***************" << RESET << std::endl;
 	try{
 		int myints[]= {15,36,7,17,20,39,4,1};
 		ft::list<int> mylist (myints,myints+8);   // 15 36 7 17 20 39 4 1
@@ -590,7 +530,7 @@ int main ()
 		std::cout << '\n';
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** TEST UNIQUE ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************  TEST UNIQUE    ***************" << RESET << std::endl;
 	try{
 		double mydoubles[]={ 12.15,  2.72, 73.0,  12.77,  3.14,
                        12.77, 73.35, 72.25, 15.3,  72.25 };
@@ -612,7 +552,6 @@ int main ()
 			std::cout << ' ' << *it;
 		std::cout << '\n';
 	}catch(const std::exception &e){};
-
 
 	// std::cout << std::endl << BLUE << "*************** TEST MERGE ***************" << RESET << std::endl;
 	// try{
