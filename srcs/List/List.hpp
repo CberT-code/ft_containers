@@ -535,13 +535,13 @@ namespace ft
 				}
 			}
 			void							merge(list &x) {
-				this->splice(x.begin(), x);
+				this->splice(this->end(), x);
 				this->sort();
 			}
 
 			template<class Compare>
 			void merge (list& x, Compare comp) {
-				this->splice(x.begin(), x);
+				this->splice(this->end(), x);
 				this->sort(comp);
 			}
 
