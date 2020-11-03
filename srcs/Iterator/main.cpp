@@ -577,7 +577,7 @@ int main ()
 
 		second.push_back (2.1);
 
-		first.merge(second,mycomparison);
+		//first.merge(second,mycomparison);
 
 		res << "first contains:";
 		for (ft::list<double>::Iterator it=first.begin(); it!=first.end(); ++it)
