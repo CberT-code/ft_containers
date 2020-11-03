@@ -6,12 +6,11 @@
 template <typename T>
 class InputIterator
 {
-	/**************************************************
-	****************** Form Coplien *******************
-	**************************************************/
-	
 	public :
 
+		/**************************************************
+		****************** Form Coplien *******************
+		**************************************************/
 		InputIterator(){
 			this->it = NULL;
 		}
@@ -23,20 +22,17 @@ class InputIterator
 				this->it = src.it;
 			return (*this);
 		}
-		
 		virtual ~InputIterator(void){}
 		
 		/**************************************************
 		*************** operator '==' '!=' ****************
 		**************************************************/
-		bool					operator==(const InputIterator &src) const{
-			// std::cout << "it = " << this->it << std::endl;
-			// std::cout << "tata.end() = " << src.it << std::endl;
+		bool						operator==(const InputIterator &src) const{
 			if (src.it == this->it)
 				return (true);
 			return (false);
 		}
-		bool					operator!=(const InputIterator &src) const{
+		bool						operator!=(const InputIterator &src) const{
 			return (!operator==(src));
 		}
 		
@@ -65,15 +61,9 @@ class InputIterator
 				this->it = this->it->next;
 			return (*this);
 		}
-		maillon<T>						*get_it(void) const{
+		maillon<T>					*get_it(void) const{
 			return (this->it);
 		}
-		// T							*operator++(void){
-
-		// 	std::cout << this->it->ptr << std::endl;
-		// 	;
-		// 	return (this->it->ptr += 1);
-		// }
 
 	protected :
 		maillon<T>					*it;

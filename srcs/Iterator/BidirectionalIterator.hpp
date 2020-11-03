@@ -12,9 +12,7 @@ class BidirectionalIterator : public ForwardIterator<T>
 		/**************************************************
 		****************** Form Coplien *******************
 		**************************************************/
-
-		BidirectionalIterator(void){}
-		
+		BidirectionalIterator(void){}	
 		BidirectionalIterator(BidirectionalIterator const &src){
 			operator=(src);
 		}
@@ -25,11 +23,9 @@ class BidirectionalIterator : public ForwardIterator<T>
 			return (*this);
 		}
 		virtual ~BidirectionalIterator(void){}
-
 		BidirectionalIterator(maillon<T> *src){
 			this->it = src;
 		}
-
 
 		/**************************************************
 		********* operator '--a' 'a--' '*a--' *************
@@ -45,13 +41,6 @@ class BidirectionalIterator : public ForwardIterator<T>
 				this->it = this->it->prev;
 			return (*this);
 		}
-		// T							*operator--(void){
-		// 	if (this->it != NULL){
-		// 		this->it->ptr -= 1;
-		// 		return (this->it->ptr);
-		// 	}
-		// 	return (NULL);
-		// }
 
 };
 
