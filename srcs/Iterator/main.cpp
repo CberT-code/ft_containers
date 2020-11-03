@@ -54,7 +54,7 @@ bool 			mycomparison (double first, double second)
 
 int main ()
 {
-	std::cout << std::endl << BLUE << "*************** Test Constructor ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************** Test Constructor ************" << RESET << std::endl;
 	try{
 		// constructors used in the same order as described above:
 		ft::list<int> first;                                // empty list of ints
@@ -75,7 +75,7 @@ int main ()
 		compare_result(res.str(), "The contents of fifth are: 16 2 77 29 ");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test operator= ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************** Test operator= **************" << RESET << std::endl;
 	try{
 		ft::list<int> first (3);      // list of 3 zero-initialized ints
 		ft::list<int> second (5);     // list of 5 zero-initialized ints
@@ -91,7 +91,7 @@ int main ()
 		compare_result(res1.str(), "Size of second: 3");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test begin ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************** Test begin ******************" << RESET << std::endl;
 	try{
 		int myints[] = {75,23,65,42,13};
 		ft::list<int> mylist (myints,myints+5);
@@ -103,7 +103,7 @@ int main ()
 		compare_result(res.str(), "mylist contains: 75 23 65 42 13");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test end ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************** Test end ********************" << RESET << std::endl;
 	try{
 		int myints[] = {75,23,65,42,13};
 		ft::list<int> mylist (myints,myints+5);
@@ -116,7 +116,7 @@ int main ()
 		compare_result(res.str(), "mylist contains: 75 23 65 42 13");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test rbegin ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************** Test rbegin *****************" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		std::stringstream res;
@@ -129,7 +129,7 @@ int main ()
 		compare_result(res.str(), "mylist backwards: 5 4 3 2 1");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test rend ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************** Test rend *******************" << RESET << std::endl;
 	try{
 		 ft::list<int> mylist;
 		 std::stringstream res;
@@ -142,7 +142,7 @@ int main ()
 		compare_result(res.str(), "mylist backwards: 5 4 3 2 1");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test empty ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************** Test empty ******************" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		std::stringstream res;
@@ -159,7 +159,7 @@ int main ()
 		compare_result(res.str(), "total: 55");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** Test size ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************** Test size *******************" << RESET << std::endl;
 	try{
 		ft::list<int> myints;
 		std::stringstream res;
