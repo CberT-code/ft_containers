@@ -1,4 +1,3 @@
-
 #ifndef FORWARDITERATOR_H
 #define FORWARDITERATOR_H
 
@@ -7,13 +6,11 @@
 template <typename T>
 struct ForwardIterator : public InputIterator<T>
 {
-	/**************************************************
-	****************** Form Coplien *******************
-	**************************************************/
 	public :
+		/**************************************************
+		****************** Form Coplien *******************
+		**************************************************/
 		ForwardIterator(void){}
-
-	
 
 };
 

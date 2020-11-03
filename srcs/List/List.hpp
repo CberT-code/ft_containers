@@ -1,8 +1,6 @@
 
 #ifndef LIST_H
 #define LIST_H
-
-
 #include "../Headers/Header.hpp"
 
 namespace ft
@@ -185,16 +183,13 @@ namespace ft
 
 				//Modification des variables
 				this->_begin = new_start;
-				*this->_endsize->ptr += 1;
+
 				this->_size += 1;
 			}
 			void								pop_front(void){
 				if (this->_size == 2){
 					this->_al.deallocate(this->_begin->ptr, 1);
-					this->_al.destroy(this->_begin->ptr);
 					delete (this->_begin);
-					this->_al.deallocate(this->_endsize->ptr, 1);
-					this->_al.destroy(this->_endsize->ptr);
 					delete (this->_endsize);
 					this->_begin = NULL;
 					this->_endsize = NULL;
@@ -207,7 +202,6 @@ namespace ft
 					this->_begin = cpy->next;
 					delete cpy;
 					this->_begin->prev = this->_endsize;
-					*this->_endsize->ptr -= 1;
 					this->_size -= 1;
 				}
 			}
@@ -221,9 +215,9 @@ namespace ft
 					this->_begin->next = this->_endsize;
 					this->_endsize->prev = this->_begin;
 					this->_endsize->next = this->_begin;
-					this->_endsize->ptr = this->_al.allocate(1);
+
 					this->_size = 2;
-					//*this->_endsize->ptr = static_cast<int>(this->_size);
+					this->_endsize->ptr = reinterpret_cast<T *>(&this->_size);
 				}
 				else
 				{
@@ -240,7 +234,7 @@ namespace ft
 
 					//Modification des variables
 					this->_endsize->prev = new_end;
-					*this->_endsize->ptr += 1;
+
 					this->_size += 1;
 				}
 			}
@@ -249,10 +243,8 @@ namespace ft
 				{
 					if (this->_begin->ptr) {
 						this->_al.deallocate(this->_begin->ptr, 1);
-						this->_al.destroy(this->_begin->ptr);
 					}
 					delete (this->_begin);
-					this->_al.deallocate(this->_endsize->ptr, 1);
 					delete (this->_endsize);
 					this->_begin = NULL;
 					this->_endsize = NULL;
@@ -265,13 +257,11 @@ namespace ft
 					
 					if (replaced->ptr) {
 						this->_al.deallocate(replaced->ptr, 1);
-						this->_al.destroy(replaced->ptr);
 					}
 					this->_endsize->prev = new_end;
 					new_end->next = this->_endsize;
 					delete (replaced);
 					this->_size -= 1;
-					//*this->_endsize->ptr = static_cast<int>(this->_size);
 				}
 				
 			}
@@ -291,7 +281,6 @@ namespace ft
 				new_maillon->prev->next = new_maillon;
 
 				this->_size += 1;
-				//*this->_endsize->ptr = static_cast<int>(this->_size);
 				return (position);
 			}	
 			void								insert (Iterator position, size_type n, const value_type& val){
@@ -316,11 +305,9 @@ namespace ft
 				pos->prev->next = pos->next;
 				pos->next->prev = pos->prev;
 				this->_al.deallocate(pos->ptr, 1);
-				this->_al.destroy(pos->ptr);
-				delete (pos);
 				position++;
+				delete (pos);
 				this->_size -= 1;
-				*this->_endsize->ptr = static_cast<int>(this->_size);
 				return (position);
 			}
 			Iterator							erase (Iterator first, Iterator last){
@@ -406,9 +393,12 @@ namespace ft
 				
 			}
 			void 								splice (Iterator position, list& x, Iterator first, Iterator last){
+				Iterator cpy;
 				while (first != last){
+					cpy = first;
+					cpy++;
 					splice(position, x, first);
-					first++;
+					first = cpy;
 				}
 			}
 			void 								sort(void){
@@ -432,9 +422,13 @@ namespace ft
 
 				while (start != end){
 					while (start != end){
-						if (comp)
+						if (comp(*end->ptr, *start->ptr)){
 							std::swap(start->ptr, end->ptr);
+							end = end->prev;
+						}
+						else{
 						end = end->prev;
+						}
 					}
 					end = this->_endsize->prev;
 					start = start->next;
@@ -534,18 +528,27 @@ namespace ft
 					}
 				}
 			}
-			void							merge(list &x) {
-				this->splice(x.begin(), x);
+			void								merge(list &x) {
+				this->splice(this->begin(), x);
 				this->sort();
 			}
-
 			template<class Compare>
-			void merge (list& x, Compare comp) {
-				this->splice(x.begin(), x);
+			void 								merge (list& x, Compare comp) {
 				this->sort(comp);
-			}
+				Iterator it = this->begin();
+				Iterator itx = x.begin();
 
-			void 							reverse(void){
+				size_t i = 0;
+				while (it != this->end() && i < x.size())
+				{
+					if (comp(*itx,*it))
+						this->splice(it, x, itx);
+					else
+						it++;
+					itx = x.begin();
+				}
+			}
+			void 								reverse(void){
 
 				maillon<T> 		*start = this->_begin;
 				maillon<T> 		*end = this->_endsize->prev;
@@ -567,4 +570,85 @@ namespace ft
 
 
 
+template <class T, class Alloc>
+	bool operator== (const ft::list<T,Alloc>& lhs, const ft::list<T,Alloc>& rhs){
+		
+		if (lhs.size() != rhs.size())
+			return false;
+		BidirectionalIterator<T>	itr = rhs.begin();
+		BidirectionalIterator<T>	itl = lhs.begin();
+
+		while (itr != rhs.end())
+		{
+			if (*itr != *itl)
+				return (false);
+			itr++;
+			itl++;
+		}
+		return true;
+	}
+
+template <class T, class Alloc>
+	bool operator!= (const ft::list<T,Alloc>& lhs, const ft::list<T,Alloc>& rhs){
+		if (!operator==(lhs, rhs))
+			return true;
+		return false;
+	}
+
+template <class T, class Alloc>
+	bool operator<  (const ft::list<T,Alloc>& lhs, const ft::list<T,Alloc>& rhs){
+		if (lhs.size() < rhs.size())
+			return true;
+		else if (rhs.size() > lhs.size())
+			return false;
+		BidirectionalIterator<T>	itr = rhs.begin();
+		BidirectionalIterator<T>	itl = lhs.begin();
+
+		while (itr != rhs.end())
+		{
+			if (*itl < *itr)
+				return (true);
+			itr++;
+			itl++;
+		}
+		return false;
+	}
+
+template <class T, class Alloc>
+	bool operator<= (const ft::list<T,Alloc>& lhs, const ft::list<T,Alloc>& rhs){
+		if (operator<(lhs, rhs) || operator==(lhs, rhs))
+			return (true);
+		return (false);
+	}
+
+template <class T, class Alloc>
+	bool operator>  (const ft::list<T,Alloc>& lhs, const ft::list<T,Alloc>& rhs){
+		if (lhs.size()	> rhs.size())
+			return true;
+		else if (rhs.size() < lhs.size())
+			return false;
+		BidirectionalIterator<T>	itr = rhs.begin();
+		BidirectionalIterator<T>	itl = lhs.begin();
+
+		while (itr != rhs.end())
+		{
+			if (*itl > *itr)
+				return (true);
+			itr++;
+			itl++;
+		}
+		return false;
+	}
+
+template <class T, class Alloc>
+	bool operator>= (const ft::list<T,Alloc>& lhs, const ft::list<T,Alloc>& rhs){
+		if (operator>(lhs, rhs) || operator==(lhs, rhs))
+			return (true);
+		return (false);
+	}
+
+template <class T, class Alloc>
+  void swap (ft::list<T,Alloc>& x, ft::list<T,Alloc>& y){
+	  x->swap(y);
+  }
 #endif
