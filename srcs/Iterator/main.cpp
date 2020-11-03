@@ -576,13 +576,15 @@ int main ()
 		// (second is now empty)
 
 		second.push_back (2.1);
+		second.push_back (1.1);
+		second.push_back (3.5);
 
-		//first.merge(second,mycomparison);
+		first.merge(second,mycomparison);
 
 		res << "first contains:";
 		for (ft::list<double>::Iterator it=first.begin(); it!=first.end(); ++it)
 			res << ' ' << *it;
-		compare_result(res.str(), "first contains: 1.4 2.2 2.9 2.1 3.1 3.7 7.1");
+		compare_result(res.str(), "first contains: 1.4 2.2 2.9 2.1 1.1 3.1 3.7 3.5 7.1");
 
 	}catch(const std::exception &e){};
 

@@ -1,8 +1,6 @@
 
 #ifndef LIST_H
 #define LIST_H
-
-
 #include "../Headers/Header.hpp"
 
 namespace ft
@@ -432,9 +430,13 @@ namespace ft
 
 				while (start != end){
 					while (start != end){
-						if (comp)
+						if (comp(*end->ptr, *start->ptr)){
 							std::swap(start->ptr, end->ptr);
+							end = end->prev;
+						}
+						else{
 						end = end->prev;
+						}
 					}
 					end = this->_endsize->prev;
 					start = start->next;
@@ -534,18 +536,27 @@ namespace ft
 					}
 				}
 			}
-			void							merge(list &x) {
-				this->splice(this->end(), x);
+			void								merge(list &x) {
+				this->splice(this->begin(), x);
 				this->sort();
 			}
-
 			template<class Compare>
-			void merge (list& x, Compare comp) {
-				this->splice(this->end(), x);
+			void 								merge (list& x, Compare comp) {
 				this->sort(comp);
-			}
+				Iterator it = this->begin();
+				Iterator itx = x.begin();
 
-			void 							reverse(void){
+				size_t i = 0;
+				while (it != this->end() && i < x.size())
+				{
+					if (comp(*itx,*it))
+						this->splice(it, x, itx);
+					else
+						it++;
+					itx = x.begin();
+				}
+			}
+			void 								reverse(void){
 
 				maillon<T> 		*start = this->_begin;
 				maillon<T> 		*end = this->_endsize->prev;
