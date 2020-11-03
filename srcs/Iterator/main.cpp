@@ -73,7 +73,6 @@ int main ()
 			res << *it << ' ';
 
 		compare_result(res.str(), "The contents of fifth are: 16 2 77 29 ");
-		std::cout << '\n';
 	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "*************** Test operator= ***************" << RESET << std::endl;
@@ -197,7 +196,7 @@ int main ()
 	// 	else std::cout << "That size exceeds the limit.\n";
 	// }catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************    Test front    ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************    Test front    **************" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		std::stringstream res;
@@ -530,7 +529,6 @@ int main ()
 		for (ft::list<int>::Iterator it=mylist.begin(); it!=mylist.end(); ++it)
 			res << ' ' << *it;
 		compare_result(res.str(), "mylist contains: 36 20");
-		std::cout << '\n';
 	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "***************  TEST UNIQUE    ***************" << RESET << std::endl;
@@ -555,10 +553,9 @@ int main ()
 		for (ft::list<double>::Iterator it=mylist.begin(); it!=mylist.end(); ++it)
 			res << ' ' << *it;
 		compare_result(res.str(), "mylist contains: 2.72 12.15 72.25");
-		std::cout << '\n';
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** TEST MERGE ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**************** TEST MERGE *******************" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::list<double> first, second;
@@ -586,14 +583,15 @@ int main ()
 		for (ft::list<double>::Iterator it=first.begin(); it!=first.end(); ++it)
 			res << ' ' << *it;
 		compare_result(res.str(), "first contains: 1.4 2.2 2.9 2.1 3.1 3.7 7.1");
-		std::cout << '\n';
+
 	}catch(const std::exception &e){};
 
-
-	std::cout << std::endl << BLUE << "*************** TEST SORT ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "****************** TEST SORT ******************" << RESET << std::endl;
 	try{
 		ft::list<std::string> mylist;
 		ft::list<std::string>::Iterator it;
+		std::stringstream res;
+		std::stringstream res1;
 		
 		mylist.push_back ("one");
 		mylist.push_back ("two");
@@ -601,39 +599,38 @@ int main ()
 
 		mylist.sort();
 
-		std::cout << "mylist contains:";
+		res << "mylist contains:";
 		for (it=mylist.begin(); it!=mylist.end(); ++it)
-			std::cout << ' ' << *it;
-			it++;
-			std::cout << ' ' << *it;
-		std::cout << '\n';
+			res << ' ' << *it;
+		compare_result(res.str(), "mylist contains: Three one two");
 
 		mylist.sort(compare_nocase);
-		std::cout << "mylist contains:";
+		res1 << "mylist contains:";
 		for (it=mylist.begin(); it!=mylist.end(); ++it)
-			std::cout << ' ' << *it;
-		std::cout << '\n';
+			res1 << ' ' << *it;
+		compare_result(res1.str(), "mylist contains: one Three two");
 
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** TEST REVERSE ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***************** TEST REVERSE ****************" << RESET << std::endl;
 	try{
+		std::stringstream res;
 		ft::list<int> mylist;
 
 		for (int i=1; i<10; ++i) mylist.push_back(i);
 
 		mylist.reverse();
 
-		std::cout << "mylist contains:";
+		res << "mylist contains:";
 		for (ft::list<int>::Iterator it=mylist.begin(); it!=mylist.end(); ++it)
-			std::cout << ' ' << *it;
+			res << ' ' << *it;
 
-		std::cout << '\n';
+		compare_result(res.str(), "mylist contains: 9 8 7 6 5 4 3 2 1");
 	}catch(const std::exception &e){};
 
-
-	std::cout << std::endl << BLUE << "*************** Operators NON MEMBER ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "********* Operators NON MEMBER ****************" << RESET << std::endl;
 	try{
+		std::stringstream res, res1, res2, res3, res4, res5;
 		ft::list<int> a;
 		a.push_back(10);
 		a.push_back(20);
@@ -647,31 +644,37 @@ int main ()
 		c.push_back(20);
 		c.push_back(10);
 
-		if (a==b) std::cout << "a and b are equal\n";
-		if (b!=c) std::cout << "b and c are not equal\n";
-		if (b<c) std::cout << "b is less than c\n";
-		if (c>b) std::cout << "c is greater than b\n";
-		if (a<=b) std::cout << "a is less than or equal to b\n";
-		if (a>=b) std::cout << "a is greater than or equal to b\n";
+		if (a==b) res << "a and b are equal";
+		if (b!=c) res1 << "b and c are not equal";
+		if (b<c) res2 << "b is less than c";
+		if (c>b) res3 << "c is greater than b";
+		if (a<=b) res4 << "a is less than or equal to b";
+		if (a>=b) res5 << "a is greater than or equal to b";
+		compare_result(res.str(), "a and b are equal");
+		compare_result(res1.str(), "b and c are not equal");
+		compare_result(res2.str(), "b is less than c");
+		compare_result(res3.str(), "c is greater than b");
+		compare_result(res4.str(), "a is less than or equal to b");
+		compare_result(res5.str(), "a is greater than or equal to b");
 	}catch(const std::exception &e){};
-
 
 	std::cout << std::endl << BLUE << "*************** SWAP NON MEMBER ***************" << RESET << std::endl;
 	try{
+		std::stringstream res, res1;
 		std::list<int> foo (3,100);   // three ints with a value of 100
 		std::list<int> bar (5,200);   // five ints with a value of 200
 
 		foo.swap(bar);
 
-		std::cout << "foo contains:";
+		res << "foo contains:";
 		for (std::list<int>::iterator it = foo.begin(); it!=foo.end(); ++it)
-			std::cout << ' ' << *it;
-		std::cout << '\n';
+			res << ' ' << *it;
 
-		std::cout << "bar contains:";
+		res1 << "bar contains:";
 		for (std::list<int>::iterator it = bar.begin(); it!=bar.end(); ++it)
-			std::cout << ' ' << *it;
-		std::cout << '\n';
+			res1 << ' ' << *it;
+		compare_result(res.str(), "foo contains: 200 200 200 200 200");
+		compare_result(res1.str(), "bar contains: 100 100 100");
 	}catch(const std::exception &e){};
 	return 0;
 }
