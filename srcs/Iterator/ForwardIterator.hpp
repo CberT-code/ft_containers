@@ -1,4 +1,3 @@
-
 #ifndef FORWARDITERATOR_H
 #define FORWARDITERATOR_H
 
@@ -12,8 +11,6 @@ struct ForwardIterator : public InputIterator<T>
 	**************************************************/
 	public :
 		ForwardIterator(void){}
-
-	
 
 };
 
