@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Header.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:16:44 by cbertola          #+#    #+#             */
-/*   Updated: 2020/10/30 13:57:38 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/03 16:15:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ struct maillon
 	maillon					*prev;
 	maillon					*next;	
 	T						*ptr;		
+};
+
+template<class Key, class T>
+struct maillontree
+{
+	maillontree				*prev;
+	maillontree				*right;
+	maillontree				*left;
+	T						*ptr;
+	Key						_key;	
 };
 
 # define RESET   		"\033[0m"
@@ -46,6 +56,7 @@ struct maillon
 #include <memory>
 #include <limits>
 #include <algorithm>
+#include <utility>
 
 #include "../Iterator/InputIterator.hpp"
 #include "../Iterator/OutputIterator.hpp"
@@ -56,5 +67,6 @@ struct maillon
 #include "../Iterator/ReverseBidirectionalIterator.hpp"
 
 #include "../List/List.hpp"
+#include "../Map/Map.hpp"
 
 #endif
