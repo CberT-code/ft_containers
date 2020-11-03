@@ -54,6 +54,7 @@ bool 			mycomparison (double first, double second)
 
 int main ()
 {
+	
 	std::cout << std::endl << BLUE << "***************** Test Constructor ************" << RESET << std::endl;
 	try{
 		// constructors used in the same order as described above:

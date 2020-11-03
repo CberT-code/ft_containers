@@ -183,16 +183,13 @@ namespace ft
 
 				//Modification des variables
 				this->_begin = new_start;
-				*this->_endsize->ptr += 1;
+
 				this->_size += 1;
 			}
 			void								pop_front(void){
 				if (this->_size == 2){
 					this->_al.deallocate(this->_begin->ptr, 1);
-					this->_al.destroy(this->_begin->ptr);
 					delete (this->_begin);
-					this->_al.deallocate(this->_endsize->ptr, 1);
-					this->_al.destroy(this->_endsize->ptr);
 					delete (this->_endsize);
 					this->_begin = NULL;
 					this->_endsize = NULL;
@@ -205,7 +202,6 @@ namespace ft
 					this->_begin = cpy->next;
 					delete cpy;
 					this->_begin->prev = this->_endsize;
-					*this->_endsize->ptr -= 1;
 					this->_size -= 1;
 				}
 			}
@@ -219,9 +215,9 @@ namespace ft
 					this->_begin->next = this->_endsize;
 					this->_endsize->prev = this->_begin;
 					this->_endsize->next = this->_begin;
-					this->_endsize->ptr = this->_al.allocate(1);
+
 					this->_size = 2;
-					//*this->_endsize->ptr = static_cast<int>(this->_size);
+					this->_endsize->ptr = reinterpret_cast<T *>(&this->_size);
 				}
 				else
 				{
@@ -238,7 +234,7 @@ namespace ft
 
 					//Modification des variables
 					this->_endsize->prev = new_end;
-					*this->_endsize->ptr += 1;
+
 					this->_size += 1;
 				}
 			}
@@ -247,10 +243,8 @@ namespace ft
 				{
 					if (this->_begin->ptr) {
 						this->_al.deallocate(this->_begin->ptr, 1);
-						this->_al.destroy(this->_begin->ptr);
 					}
 					delete (this->_begin);
-					this->_al.deallocate(this->_endsize->ptr, 1);
 					delete (this->_endsize);
 					this->_begin = NULL;
 					this->_endsize = NULL;
@@ -263,13 +257,11 @@ namespace ft
 					
 					if (replaced->ptr) {
 						this->_al.deallocate(replaced->ptr, 1);
-						this->_al.destroy(replaced->ptr);
 					}
 					this->_endsize->prev = new_end;
 					new_end->next = this->_endsize;
 					delete (replaced);
 					this->_size -= 1;
-					//*this->_endsize->ptr = static_cast<int>(this->_size);
 				}
 				
 			}
@@ -289,7 +281,6 @@ namespace ft
 				new_maillon->prev->next = new_maillon;
 
 				this->_size += 1;
-				//*this->_endsize->ptr = static_cast<int>(this->_size);
 				return (position);
 			}	
 			void								insert (Iterator position, size_type n, const value_type& val){
@@ -314,11 +305,9 @@ namespace ft
 				pos->prev->next = pos->next;
 				pos->next->prev = pos->prev;
 				this->_al.deallocate(pos->ptr, 1);
-				this->_al.destroy(pos->ptr);
-				delete (pos);
 				position++;
+				delete (pos);
 				this->_size -= 1;
-				*this->_endsize->ptr = static_cast<int>(this->_size);
 				return (position);
 			}
 			Iterator							erase (Iterator first, Iterator last){
@@ -404,9 +393,12 @@ namespace ft
 				
 			}
 			void 								splice (Iterator position, list& x, Iterator first, Iterator last){
+				Iterator cpy;
 				while (first != last){
+					cpy = first;
+					cpy++;
 					splice(position, x, first);
-					first++;
+					first = cpy;
 				}
 			}
 			void 								sort(void){
