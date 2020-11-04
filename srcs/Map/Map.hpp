@@ -126,11 +126,32 @@ namespace ft
 					this->_size += 1;
 					return (std::make_pair(this->launch->get_it(), true));
 				} else {
-					if (this->_size == 1 && this->launch->ptr > val) {
-						this->_al->allocate(this->_start->ptr, 1);
-						this->_al->construct(this->_start->ptr, val);
-						this->_size += 1;
-						return (std::make_pair(this->_start->get_it(), true));
+					if (this->launch->ptr > val) {
+						maillontree<Key, T> new_maillon = new maillontree<Key, T>();
+						this->_al->allocate(new_maillon->ptr, 1);
+						this->_al->construct(new_maillon->ptr, val);
+						new_maillon->left = NULL;
+						new_maillon->right = NULL;
+						maillontree<Key, T> *tmp = tm? this->launch->left;
+						for (int i = 0; i < this->_size; this->_size++) {
+							if (val <= *tmp->ptr)
+								if (tmp->left == NULL) {
+									tmp->left = new_maillon;
+									tmp->left->prev = tmp;
+									return (std::make_pair(tmp->left->get_it(), true));
+								} else {
+									tmp = tmp->left
+								}
+							else
+								if (tmp->right == NULL) {
+									tmp->right = new_maillon;
+									tmp->right->prev = tmp;
+									return (std::make_pair(tmp->right->get_it(), true));
+								} else {
+									tmp = tmp->right;
+								}
+
+						}
 					}
 				}
 			}
