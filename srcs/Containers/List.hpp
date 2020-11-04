@@ -73,15 +73,6 @@ namespace ft
 				}
 				return (*this);
 			}
-			void								aff(void){
-				maillon<T> *cpy = this->_begin;
-
-				while (cpy != this->_endsize && cpy)
-				{
-					std::cout << *(cpy->ptr) << std::endl;
-					cpy = cpy->next;
-				}
-			}
 
 			/**************************************************
 			************** begin end rbegin rend **************

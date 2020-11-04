@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:16:44 by cbertola          #+#    #+#             */
-/*   Updated: 2020/10/30 13:57:38 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/04 17:18:23 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,31 @@ struct maillon
 # define BOLDWHITE   	"\033[1m\033[37m"      /* Bold White */
 
 #include <iostream>
-#include <fstream>
+#include <sstream>
 #include <string>
 #include <iomanip>
 #include <memory>
 #include <limits>
+#include <vector>
+#include <tgmath.h>
+#include <list>
 #include <algorithm>
+# include <cstddef>
 
 #include "../Iterator/InputIterator.hpp"
 #include "../Iterator/OutputIterator.hpp"
 #include "../Iterator/ForwardIterator.hpp"
 #include "../Iterator/BidirectionalIterator.hpp"
+#include "../Iterator/RandomAccessIterator.hpp"
 #include "../Iterator/ReverseInputIterator.hpp"
 #include "../Iterator/ReverseForwardIterator.hpp"
 #include "../Iterator/ReverseBidirectionalIterator.hpp"
+#include "../Iterator/ReverseRandomAccessIterator.hpp"
 
-#include "../List/List.hpp"
+#include "../Containers/List.hpp"
+#include "../Containers/Vector.hpp"
+
+int 			List_main(void);
+void 			compare_result(std::string res1, std::string res2);
 
 #endif
