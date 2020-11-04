@@ -1,12 +1,12 @@
 
-#ifndef STACK_HPP
-# define STACK_HPP
+#ifndef QUEUE_HPP
+# define QUEUE_HPP
 #include "../Headers/Header.hpp"
 
 namespace ft
 {
 	template <typename T, class Container = std::deque<T> >
-	class stack
+	class queue
 	{
 
 	public:
@@ -20,20 +20,20 @@ namespace ft
 		****************** Forme Coplien*******************
 		**************************************************/
 
-		explicit 			stack (const container_type& ctnr = container_type())
+		explicit 			queue (const container_type& ctnr = container_type())
 		{
 			this->_container = ctnr;
 		}
 
-		~stack(void)
+		~queue(void)
 		{
 		}
 
-							stack(const stack& x){
+							queue(const queue& x){
 			operator=(x);
 		}
 
-		stack				&operator=(const stack &src)
+		queue				&operator=(const queue &src)
 		{
 			this->_container = src._container;
 			return (*this);
@@ -58,13 +58,25 @@ namespace ft
 		******************** front back *******************
 		**************************************************/
 
-		value_type			&top(void)
+		value_type			&front(void)
+		{
+			return (this->_container.front());
+		}
+
+
+		const value_type	&front(void) const
+		{
+			return (this->_container.front());
+		}
+
+
+		value_type			&back(void)
 		{
 			return (this->_container.back());
 		}
 
 
-		const value_type	&top(void) const
+		const value_type	&back(void) const
 		{
 			return (this->_container.back());
 		}
@@ -81,7 +93,7 @@ namespace ft
 
 		void				pop(void)
 		{
-			return (this->_container.pop_back());
+			return (this->_container.pop_front());
 		}
 
 
@@ -89,52 +101,52 @@ namespace ft
 		container_type				_container;
 	
 		template <class U, class V>
-		friend bool	operator==(const stack<U,V> &lhs, const stack<U,V> &rhs);
+		friend bool	operator==(const queue<U,V> &lhs, const queue<U,V> &rhs);
 		template <class U, class V>
-		friend bool	operator!=(const stack<U,V> &lhs, const stack<U,V> &rhs);
+		friend bool	operator!=(const queue<U,V> &lhs, const queue<U,V> &rhs);
 		template <class U, class V>
-		friend bool	operator<(const stack<U,V> &lhs, const stack<U,V> &rhs);
+		friend bool	operator<(const queue<U,V> &lhs, const queue<U,V> &rhs);
 		template <class U, class V>
-		friend bool	operator<=(const stack<U,V> &lhs, const stack<U,V> &rhs);
+		friend bool	operator<=(const queue<U,V> &lhs, const queue<U,V> &rhs);
 		template <class U, class V>
-		friend bool	operator>(const stack<U,V> &lhs, const stack<U,V> &rhs);
+		friend bool	operator>(const queue<U,V> &lhs, const queue<U,V> &rhs);
 		template <class U, class V>
-		friend bool	operator>=(const stack<U,V> &lhs, const stack<U,V> &rhs);
+		friend bool	operator>=(const queue<U,V> &lhs, const queue<U,V> &rhs);
 	};
 
 
 template <class T, class Container>
-	bool		operator==(const stack<T,Container> &lhs, const stack<T,Container> &rhs)
+	bool		operator==(const queue<T,Container> &lhs, const queue<T,Container> &rhs)
 	{
 		return (lhs._container == rhs._container);
 	}
 
 template <class T, class Container>
-	bool		operator!=(const stack<T,Container> &lhs, const stack<T,Container> &rhs)
+	bool		operator!=(const queue<T,Container> &lhs, const queue<T,Container> &rhs)
 	{
 		return (lhs._container != rhs._container);
 	}
 
 template <class T, class Container>
-	bool		operator<(const stack<T,Container> &lhs, const stack<T,Container> &rhs)
+	bool		operator<(const queue<T,Container> &lhs, const queue<T,Container> &rhs)
 	{
 		return (lhs._container < rhs._container);
 	}
 
 template <class T, class Container>
-	bool		operator<=(const stack<T,Container> &lhs, const stack<T,Container> &rhs)
+	bool		operator<=(const queue<T,Container> &lhs, const queue<T,Container> &rhs)
 	{
 		return (lhs._container <= rhs._container);
 	}
 
 template <class T, class Container>
-	bool		operator>(const stack<T,Container> &lhs, const stack<T,Container> &rhs)
+	bool		operator>(const queue<T,Container> &lhs, const queue<T,Container> &rhs)
 	{
 		return (lhs._container > rhs._container);
 	}
 
 template <class T, class Container>
-	bool		operator>=(const stack<T,Container> &lhs, const stack<T,Container> &rhs)
+	bool		operator>=(const queue<T,Container> &lhs, const queue<T,Container> &rhs)
 	{
 		return (lhs._container >= rhs._container);
 	}
