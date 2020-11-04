@@ -39,6 +39,11 @@ namespace ft
 				this->_size = 0;
 			}
 
+			template<class InputIterator>
+			Map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) {
+
+			}
+
 			Map(const Map &objmap) {
 				this->_start = new maillontree<Key, T>();
 				this->_end = new maillontree<Key, T>();
@@ -69,6 +74,71 @@ namespace ft
 				}
 				return (*this);
 			}
+
+			iterator	begin(void) const {
+				return (this->_start->get_it());
+			}
+
+			iterator	end(void) const {
+				return (this->_end->get_it());
+			}
+
+			reverse_Iterator	rbegin(void) const {
+				return (this->end());
+			}
+
+			reverse_Iterator	rend(void) const {
+				return (this->begin());
+			}
+
+			const_Iterator		cbegin(void) const {
+				return (this->_start->get_it());
+			}
+
+			const_Iterator		cend(void) const {
+				return (this->_end->get_it());
+			}
+
+			reverse_Iterator	crbegin(void) const {
+				return (this->cend());
+			}
+
+			reverse_Iterator	crend(void) const {
+				return (this->cbegin());
+			}
+
+			bool		empty(void) const {
+				return (!this->_size);
+			}
+
+			size_type	size(void) const {
+				return (this->_size);
+			}
+
+			size_type	max_size() const{
+				return (std::numeric_limits<std::size_t>::max() / sizeof(this->launch));
+			}
+
+			std::pair<iterator, bool> insert(const value_type &val) {
+				if (this->_size == 0) {
+					this->_al->allocate(this->launch->ptr, 1);
+					this->_al->construct(this->launch->ptr, val);
+					this->_size += 1;
+					return (std::make_pair(this->launch->get_it(), true));
+				} else {
+					if (this->_size == 1 && this->launch->ptr > val) {
+						this->_al->allocate(this->_start->ptr, 1);
+						this->_al->construct(this->_start->ptr, val);
+						this->_size += 1;
+						return (std::make_pair(this->_start->get_it(), true));
+					}
+				}
+			}
+
+
+
+
+
 
 		private:
 			maillontree<Key, T>		*_end;
