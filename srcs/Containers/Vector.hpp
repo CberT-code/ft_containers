@@ -207,22 +207,17 @@ namespace ft
 				this->_size--;
 			}
 			Iterator							insert (Iterator position, const value_type& val){
-				
-				size_t count = 0;
-				value_type val2;
-
-				while (position-- != this->begin())
-					count++;
 
 				if (this->_size + 1 > this->_capacity)
 					reserve(this->_size + 1);
-				
+
 				this->_size += 1;
-				std::swap(val2, this->_array[count]);		
-				while (&this->_array[count] != &this->_array[this->_size]){
-					std::swap(val2, this->_array[count++]);		
+				size_t i = this->_size;
+				for (Iterator it = this->end(); position != it; it--){
+					std::swap(this->_array[i - 1], this->_array[i]);
+					i--;
 				}
-				this->_array[count] = val;
+				this->_array[++i] = val;
 				return (Iterator(this->_array));
 			}	
 			void								insert (Iterator position, size_type n, const value_type& val){
