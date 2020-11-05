@@ -522,5 +522,53 @@ int main(void) {
 		compare_result(res.str(), "foo contains: 200 200 200 200 200");
 		compare_result(res1.str(), "bar contains: 100 100 100");
 	}catch(const std::exception &e){};
+
+	std::cout << std::endl << BLUE << "***************** Flip BOOL ************" << RESET << std::endl;
+	try{
+		std::stringstream res;
+		ft::vector<bool> mask;
+
+		mask.push_back(true);
+		mask.push_back(false);
+		mask.push_back(false);
+		mask.push_back(true);
+
+		mask.flip();
+
+		res << std::boolalpha;
+		res << "mask contains:";
+		for (unsigned i=0; i<mask.size(); i++)
+			res << ' ' << mask.at(i);
+		compare_result(res.str(), "mask contains: false true true false");
+	}catch(const std::exception &e){};
+
+	std::cout << std::endl << BLUE << "***************** SWAP BOOL ************" << RESET << std::endl;
+	try{
+		std::stringstream res;
+		std::stringstream res1;
+		std::vector<bool> foo;
+		std::vector<bool> bar;
+
+		foo.push_back(false);
+		foo.push_back(true);
+		foo.push_back(false);
+
+		bar.push_back(true);
+		bar.push_back(false);
+
+		foo.swap (foo[0], foo[1]);
+		bar.swap (bar.front(), bar.back());
+
+		foo.swap(bar);
+
+		res << std::boolalpha;
+		res1 << std::boolalpha;
+		res << "foo contains:";
+		for (unsigned i=0; i<foo.size(); i++) res << ' ' << foo[i];
+		res1 << "bar contains:";
+		for (unsigned i=0; i<bar.size(); i++) res1 << ' ' << bar[i];
+		compare_result(res.str(), "foo contains: false true");
+		compare_result(res1.str(), "bar contains: true false false");
+	}catch(const std::exception &e){};
 	return 0;
 }
