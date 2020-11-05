@@ -73,11 +73,6 @@ namespace ft
 				}
 				return (*this);
 			}
-			void								aff(void){
-				size_t i = 0;
-				while (i < this->_size)
-					std::cout << GREEN << this->_array[i++] << RESET << std::endl;
-			}
 
 			/**************************************************
 			******************** Iterators ********************

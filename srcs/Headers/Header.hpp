@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:16:44 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/05 16:52:20 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/05 18:36:25 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ struct maillon
 #include "../Containers/Vector.hpp"
 #include "../Containers/Vector_bool.hpp"
 
-int 			List_main(void);
+int 			list_main(void);
+int				vector_main(void);
 void 			compare_result(std::string res1, std::string res2);
 
 #endif

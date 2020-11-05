@@ -6,14 +6,14 @@
 #    By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/21 15:12:58 by cbertola          #+#    #+#              #
-#    Updated: 2020/11/03 15:28:17 by cbertola         ###   ########.fr        #
+#    Updated: 2020/11/05 18:35:57 by cbertola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= ft_containers
 SRCS_PATH	= ./
 OBJS_PATH	= ./srcs/Iterator/
-SRCSC		= list_main.cpp main.cpp
+SRCSC		= vector_main.cpp list_main.cpp main.cpp
 
 SRCSH		=
 SRCS		= $(addprefix $(SRCS_PATH),$(SRCSC))
