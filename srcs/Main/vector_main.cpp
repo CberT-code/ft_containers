@@ -546,8 +546,8 @@ int vector_main(void) {
 	try{
 		std::stringstream res;
 		std::stringstream res1;
-		std::vector<bool> foo;
-		std::vector<bool> bar;
+		ft::vector<bool> foo;
+		ft::vector<bool> bar;
 
 		foo.push_back(false);
 		foo.push_back(true);

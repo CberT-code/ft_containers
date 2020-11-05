@@ -13,5 +13,7 @@ void 			compare_result(std::string res1, std::string res2)
 int main(void) {
 	list_main();
 	vector_main();
+	queue_main();
+	stack_main();
 	return (1);
 }

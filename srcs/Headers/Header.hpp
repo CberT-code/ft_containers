@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:16:44 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/05 18:36:25 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/05 19:03:21 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ struct maillon
 #include <iomanip>
 #include <memory>
 #include <limits>
-#include <vector>
 #include <tgmath.h>
 #include <list>
 #include <algorithm>
 # include <cstddef>
+# include <deque>
 
 #include "../Iterator/InputIterator.hpp"
 #include "../Iterator/OutputIterator.hpp"
@@ -64,9 +64,13 @@ struct maillon
 #include "../Containers/List.hpp"
 #include "../Containers/Vector.hpp"
 #include "../Containers/Vector_bool.hpp"
+#include "../Containers/Queue.hpp"
+#include "../Containers/Stack.hpp"
 
 int 			list_main(void);
 int				vector_main(void);
+int				queue_main(void);
+int				stack_main(void);
 void 			compare_result(std::string res1, std::string res2);
 
 #endif
