@@ -28,14 +28,13 @@ namespace ft
 			explicit Map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) {
 				this->_al = alloc;
 				this->_start = new maillontree<Key, T>();
-				this->_start->left = NULL;
-				this->_start->right = NULL;
 				this->_end = new maillontree<Key, T>();
-				this->_end->left = this->_start;
-				this->_start->prev = this->_end;
+				this->_start->left = _end;
+				this->_start->right = NULL;
+				this->_start->prev = NULL;
 				this->_end->right = NULL;
-				this->_end->prev = NULL;
-				this->launch = this->_end;
+				this->_end->prev = this->_start;
+				this->launch = this->start;
 				this->_size = 0;
 			}
 
@@ -45,14 +44,15 @@ namespace ft
 			}
 
 			Map(const Map &objmap) {
+				this->_al = alloc;
 				this->_start = new maillontree<Key, T>();
 				this->_end = new maillontree<Key, T>();
-				this->launch = this->_end;
-				this->_start->left = NULL;
+				this->_start->left = _end;
 				this->_start->right = NULL;
-				this->_end->left = this->_start;
+				this->_start->prev = NULL;
 				this->_end->right = NULL;
-				this->_end->prev = NULL;
+				this->_end->prev = this->_start;
+				this->launch = this->start;
 				this->_size = 0;
 				*this = objmap;
 				return ;
@@ -117,6 +117,38 @@ namespace ft
 
 			size_type	max_size() const{
 				return (std::numeric_limits<std::size_t>::max() / sizeof(this->launch));
+			}
+
+			iterator	find(const key_type& k) {
+				maillontree<Key, T> *tmp  = this->launch;
+				int					i = 0;
+				
+				while (i != this->_size) {
+					if (*tmp->ptr == val)
+						return (iterator(tmp));
+					else if (k < *tmp->ptr)
+						tmp = tmp->left;
+					else
+						tmp = tmp->right;
+					i++;
+				}
+				return (tmp->launch);
+			}
+
+			const_iterator	find(const key_type& k) const {
+				maillontree<Key, T> *tmp  = this->launch;
+				int					i = 0;
+				
+				while (i != this->_size) {
+					if (*tmp->ptr == val)
+						return (iterator(tmp));
+					else if (k < *tmp->ptr)
+						tmp = tmp->left;
+					else
+						tmp = tmp->right;
+					i++;
+				}
+				return (tmp->launch);
 			}
 
 			std::pair<iterator, bool> insert(const value_type &val) {
