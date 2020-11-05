@@ -7,7 +7,7 @@ void 			compare_result(std::string res1, std::string res2)
 	if (!res1.compare(res2)) 
 		std::cout << GREEN << res1  << RESET << std::endl;
 	else{
-		std::cout << RED << "Our : " << res1  << RESET << std::endl;
+		std::cout << YELLOW << "Our : " << res1  << RESET << std::endl;
 		std::cout << RED << "Real one : " << res2  << RESET << std::endl;
 	}
 }
@@ -76,7 +76,6 @@ int main(void) {
 		ft::vector<int> myvector;
 		for (int i=1; i<=5; i++){
 		 myvector.push_back(i);
-		std::cout << myvector.size() << std::endl;
 		}
 
 		res << "myvector contains:";
@@ -96,9 +95,6 @@ int main(void) {
 		for (ft::vector<int>::reverse_Iterator rit = myvector.rbegin(); rit != myvector.rend(); ++rit){
 			*rit = ++i;
 		}
-
-		std::cout <<  myvector.begin().get_it() << std::endl;
-		std::cout <<  myvector.end().get_it() << std::endl;
 		res << "myvector contains:";
 		for (ft::vector<int>::Iterator it = myvector.begin(); it != myvector.end(); ++it)
 			res << ' ' << *it;
@@ -177,24 +173,24 @@ int main(void) {
 		compare_result(res2.str(), "max_size: 1073741823");
 	}catch(const std::exception &e){};
 
-	// std::cout << std::endl << BLUE << "***************** Resize ************" << RESET << std::endl;
-	// try{
-	// 	std::stringstream res;
-	// 	ft::vector<int> myvector;
+	std::cout << std::endl << BLUE << "***************** Resize ************" << RESET << std::endl;
+	try{
+		std::stringstream res;
+		ft::vector<int> myvector;
 
-	// 	// set some initial content:
-	// 	for (int i=1;i<10;i++) myvector.push_back(i);
+		// set some initial content:
+		for (int i=1;i<10;i++) myvector.push_back(i);
 
-	// 	myvector.resize(5);
-	// 	myvector.resize(8,100);
-	// 	myvector.resize(12);
+		myvector.resize(5);
+		myvector.resize(8,100);
+		myvector.resize(12);
 
-	// 	res << "myvector contains:";
-	// 	for (int i=0;i<myvector.size();i++)
-  	// 	res << ' ' << myvector[i];
+		res << "myvector contains:";
+		for (size_t i=0;i<myvector.size();i++)
+  		res << ' ' << myvector[i];
 
-	// 	compare_result(res.str(), "myvector contains: 1 2 3 4 5 100 100 100 0 0 0 0");
-	// }catch(const std::exception &e){};
+		compare_result(res.str(), "myvector contains: 1 2 3 4 5 100 100 100 0 0 0 0");
+	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "***************** Capacity ************" << RESET << std::endl;
 	try{
@@ -266,79 +262,79 @@ int main(void) {
 	***************** Element Access ******************
 	**************************************************/
 
-	// std::cout << std::endl << BLUE << "***************** Operator [] ************" << RESET << std::endl;
-	// try{
-	// 	std::stringstream res;
-	// 	ft::vector<int> myvector (10);   // 10 zero-initialized elements
+	std::cout << std::endl << BLUE << "***************** Operator [] ************" << RESET << std::endl;
+	try{
+		std::stringstream res;
+		ft::vector<int> myvector (10);   // 10 zero-initialized elements
 
-	// 	ft::vector<int>::size_type sz = myvector.size();
+		ft::vector<int>::size_type sz = myvector.size();
 
-	// 	// assign some values:
-	// 	for (unsigned i=0; i<sz; i++) myvector[i]=i;
+		// assign some values:
+		for (unsigned i=0; i<sz; i++) myvector[i]=i;
 
-	// 	// reverse vector using operator[]:
-	// 	for (unsigned i=0; i<sz/2; i++)
-	// 	{
-	// 		int temp;
-	// 		temp = myvector[sz-1-i];
-	// 		myvector[sz-1-i]=myvector[i];
-	// 		myvector[i]=temp;
-	// 	}
+		// reverse vector using operator[]:
+		for (unsigned i=0; i<sz/2; i++)
+		{
+			int temp;
+			temp = myvector[sz-1-i];
+			myvector[sz-1-i]=myvector[i];
+			myvector[i]=temp;
+		}
 
-	// 	res << "myvector contains:";
-	// 	for (unsigned i=0; i<sz; i++)
-	// 		res << ' ' << myvector[i];
-	// 	compare_result(res.str(), "myvector contains: 9 8 7 6 5 4 3 2 1 0");
-	// }catch(const std::exception &e){};
+		res << "myvector contains:";
+		for (unsigned i=0; i<sz; i++)
+			res << ' ' << myvector[i];
+		compare_result(res.str(), "myvector contains: 9 8 7 6 5 4 3 2 1 0");
+	}catch(const std::exception &e){};
 
-	// std::cout << std::endl << BLUE << "***************** At ************" << RESET << std::endl;
-	// try{
-	// 	std::stringstream res;
-	// 	ft::vector<int> myvector (10);   // 10 zero-initialized ints
+	std::cout << std::endl << BLUE << "***************** At ************" << RESET << std::endl;
+	try{
+		std::stringstream res;
+		ft::vector<int> myvector (10);   // 10 zero-initialized ints
 
-	// 	// assign some values:
-	// 	for (unsigned i=0; i<myvector.size(); i++)
-	// 		myvector.at(i)=i;
+		// assign some values:
+		for (unsigned i=0; i<myvector.size(); i++)
+			myvector.at(i)=i;
 
-	// 	res << "myvector contains:";
-	// 	for (unsigned i=0; i<myvector.size(); i++)
-	// 		res << ' ' << myvector.at(i);
-	// 	compare_result(res.str(), "myvector contains: 0 1 2 3 4 5 6 7 8 9");
-	// }catch(const std::exception &e){};
+		res << "myvector contains:";
+		for (unsigned i=0; i<myvector.size(); i++)
+			res << ' ' << myvector.at(i);
+		compare_result(res.str(), "myvector contains: 0 1 2 3 4 5 6 7 8 9");
+	}catch(const std::exception &e){};
 
-	// std::cout << std::endl << BLUE << "***************** Front ************" << RESET << std::endl;
-	// try{
-	// 	std::stringstream res;
-	// 	ft::vector<int> myvector;
+	std::cout << std::endl << BLUE << "***************** Front ************" << RESET << std::endl;
+	try{
+		std::stringstream res;
+		ft::vector<int> myvector;
 
-	// 	myvector.push_back(78);
-	// 	myvector.push_back(16);
+		myvector.push_back(78);
+		myvector.push_back(16);
 
-	// 	// now front equals 78, and back 16
+		// now front equals 78, and back 16
 
-	// 	myvector.front() -= myvector.back();
+		myvector.front() -= myvector.back();
 
-	// 	res << "myvector.front() is now " << myvector.front();
-	// 	compare_result(res.str(), "myvector.front() is now 62");
-	// }catch(const std::exception &e){};
+		res << "myvector.front() is now " << myvector.front();
+		compare_result(res.str(), "myvector.front() is now 62");
+	}catch(const std::exception &e){};
 
-	// std::cout << std::endl << BLUE << "***************** Back ************" << RESET << std::endl;
-	// try{
-	// 	std::stringstream res;
-	// 	ft::vector<int> myvector;
+	std::cout << std::endl << BLUE << "***************** Back ************" << RESET << std::endl;
+	try{
+		std::stringstream res;
+		ft::vector<int> myvector;
 
-	// 	myvector.push_back(10);
+		myvector.push_back(10);
 
-	// 	while (myvector.back() != 0)
-	// 	{
-	// 		myvector.push_back ( myvector.back() -1 );
-	// 	}
+		while (myvector.back() != 0)
+		{
+			myvector.push_back ( myvector.back() -1 );
+		}
 
-	// 	res << "myvector contains:";
-	// 	for (unsigned i=0; i<myvector.size() ; i++)
-	// 		res << ' ' << myvector[i];
-	// 	compare_result(res.str(), "myvector contains: 10 9 8 7 6 5 4 3 2 1 0");
-	// }catch(const std::exception &e){};
+		res << "myvector contains:";
+		for (unsigned i=0; i<myvector.size() ; i++)
+			res << ' ' << myvector[i];
+		compare_result(res.str(), "myvector contains: 10 9 8 7 6 5 4 3 2 1 0");
+	}catch(const std::exception &e){};
 
 	/**************************************************
 	***************** Element Access ******************
@@ -410,16 +406,16 @@ int main(void) {
 		it = myvector.begin();
 		it = myvector.insert ( it , 200 );
 
-		// myvector.insert (it,2,300);
+		myvector.insert (it,2,300);
 
-		// // // "it" no longer valid, get a new one:
-		// it = myvector.begin();
+		// // "it" no longer valid, get a new one:
+		it = myvector.begin();
 
-		// ft::vector<int> anothervector (2,400);
-		// myvector.insert (it+2,anothervector.begin(),anothervector.end());
+		ft::vector<int> anothervector (2,400);
+		myvector.insert (it+2,anothervector.begin(),anothervector.end());
 
-		// int myarray [] = { 501,502,503 };
-		// myvector.insert (myvector.begin(), myarray, myarray+3);
+		int myarray [] = { 501,502,503 };
+		myvector.insert (myvector.begin(), myarray, myarray+3);
 
 		res << "myvector contains:";
 		for (it=myvector.begin(); it<myvector.end(); it++)
@@ -427,68 +423,104 @@ int main(void) {
 		compare_result(res.str(), "myvector contains: 501 502 503 300 300 400 400 200 100 100 100");
 	}catch(const std::exception &e){};
 
-	// std::cout << std::endl << BLUE << "***************** Erase ************" << RESET << std::endl;
-	// try{
-	// 	std::stringstream res;
-	// 	ft::vector<int> myvector;
+	std::cout << std::endl << BLUE << "***************** Erase ************" << RESET << std::endl;
+	try{
+		std::stringstream res;
+		ft::vector<int> myvector;
 
-	// 	// set some values (from 1 to 10)
-	// 	for (int i=1; i<=10; i++) myvector.push_back(i);
+		// set some values (from 1 to 10)
+		for (int i=1; i<=10; i++) myvector.push_back(i);
 
-	// 	// erase the 6th element
-	// 	myvector.erase (myvector.begin()+5);
+		// // erase the 6th element
+		myvector.erase (myvector.begin()+5);
 
-	// 	// erase the first 3 elements:
-	// 	myvector.erase (myvector.begin(),myvector.begin()+3);
+		// erase the first 3 elements:
+		myvector.erase (myvector.begin(),myvector.begin()+3);
 
-	// 	res << "myvector contains:";
-	// 	for (unsigned i=0; i<myvector.size(); ++i)
-	// 		res << ' ' << myvector[i];
-	// 	compare_result(res.str(), "myvector contains: 4 5 7 8 9 10");
-	// }catch(const std::exception &e){};
+// attends mais je l'affiche plus ici, je le met dans res.... hein???
+		res << "myvector contains:";
+		for (unsigned i=0; i<myvector.size(); ++i)
+			res << ' ' << myvector[i];
+		compare_result(res.str(), "myvector contains: 4 5 7 8 9 10");
+	}catch(const std::exception &e){};
 
-	// std::cout << std::endl << BLUE << "***************** Swap ************" << RESET << std::endl;
-	// try{
-	// 	std::stringstream res;
-	// 	std::stringstream res1;
-	// 	ft::vector<int> foo (3,100);   // three ints with a value of 100
-	// 	ft::vector<int> bar (5,200);   // five ints with a value of 200
+	std::cout << std::endl << BLUE << "***************** Swap ************" << RESET << std::endl;
+	try{
+		std::stringstream res;
+		std::stringstream res1;
+		ft::vector<int> foo (3,100);   // three ints with a value of 100
+		ft::vector<int> bar (5,200);   // five ints with a value of 200
 
-	// 	foo.swap(bar);
+		foo.swap(bar);
 
-	// 	res << "foo contains:";
-	// 	for (unsigned i=0; i<foo.size(); i++)
-	// 		res << ' ' << foo[i];
+		res << "foo contains:";
+		for (unsigned i=0; i<foo.size(); i++)
+			res << ' ' << foo[i];
 
-	// 	res1 << "bar contains:";
-	// 	for (unsigned i=0; i<bar.size(); i++)
-	// 		res1 << ' ' << bar[i];
-	// 	compare_result(res.str(), "foo contains: 200 200 200 200 200");
-	// 	compare_result(res1.str(), "bar contains: 100 100 100");
-	// }catch(const std::exception &e){};
+		res1 << "bar contains:";
+		for (unsigned i=0; i<bar.size(); i++)
+			res1 << ' ' << bar[i];
+		compare_result(res.str(), "foo contains: 200 200 200 200 200");
+		compare_result(res1.str(), "bar contains: 100 100 100");
+	}catch(const std::exception &e){};
 	
-	// std::cout << std::endl << BLUE << "***************** Clear ************" << RESET << std::endl;
-	// try{
-	// 	std::stringstream res;
-	// 	std::stringstream res1;
-	// 	ft::vector<int> myvector;
-	// 	myvector.push_back (100);
-	// 	myvector.push_back (200);
-	// 	myvector.push_back (300);
+	std::cout << std::endl << BLUE << "***************** Clear ************" << RESET << std::endl;
+	try{
+		std::stringstream res;
+		std::stringstream res1;
+		ft::vector<int> myvector;
+		myvector.push_back (100);
+		myvector.push_back (200);
+		myvector.push_back (300);
 
-	// 	res << "myvector contains:";
-	// 	for (unsigned i=0; i<myvector.size(); i++)
-	// 		res << ' ' << myvector[i];
+		res << "myvector contains:";
+		for (unsigned i=0; i<myvector.size(); i++)
+			res << ' ' << myvector[i];
 
-	// 	myvector.clear();
-	// 	myvector.push_back (1101);
-	// 	myvector.push_back (2202);
+		myvector.clear();
+		myvector.push_back (1101);
+		myvector.push_back (2202);
 
-	// 	res1 << "myvector contains:";
-	// 	for (unsigned i=0; i<myvector.size(); i++)
-	// 		res1 << ' ' << myvector[i];
-	// 	compare_result(res.str(), "myvector contains: 100 200 300");
-	// 	compare_result(res1.str(), "myvector contains: 1101 2202");
-	// }catch(const std::exception &e){};
+		res1 << "myvector contains:";
+		for (unsigned i=0; i<myvector.size(); i++)
+			res1 << ' ' << myvector[i];
+		compare_result(res.str(), "myvector contains: 100 200 300");
+		compare_result(res1.str(), "myvector contains: 1101 2202");
+	}catch(const std::exception &e){};
+
+	std::cout << std::endl << BLUE << "***************** Operator non membre ************" << RESET << std::endl;
+	try{
+		std::stringstream res;
+		ft::vector<int> foo (3,100);   // three ints with a value of 100
+		ft::vector<int> bar (2,200);   // two ints with a value of 200
+
+		if (foo==bar) res << "foo and bar are equal";
+		if (foo!=bar) res << "foo and bar are not equal\n";
+		if (foo< bar) res << "foo is less than bar\n";
+		if (foo> bar) res << "foo is greater than bar\n";
+		if (foo<=bar) res << "foo is less than or equal to bar";
+		if (foo>=bar) res << "foo is greater than or equal to bar";
+		compare_result(res.str(), "foo and bar are not equal\nfoo is less than bar\nfoo is less than or equal to bar");
+	}catch(const std::exception &e){};
+
+	std::cout << std::endl << BLUE << "***************** Swap ************" << RESET << std::endl;
+	try{
+		std::stringstream res;
+		std::stringstream res1;
+		ft::vector<int> foo (3,100);   // three ints with a value of 100
+		ft::vector<int> bar (5,200);   // five ints with a value of 200
+
+		foo.swap(bar);
+
+		res << "foo contains:";
+		for (ft::vector<int>::Iterator it = foo.begin(); it!=foo.end(); ++it)
+			res << ' ' << *it;
+
+		res1 << "bar contains:";
+		for (ft::vector<int>::Iterator it = bar.begin(); it!=bar.end(); ++it)
+			res1 << ' ' << *it;
+		compare_result(res.str(), "foo contains: 200 200 200 200 200");
+		compare_result(res1.str(), "bar contains: 100 100 100");
+	}catch(const std::exception &e){};
 	return 0;
 }

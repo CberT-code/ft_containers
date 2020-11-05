@@ -569,8 +569,7 @@ template <class T, class Alloc>
 		BidirectionalIterator<T>	itr = rhs.begin();
 		BidirectionalIterator<T>	itl = lhs.begin();
 
-		while (itr != rhs.end())
-		{
+		while (itr != rhs.end()){
 			if (*itr != *itl)
 				return (false);
 			itr++;
@@ -578,14 +577,10 @@ template <class T, class Alloc>
 		}
 		return true;
 	}
-
 template <class T, class Alloc>
 	bool operator!= (const ft::list<T,Alloc>& lhs, const ft::list<T,Alloc>& rhs){
-		if (!operator==(lhs, rhs))
-			return true;
-		return false;
+		return (!operator==(lhs, rhs));
 	}
-
 template <class T, class Alloc>
 	bool operator<  (const ft::list<T,Alloc>& lhs, const ft::list<T,Alloc>& rhs){
 		if (lhs.size() < rhs.size())
@@ -595,8 +590,7 @@ template <class T, class Alloc>
 		BidirectionalIterator<T>	itr = rhs.begin();
 		BidirectionalIterator<T>	itl = lhs.begin();
 
-		while (itr != rhs.end())
-		{
+		while (itr != rhs.end()){
 			if (*itl < *itr)
 				return (true);
 			itr++;
@@ -604,38 +598,19 @@ template <class T, class Alloc>
 		}
 		return false;
 	}
-
 template <class T, class Alloc>
 	bool operator<= (const ft::list<T,Alloc>& lhs, const ft::list<T,Alloc>& rhs){
 		if (operator<(lhs, rhs) || operator==(lhs, rhs))
 			return (true);
 		return (false);
 	}
-
 template <class T, class Alloc>
 	bool operator>  (const ft::list<T,Alloc>& lhs, const ft::list<T,Alloc>& rhs){
-		if (lhs.size()	> rhs.size())
-			return true;
-		else if (rhs.size() < lhs.size())
-			return false;
-		BidirectionalIterator<T>	itr = rhs.begin();
-		BidirectionalIterator<T>	itl = lhs.begin();
-
-		while (itr != rhs.end())
-		{
-			if (*itl > *itr)
-				return (true);
-			itr++;
-			itl++;
-		}
-		return false;
+		return (!operator<=(lhs,rhs));
 	}
-
 template <class T, class Alloc>
 	bool operator>= (const ft::list<T,Alloc>& lhs, const ft::list<T,Alloc>& rhs){
-		if (operator>(lhs, rhs) || operator==(lhs, rhs))
-			return (true);
-		return (false);
+		return (!operator<(lhs, rhs));
 	}
 
 template <class T, class Alloc>
