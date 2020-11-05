@@ -44,7 +44,7 @@ int list_main()
 	std::cout << "***********************************************************" << std::endl;
 	std::cout << RESET << std::endl << std::endl;
 
-	std::cout << std::endl << BLUE << "***************** Constructor ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********     Constructor      **********" << RESET << std::endl;
 	try{
 		// constructors used in the same order as described above:
 		ft::list<int> first;                                // empty list of ints
@@ -65,7 +65,7 @@ int list_main()
 		compare_result(res.str(), "The contents of fifth are: 16 2 77 29 ");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** operator= **************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********      operator=       **********" << RESET << std::endl;
 	try{
 		ft::list<int> first (3);      // list of 3 zero-initialized ints
 		ft::list<int> second (5);     // list of 5 zero-initialized ints
@@ -81,7 +81,7 @@ int list_main()
 		compare_result(res1.str(), "Size of second: 3");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** begin ******************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        begin         **********" << RESET << std::endl;
 	try{
 		int myints[] = {75,23,65,42,13};
 		ft::list<int> mylist (myints,myints+5);
@@ -93,7 +93,7 @@ int list_main()
 		compare_result(res.str(), "mylist contains: 75 23 65 42 13");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** end ********************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********         end          **********" << RESET << std::endl;
 	try{
 		int myints[] = {75,23,65,42,13};
 		ft::list<int> mylist (myints,myints+5);
@@ -106,7 +106,7 @@ int list_main()
 		compare_result(res.str(), "mylist contains: 75 23 65 42 13");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** rbegin *****************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        rbegin        **********" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		std::stringstream res;
@@ -119,7 +119,7 @@ int list_main()
 		compare_result(res.str(), "mylist backwards: 5 4 3 2 1");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** rend *******************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        rend          **********" << RESET << std::endl;
 	try{
 		 ft::list<int> mylist;
 		 std::stringstream res;
@@ -132,7 +132,7 @@ int list_main()
 		compare_result(res.str(), "mylist backwards: 5 4 3 2 1");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** empty ******************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        empty         **********" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		std::stringstream res;
@@ -149,7 +149,7 @@ int list_main()
 		compare_result(res.str(), "total: 55");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** size *******************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        size          **********" << RESET << std::endl;
 	try{
 		ft::list<int> myints;
 		std::stringstream res;
@@ -173,7 +173,7 @@ int list_main()
 
 	}catch(const std::exception &e){};
 
-	// std::cout << std::endl << BLUE << "*************** max_size ***************" << RESET << std::endl;
+	// std::cout << std::endl << BLUE << "*********** max_size *  **********" << RESET << std::endl;
 	// try{
 	// 	size_t i;
 	// 	ft::list<int> mylist;
@@ -186,7 +186,7 @@ int list_main()
 	// 	else std::cout << "That size exceeds the limit.\n";
 	// }catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************    front     **************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        front         **********" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		std::stringstream res;
@@ -203,7 +203,7 @@ int list_main()
 
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************    back     ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        back          **********" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		std::stringstream res;
@@ -223,7 +223,7 @@ int list_main()
 
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************    assign   ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        assign        **********" << RESET << std::endl;
 	try{
 		ft::list<int> first;
 		ft::list<int> second;
@@ -244,7 +244,7 @@ int list_main()
 
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************  push_front ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********      push_front      **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::list<int> mylist (2,100);         // two ints with a value of 100
@@ -257,7 +257,7 @@ int list_main()
 		compare_result(res.str(), "mylist contains: 300 200 100 100");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************  pop_front  ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********      pop_front       **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		std::stringstream res1;
@@ -277,7 +277,7 @@ int list_main()
 		compare_result(res1.str(), "Final size of mylist is 0");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************  Push_back  ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********      Push_back       **********" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		std::stringstream res;
@@ -293,7 +293,7 @@ int list_main()
 		std::cout << "mylist stores " << mylist.size() << " numbers.\n";
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************  Pop_back   ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********       Pop_back         *********" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		std::stringstream res;
@@ -312,7 +312,7 @@ int list_main()
 		compare_result(res.str(), "The elements of mylist summed 600");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************    Insert   ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********       Insert         **********" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		ft::list<int>::Iterator it;
@@ -342,7 +342,7 @@ int list_main()
 		
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************    Erase    ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        Erase         **********" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		ft::list<int>::Iterator it1,it2;
@@ -378,7 +378,7 @@ int list_main()
 		compare_result(res.str(), "mylist contains: 10 30 60 80 90");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************    SWAP     ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********         SWAP         **********" << RESET << std::endl;
 	try{
 		ft::list<int> first (3,100);   // three ints with a value of 100
 		ft::list<int> second (5,200);  // five ints with a value of 200
@@ -398,7 +398,7 @@ int list_main()
 		compare_result(res1.str(), "second contains: 100 100 100");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************   RESIZE    ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        RESIZE        **********" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		std::stringstream res;
@@ -417,7 +417,7 @@ int list_main()
 		compare_result(res.str(), "mylist contains: 1 2 3 4 5 100 100 100 0 0 0 0");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************    CLEAR    ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        CLEAR         **********" << RESET << std::endl;
 	try{
 		ft::list<int> mylist;
 		ft::list<int>::Iterator it;
@@ -443,7 +443,7 @@ int list_main()
 		compare_result(res1.str(), "mylist contains: 1101 2202");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************    SPLICE   ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********       SPLICE         **********" << RESET << std::endl;
 	try{
 		ft::list<int> mylist1, mylist2;
 		ft::list<int>::Iterator it;
@@ -491,7 +491,7 @@ int list_main()
 
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************     REMOVE     *************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********       REMOVE         **********" << RESET << std::endl;
 	try{
 		int myints[]= {17,89,7,14};
 		ft::list<int> mylist (myints,myints+4);
@@ -505,7 +505,7 @@ int list_main()
 		compare_result(res.str(), "mylist contains: 17 7 14");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************    REMOVE IF   *************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********      REMOVE IF       **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		int myints[]= {15,36,7,17,20,39,4,1};
@@ -521,7 +521,7 @@ int list_main()
 		compare_result(res.str(), "mylist contains: 36 20");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***********       UNIQUE    ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********       UNIQUE         **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		double mydoubles[]={ 12.15,  2.72, 73.0,  12.77,  3.14,
@@ -545,7 +545,7 @@ int list_main()
 		compare_result(res.str(), "mylist contains: 2.72 12.15 72.25");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***********       MERGE     ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        MERGE         **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::list<double> first, second;
@@ -578,7 +578,7 @@ int list_main()
 
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***********        SORT      *************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        SORT          **********" << RESET << std::endl;
 	try{
 		ft::list<std::string> mylist;
 		ft::list<std::string>::Iterator it;
@@ -604,7 +604,7 @@ int list_main()
 
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************     REVERSE    *************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********       REVERSE        **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::list<int> mylist;
@@ -620,7 +620,7 @@ int list_main()
 		compare_result(res.str(), "mylist contains: 9 8 7 6 5 4 3 2 1");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "********* Operators NON MEMBER ****************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "********** Operators NON MEMBER **********" << RESET << std::endl;
 	try{
 		std::stringstream res, res1, res2, res3, res4, res5;
 		ft::list<int> a;
@@ -650,7 +650,7 @@ int list_main()
 		compare_result(res5.str(), "a is greater than or equal to b");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*************** SWAP NON MEMBER ***************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********  SWAP NON MEMBER     **********" << RESET << std::endl;
 	try{
 		std::stringstream res, res1;
 		std::list<int> foo (3,100);   // three ints with a value of 100

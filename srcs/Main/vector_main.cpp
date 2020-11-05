@@ -12,7 +12,7 @@ int vector_main(void) {
 	***************** Member functions ****************
 	**************************************************/
 
-	std::cout << std::endl << BLUE << "***************** Constructor ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********    Constructor      **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 
@@ -32,7 +32,7 @@ int vector_main(void) {
 		compare_result(res.str(), "The contents of fifth are: 16 2 77 29");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Operator = ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********     Operator =      **********" << RESET << std::endl;
 	try{
 		ft::vector<int> foo (3,0);
 		ft::vector<int> bar (5,0);
@@ -52,7 +52,7 @@ int vector_main(void) {
 	******************** Iterators ********************
 	**************************************************/
 
-	std::cout << std::endl << BLUE << "***************** Begin ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        Begin        **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::vector<int> myvector;
@@ -64,7 +64,7 @@ int vector_main(void) {
 		compare_result(res.str(), "myvector contains: 1 2 3 4 5");
 	}catch(const std::exception &e){};
 	
-	std::cout << std::endl << BLUE << "***************** End ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********         End         **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::vector<int> myvector;
@@ -79,7 +79,7 @@ int vector_main(void) {
 		compare_result(res.str(), "myvector contains: 1 2 3 4 5");
 	}catch(const std::exception &e){};
 	
-	std::cout << std::endl << BLUE << "***************** Rbegin ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********       Rbegin        **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::vector<int> myvector (5);  // 5 default-constructed ints
@@ -96,7 +96,7 @@ int vector_main(void) {
 		compare_result(res.str(), "myvector contains: 5 4 3 2 1");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Rend ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        Rend         **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::vector<int> myvector (5);  // 5 default-constructed ints
@@ -118,7 +118,7 @@ int vector_main(void) {
 	********************* Capacity ********************
 	**************************************************/
 
-	std::cout << std::endl << BLUE << "***************** Size ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        Size         **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		std::stringstream res1;
@@ -147,7 +147,7 @@ int vector_main(void) {
 		compare_result(res3.str(), "3. size: 19");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Max_Size ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********      Max_Size       **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		std::stringstream res1;
@@ -167,7 +167,7 @@ int vector_main(void) {
 		compare_result(res2.str(), "max_size: 1073741823");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Resize ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********       Resize        **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::vector<int> myvector;
@@ -186,7 +186,7 @@ int vector_main(void) {
 		compare_result(res.str(), "myvector contains: 1 2 3 4 5 100 100 100 0 0 0 0");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Capacity ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********      Capacity       **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		std::stringstream res1;
@@ -204,7 +204,7 @@ int vector_main(void) {
 		compare_result(res2.str(), "max_size: 1073741823");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Empty ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        Empty        **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::vector<int> myvector;
@@ -222,7 +222,7 @@ int vector_main(void) {
 		compare_result(res.str(), "total: 55");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Reserve ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********       Reserve       **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::vector<int>::size_type sz;
@@ -256,7 +256,7 @@ int vector_main(void) {
 	***************** Element Access ******************
 	**************************************************/
 
-	std::cout << std::endl << BLUE << "***************** Operator [] ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********     Operator []     **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::vector<int> myvector (10);   // 10 zero-initialized elements
@@ -281,7 +281,7 @@ int vector_main(void) {
 		compare_result(res.str(), "myvector contains: 9 8 7 6 5 4 3 2 1 0");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** At ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********         At          **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::vector<int> myvector (10);   // 10 zero-initialized ints
@@ -296,7 +296,7 @@ int vector_main(void) {
 		compare_result(res.str(), "myvector contains: 0 1 2 3 4 5 6 7 8 9");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Front ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        Front        **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::vector<int> myvector;
@@ -312,7 +312,7 @@ int vector_main(void) {
 		compare_result(res.str(), "myvector.front() is now 62");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Back ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        Back         **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::vector<int> myvector;
@@ -334,7 +334,7 @@ int vector_main(void) {
 	***************** Element Access ******************
 	**************************************************/
 
-	std::cout << std::endl << BLUE << "***************** Assign ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********       Assign        **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		std::stringstream res1;
@@ -361,7 +361,7 @@ int vector_main(void) {
 		compare_result(res2.str(), "Size of third: 3");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Push_back ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********      Push_back      **********" << RESET << std::endl;
 	try{
 		ft::vector<int> myvector;
 		int myint;
@@ -376,7 +376,7 @@ int vector_main(void) {
 		std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Pop_back ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********      Pop_back       **********" << RESET << std::endl;
 	try{
 		ft::vector<int> myvector;
 		int myint;
@@ -391,7 +391,7 @@ int vector_main(void) {
 		std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Insert ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********       Insert        **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::vector<int> myvector (3,100);
@@ -417,7 +417,7 @@ int vector_main(void) {
 		compare_result(res.str(), "myvector contains: 501 502 503 300 300 400 400 200 100 100 100");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Erase ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        Erase        **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::vector<int> myvector;
@@ -438,7 +438,7 @@ int vector_main(void) {
 		compare_result(res.str(), "myvector contains: 4 5 7 8 9 10");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Swap ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        Swap         **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		std::stringstream res1;
@@ -457,8 +457,8 @@ int vector_main(void) {
 		compare_result(res.str(), "foo contains: 200 200 200 200 200");
 		compare_result(res1.str(), "bar contains: 100 100 100");
 	}catch(const std::exception &e){};
-	
-	std::cout << std::endl << BLUE << "***************** Clear ************" << RESET << std::endl;
+
+	std::cout << std::endl << BLUE << "**********        Clear        **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		std::stringstream res1;
@@ -482,7 +482,7 @@ int vector_main(void) {
 		compare_result(res1.str(), "myvector contains: 1101 2202");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Operator non membre ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "********** Operator non membre **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::vector<int> foo (3,100);   // three ints with a value of 100
@@ -497,7 +497,7 @@ int vector_main(void) {
 		compare_result(res.str(), "foo and bar are not equal\nfoo is less than bar\nfoo is less than or equal to bar");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Swap ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        Swap         **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		std::stringstream res1;
@@ -522,8 +522,8 @@ int vector_main(void) {
 	std::cout << "************              Vector BOOL            **********" << std::endl;
 	std::cout << "***********************************************************" << std::endl;
 	std::cout << RESET << std::endl << std::endl;
- 
-	std::cout << std::endl << BLUE << "***************** Flip BOOL ************" << RESET << std::endl;
+
+	std::cout << std::endl << BLUE << "**********      Flip BOOL      **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::vector<bool> mask;
@@ -542,7 +542,7 @@ int vector_main(void) {
 		compare_result(res.str(), "mask contains: false true true false");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** SWAP BOOL ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********      SWAP BOOL      **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		std::stringstream res1;

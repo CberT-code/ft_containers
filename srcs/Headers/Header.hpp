@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:16:44 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/05 19:03:21 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/05 19:37:49 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ struct maillon
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <stdio.h>
 #include <iomanip>
 #include <memory>
 #include <limits>
