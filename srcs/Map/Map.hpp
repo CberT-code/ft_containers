@@ -119,6 +119,18 @@ namespace ft
 				return (std::numeric_limits<std::size_t>::max() / sizeof(this->launch));
 			}
 
+			void		clear() {
+				maillontree<Key, T> *tmp = this->launch;
+
+				while (this->_size != 0) {
+					for (maillontree<Key, T> *tleft = tmp->left; tmp != NULL;) {
+						if (tmp->right) {
+							tmp = 
+						}
+					}
+				}
+			}
+
 			iterator	find(const key_type& k) {
 				maillontree<Key, T> *tmp  = this->launch;
 				int					i = 0;
@@ -164,9 +176,9 @@ namespace ft
 						this->_al->construct(new_maillon->ptr, val);
 						new_maillon->left = NULL;
 						new_maillon->right = NULL;
-						maillontree<Key, T> *tmp = tm? this->launch->left;
+						//maillontree<Key, T> *tmp = tm? this->launch->left;
 						for (int i = 0; i < this->_size; this->_size++) {
-							if (val <= *tmp->ptr)
+							if (val <= *tmp->ptr) {
 								if (tmp->left == NULL) {
 									tmp->left = new_maillon;
 									tmp->left->prev = tmp;
@@ -174,7 +186,7 @@ namespace ft
 								} else {
 									tmp = tmp->left
 								}
-							else
+							} else {
 								if (tmp->right == NULL) {
 									tmp->right = new_maillon;
 									tmp->right->prev = tmp;
@@ -182,16 +194,11 @@ namespace ft
 								} else {
 									tmp = tmp->right;
 								}
-
+							}
 						}
 					}
 				}
 			}
-
-
-
-
-
 
 		private:
 			maillontree<Key, T>		*_end;
