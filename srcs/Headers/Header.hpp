@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:16:44 by cbertola          #+#    #+#             */
-/*   Updated: 2020/10/30 13:57:38 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/06 11:09:20 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ struct maillon
 	maillon					*prev;
 	maillon					*next;	
 	T						*ptr;		
+};
+
+template<class Key, class T>
+struct maillontree
+{
+	maillontree				*prev;
+	maillontree				*right;
+	maillontree				*left;
+	T						*ptr;
+	Key						_key;	
 };
 
 # define RESET   		"\033[0m"
@@ -40,21 +50,42 @@ struct maillon
 # define BOLDWHITE   	"\033[1m\033[37m"      /* Bold White */
 
 #include <iostream>
-#include <fstream>
+#include <sstream>
 #include <string>
+#include <stdio.h>
 #include <iomanip>
 #include <memory>
 #include <limits>
+#include <tgmath.h>
+#include <list>
 #include <algorithm>
+#include <utility>
+#include <cstddef>
+#include <deque>
+
 
 #include "../Iterator/InputIterator.hpp"
 #include "../Iterator/OutputIterator.hpp"
 #include "../Iterator/ForwardIterator.hpp"
 #include "../Iterator/BidirectionalIterator.hpp"
+#include "../Iterator/RandomAccessIterator.hpp"
 #include "../Iterator/ReverseInputIterator.hpp"
 #include "../Iterator/ReverseForwardIterator.hpp"
 #include "../Iterator/ReverseBidirectionalIterator.hpp"
+#include "../Iterator/ReverseRandomAccessIterator.hpp"
 
-#include "../List/List.hpp"
+
+#include "../Containers/List.hpp"
+#include "../Containers/Vector.hpp"
+#include "../Containers/Vector_bool.hpp"
+#include "../Containers/Queue.hpp"
+#include "../Containers/Stack.hpp"
+#include "../Containers/Map.hpp"
+
+int 			list_main(void);
+int				vector_main(void);
+int				queue_main(void);
+int				stack_main(void);
+void 			compare_result(std::string res1, std::string res2);
 
 #endif

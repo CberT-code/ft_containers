@@ -1,6 +1,6 @@
 
-#ifndef REVERSEBidirectionalIterator_H
-#define REVERSEBidirectionalIterator_H
+#ifndef REVERSEBIDIRECTIONALITERATOR_H
+#define REVERSEBIDIRECTIONALITERATOR_H
 
 #include "./Iterator.hpp"
 
@@ -45,13 +45,6 @@ class ReverseBidirectionalIterator : public ReverseForwardIterator<T>
 				this->it = this->it->next;
 			return (*this);
 		}
-		// T							*operator--(void){
-		// 	if (this->it != NULL){
-		// 		this->it->ptr -= 1;
-		// 		return (this->it->ptr);
-		// 	}
-		// 	return (NULL);
-		// }
 
 };
 

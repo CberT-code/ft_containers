@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mainstack.cpp                                      :+:      :+:    :+:   */
+/*   main_stack.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 16:53:54 by user42            #+#    #+#             */
-/*   Updated: 2020/11/04 17:37:22 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/05 19:02:28 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Headers/Header.hpp"
-#include <iostream>
-#include <sstream>
-#include <iomanip>
-#include <set>
-#include <vector>
-#include <tgmath.h>
-#include <list>
 
-int main_stack ()
+int stack_main ()
 {
+
+	std::cout << std::endl << std::endl << YELLOW;
+	std::cout << "***********************************************************" << std::endl;
+	std::cout << "*****************           Stack         *****************" << std::endl;
+	std::cout << "***********************************************************" << std::endl;
+	std::cout << RESET << std::endl << std::endl;
+
 	std::cout << std::endl << BLUE << "***************** Test Constructeur ************" << RESET << std::endl;
 	try{
 		std::deque<int> mydeque (3,100);          // deque with 3 elements
-  		std::vector<int> myvector (2,200);        // vector with 2 elements
+  		ft::vector<int> myvector (2,200);        // vector with 2 elements
 
   		ft::stack<int> first;                    // empty stack
  		ft::stack<int> second (mydeque);         // stack initialized to copy of deque
 
-  		ft::stack<int,std::vector<int> > third;  // empty stack using vector
-  		ft::stack<int,std::vector<int> > fourth (myvector);
+  		ft::stack<int,ft::vector<int> > third;  // empty stack using vector
+  		ft::stack<int,ft::vector<int> > fourth (myvector);
 
 		std::cout << "size of first: " << first.size() << '\n';
 		std::cout << "size of second: " << second.size() << '\n';

@@ -116,37 +116,37 @@ namespace ft
 
 
 template <class T, class Container>
-	bool		operator==(const queue<T,Container> &lhs, const queue<T,Container> &rhs)
+	bool		operator==(const ft::queue<T,Container> &lhs, const ft::queue<T,Container> &rhs)
 	{
 		return (lhs._container == rhs._container);
 	}
 
 template <class T, class Container>
-	bool		operator!=(const queue<T,Container> &lhs, const queue<T,Container> &rhs)
+	bool		operator!=(const ft::queue<T,Container> &lhs, const ft::queue<T,Container> &rhs)
 	{
 		return (lhs._container != rhs._container);
 	}
 
 template <class T, class Container>
-	bool		operator<(const queue<T,Container> &lhs, const queue<T,Container> &rhs)
+	bool		operator<(const ft::queue<T,Container> &lhs, const ft::queue<T,Container> &rhs)
 	{
 		return (lhs._container < rhs._container);
 	}
 
 template <class T, class Container>
-	bool		operator<=(const queue<T,Container> &lhs, const queue<T,Container> &rhs)
+	bool		operator<=(const ft::queue<T,Container> &lhs, const ft::queue<T,Container> &rhs)
 	{
 		return (lhs._container <= rhs._container);
 	}
 
 template <class T, class Container>
-	bool		operator>(const queue<T,Container> &lhs, const queue<T,Container> &rhs)
+	bool		operator>(const ft::queue<T,Container> &lhs, const ft::queue<T,Container> &rhs)
 	{
 		return (lhs._container > rhs._container);
 	}
 
 template <class T, class Container>
-	bool		operator>=(const queue<T,Container> &lhs, const queue<T,Container> &rhs)
+	bool		operator>=(const ft::queue<T,Container> &lhs, const ft::queue<T,Container> &rhs)
 	{
 		return (lhs._container >= rhs._container);
 	}

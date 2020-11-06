@@ -11,16 +11,16 @@
 /* ************************************************************************** */
 
 #include "../Headers/Header.hpp"
-#include <iostream>
-#include <sstream>
-#include <iomanip>
-#include <set>
-#include <vector>
-#include <tgmath.h>
-#include <list>
 
-int main_queue()
+int queue_main()
 {
+
+	std::cout << std::endl << std::endl << YELLOW;
+	std::cout << "***********************************************************" << std::endl;
+	std::cout << "*****************           QUEUE         *****************" << std::endl;
+	std::cout << "***********************************************************" << std::endl;
+	std::cout << RESET << std::endl << std::endl;
+
 	std::cout << std::endl << BLUE << "***************** Test Constructeur ************" << RESET << std::endl;
 	try{
 		std::deque<int> mydeck (3,100);        // deque with 3 elements
