@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Header.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:16:44 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/05 19:37:49 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/06 11:09:20 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ struct maillontree
 #include <list>
 #include <algorithm>
 #include <utility>
-# include <cstddef>
-# include <deque>
+#include <cstddef>
+#include <deque>
 
 
 #include "../Iterator/InputIterator.hpp"
@@ -80,6 +80,7 @@ struct maillontree
 #include "../Containers/Vector_bool.hpp"
 #include "../Containers/Queue.hpp"
 #include "../Containers/Stack.hpp"
+#include "../Containers/Map.hpp"
 
 int 			list_main(void);
 int				vector_main(void);
