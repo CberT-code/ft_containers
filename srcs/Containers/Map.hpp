@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/06 16:11:47 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/06 16:18:56 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,106 +40,111 @@ namespace ft
 			/**************************************************
 			****************** Form Coplien *******************
 			**************************************************/
-		
-			explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) {
+
+			explicit 					map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()){
 			}
 
 			template<class InputIterator>
-			map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) {
+			map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()){
 
 			}
 
-			map(const map &objmap) {
+			map(const map &objmap){
 			}
 
-			~map(void) {
+			~map(void){
 			}
 
-			map		&operator=(const map &objmap) {
+			map							&operator=(const map &objmap){
 			}
 
 			/**************************************************
 			******************** Iterators ********************
 			**************************************************/
-			Iterator	begin(void) const {
+
+			Iterator					begin(void) const {
 			}
-			const_iterator begin() const{
+			const_iterator 				begin() const{
 			}
-			Iterator	end(void) const {
+			Iterator					end(void) const {
 			}
-			const_iterator end() const{
+			const_iterator 				end() const{
 			}
-			reverse_Iterator	rbegin(void) const {
+			reverse_Iterator			rbegin(void) const {
 			}
-			const_reverse_iterator rbegin() const{
+			const_reverse_iterator 		rbegin() const{
 			}
-			reverse_Iterator	rend(void) const {
+			reverse_Iterator			rend(void) const {
 			}
-			const_reverse_iterator rend() const{
+			const_reverse_iterator 		rend() const{
 			}
 	
 			/**************************************************
 			********************* Capacity ********************
 			**************************************************/
-		
-			bool		empty(void) const {
+
+			bool						empty(void) const {
 			}
 
-			size_type	size(void) const {
+			size_type					size(void) const {
 			}
 
-			size_type	max_size() const{
+			size_type					max_size() const{
 				return (std::numeric_limits<std::size_t>::max() / sizeof(this->launch));
 			}
 
 			/**************************************************
 			****************** Element Access *****************
 			**************************************************/
-			mapped_type& operator[] (const key_type& k){
+
+			mapped_type& 				operator[] (const key_type& k){
 			}
 
 			/**************************************************
 			******************** Modifiers ********************
 			**************************************************/
-			pair<Iterator, bool> insert(const value_type &val) {
+
+			pair<Iterator, bool> 		insert(const value_type &val){
 			}
-			iterator insert (iterator position, const value_type& val){
+			iterator 					insert (iterator position, const value_type& val){
 			}
-			void insert (InputIterator first, InputIterator last){
+			void 						insert (InputIterator first, InputIterator last){
 			}
-			void erase (iterator position){
+			void 						erase (iterator position){
 			}
-			size_type erase (const key_type& k){
+			size_type 					erase (const key_type& k){
 			}
-     		void erase (iterator first, iterator last){
+     		void 						erase (iterator first, iterator last){
 	 		}
-			void swap (map& x){
+			void 						swap (map& x){
 			}
-			void		clear() {
+			void						clear(){
 			}
 
 			/**************************************************
 			******************** Observers ********************
 			**************************************************/
-			key_compare key_comp() const{
+
+			key_compare 				key_comp() const{
 			}
-			value_compare value_comp() const{
+			value_compare 				value_comp() const{
 			}
 			
 			/**************************************************
-			******************** Operations ********************
+			******************** Operations *******************
 			**************************************************/
-			Iterator	find(const key_type& k) {
+
+			Iterator					find(const key_type& k){
 			}
 
-			const_Iterator	find(const key_type& k) const {
+			const_Iterator				find(const key_type& k) const {
 			}
-
 
 		private:
-			maillon<value_type>		*_begin;
-			size_t					_size;
-			allocator_type			_al;
+			maillon<value_type>			*_begin;
+			maillon<value_type>			*_endsize;
+			size_t						_size;
+			allocator_type				_al;
 
 	};
 
