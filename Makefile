@@ -6,14 +6,14 @@
 #    By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/21 15:12:58 by cbertola          #+#    #+#              #
-#    Updated: 2020/11/05 19:03:55 by cbertola         ###   ########.fr        #
+#    Updated: 2020/11/06 11:35:17 by cbertola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= ft_containers
 SRCS_PATH	= ./
 OBJS_PATH	= ./srcs/Main/
-SRCSC		= vector_main.cpp list_main.cpp queue_main.cpp stack_main.cpp main.cpp
+SRCSC		= vector_main.cpp map_main.cpp list_main.cpp queue_main.cpp stack_main.cpp main.cpp
 
 SRCSH		=
 SRCS		= $(addprefix $(SRCS_PATH),$(SRCSC))

@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:16:44 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/06 11:09:20 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/06 11:34:05 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int 			list_main(void);
 int				vector_main(void);
 int				queue_main(void);
 int				stack_main(void);
+int				map_main(void);
 void 			compare_result(std::string res1, std::string res2);
 
 #endif

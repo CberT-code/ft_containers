@@ -11,18 +11,21 @@ void 			compare_result(std::string res1, std::string res2)
 }
 
 int main(void) {
-	list_main();
-	getchar();
-	getchar();
-	std::system("clear");
-	vector_main();
-	getchar();
-	getchar();
-	std::system("clear");
-	queue_main();
-	getchar();
-	getchar();
-	std::system("clear");
-	stack_main();
+	// list_main();
+	// getchar();
+	// getchar();
+	// std::system("clear");
+	// vector_main();
+	// getchar();
+	// getchar();
+	// std::system("clear");
+	// queue_main();
+	// getchar();
+	// getchar();
+	// std::system("clear");
+	// stack_main();
+	// getchar();
+	// std::system("clear");
+	map_main();
 	return (1);
 }
