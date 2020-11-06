@@ -1,11 +1,11 @@
 
-#ifndef RANDOMACCESSITERATOR_H
-#define RANDOMACCESSITERATOR_H
+#ifndef REVERSERANDOMACCESSITERATOR_H
+#define REVERSERANDOMACCESSITERATOR_H
 
 #include "./Iterator.hpp"
 
 template <typename T>
-class RandomAccessIterator
+class ReverseRandomAccessIterator
 {
 	public:
 
@@ -14,30 +14,31 @@ class RandomAccessIterator
 		/**************************************************
 		****************** Form Coplien *******************
 		**************************************************/
-		RandomAccessIterator(void){}	
-		RandomAccessIterator(RandomAccessIterator const &src){
+		ReverseRandomAccessIterator(void){
+		}	
+		ReverseRandomAccessIterator(ReverseRandomAccessIterator const &src){
 			operator=(src);
 		}
-		RandomAccessIterator &				operator=( RandomAccessIterator const &src){
+		ReverseRandomAccessIterator &				operator=( ReverseRandomAccessIterator const &src){
 			if (this != &src){
 				this->_array = src._array;
 			}
 			return (*this);
 		}
-		virtual ~RandomAccessIterator(void){}
-		RandomAccessIterator(T *src){
+		virtual ~ReverseRandomAccessIterator(void){}
+		ReverseRandomAccessIterator(T *src){
 			this->_array = src;
 		}
 
 		/**************************************************
 		*************** operator '==' '!=' ****************
 		**************************************************/
-		bool								operator==(const RandomAccessIterator &src) const{
+		bool								operator==(const ReverseRandomAccessIterator &src) const{
 			if (src._array == this->_array)
 				return (true);
 			return (false);
 		}
-		bool								operator!=(const RandomAccessIterator &src) const{
+		bool								operator!=(const ReverseRandomAccessIterator &src) const{
 			return (!operator==(src));
 		}
 
@@ -54,13 +55,13 @@ class RandomAccessIterator
 		/**************************************************
 		********* operator '++a' 'a++' '*a++' *************
 		**************************************************/
-		RandomAccessIterator				operator++(int){
-			RandomAccessIterator I = *this;
-			++this->_array;
+		ReverseRandomAccessIterator				operator++(int){
+			ReverseRandomAccessIterator I = *this;
+			--this->_array;
 			return (I);
 		}
-		RandomAccessIterator				operator++(void){
-			++this->_array;
+		ReverseRandomAccessIterator				operator++(void){
+			--this->_array;
 			return (*this);
 		}
 		T									*get_it(void) const{
@@ -70,69 +71,69 @@ class RandomAccessIterator
 		/**************************************************
 		********* operator '--a' 'a--' '*a--' *************
 		**************************************************/
-		RandomAccessIterator				operator--(int){
-			RandomAccessIterator I = *this;
-			--this->_array;
+		ReverseRandomAccessIterator				operator--(int){
+			ReverseRandomAccessIterator I = *this;
+			++this->_array;
 			return (I);
 		}
-		RandomAccessIterator				&operator--(void){
-			--this->_array;
+		ReverseRandomAccessIterator				&operator--(void){
+			++this->_array;
 			return (*this);
 		}
 
 		/**************************************************
 		***** operator 'a + n' 'n + a' 'a - n' 'a - b' ****
 		**************************************************/
-		RandomAccessIterator				operator+(int n) {
-			return (this->_array += n);
-		}
-		difference_type						operator+(RandomAccessIterator it) {
-			return this->_array + it._array;
-		}
-		RandomAccessIterator				operator-(int n) {
+		ReverseRandomAccessIterator				operator+(int n) {
 			return (this->_array -= n);
 		}
-		difference_type						operator-(RandomAccessIterator it) {
-			return (this->_array - it._array);
+		difference_type							operator+(ReverseRandomAccessIterator it) {
+			return this->array - it.array;
+		}
+		ReverseRandomAccessIterator				operator-(int n) {
+			return (this->_array += n);
+		}
+		difference_type							operator-(ReverseRandomAccessIterator it) {
+			return (this->array + it.array);
 		}
 
 		/**************************************************
 		*** operator 'a < b' 'a > b' 'a <= b' 'a >= b' ****
 		**************************************************/
-		bool								operator<(const RandomAccessIterator& rhs) const {
-			return (this->_array < rhs._array);
+		bool								operator<(const ReverseRandomAccessIterator& rhs) const {
+			return (this->array < rhs.array);
 		}
-		bool								operator>(const RandomAccessIterator& rhs) const {
-			return (this->_array > rhs._array);
+		bool								operator>(const ReverseRandomAccessIterator& rhs) const {
+			return (this->array > rhs.array);
 		}
-		bool								operator<=(const RandomAccessIterator& rhs) const {
-			return (this->_array <= rhs._array);
+		bool								operator<=(const ReverseRandomAccessIterator& rhs) const {
+			return (this->array <= rhs.array);
 		}
 		
-		bool								operator>=(const RandomAccessIterator& rhs) const {
-			return (this->_array >= rhs._array);
+		bool								operator>=(const ReverseRandomAccessIterator& rhs) const {
+			return (this->array >= rhs.array);
 		}
 
 		/**************************************************
 		************ operator 'a += n' 'a -= n' ***********
 		**************************************************/
-		RandomAccessIterator				operator+=(difference_type n) {
-			this->_array -= n;
+		ReverseRandomAccessIterator				operator+=(difference_type n) {
+			this->array -= n;
 			return (*this);
 		}
-		RandomAccessIterator				operator-=(difference_type n) {
-			this->_array -= n;
+		ReverseRandomAccessIterator				operator-=(difference_type n) {
+			this->array += n;
 			return (*this);
 		}
 
 		/**************************************************
 		***************** operator 'a[n]' *****************
 		**************************************************/
-		RandomAccessIterator				operator[](int n) {
+		ReverseRandomAccessIterator				operator[](int n) {
 			return (this->_array[n]);
 		}
-		RandomAccessIterator							operator[](difference_type n) {
-			return (*(this->_array + n));
+		ReverseRandomAccessIterator							operator[](difference_type n) {
+			return (*(this->array - n));
 		}
 	private:
 		T*			_array;

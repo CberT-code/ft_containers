@@ -73,15 +73,6 @@ namespace ft
 				}
 				return (*this);
 			}
-			void								aff(void){
-				maillon<T> *cpy = this->_begin;
-
-				while (cpy != this->_endsize && cpy)
-				{
-					std::cout << *(cpy->ptr) << std::endl;
-					cpy = cpy->next;
-				}
-			}
 
 			/**************************************************
 			************** begin end rbegin rend **************
@@ -296,7 +287,7 @@ namespace ft
 			template <class InputIterator>
 			void								insert (Iterator position, InputIterator first, InputIterator last){
 				while (first != last){
-					insert(position, first);
+					insert(position, *first);
 					first++;
 				}
 			}
@@ -590,9 +581,7 @@ template <class T, class Alloc>
 
 template <class T, class Alloc>
 	bool operator!= (const ft::list<T,Alloc>& lhs, const ft::list<T,Alloc>& rhs){
-		if (!operator==(lhs, rhs))
-			return true;
-		return false;
+		return (!operator==(lhs, rhs));
 	}
 
 template <class T, class Alloc>

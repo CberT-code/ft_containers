@@ -6,21 +6,22 @@
 #    By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/21 15:12:58 by cbertola          #+#    #+#              #
-#    Updated: 2020/11/03 12:05:43 by cbertola         ###   ########.fr        #
+#    Updated: 2020/11/05 19:03:55 by cbertola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= ft_containers
 SRCS_PATH	= ./
-OBJS_PATH	= ./srcs/Iterator/
-SRCSC		= main.cpp
+OBJS_PATH	= ./srcs/Main/
+SRCSC		= vector_main.cpp list_main.cpp queue_main.cpp stack_main.cpp main.cpp
 
 SRCSH		=
 SRCS		= $(addprefix $(SRCS_PATH),$(SRCSC))
 OBJS 		= $(addprefix $(OBJS_PATH),$(OBJS_NAME))
 OBJS_NAME	= $(SRCSC:%.cpp=%.o)
 LIBS 		= 
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+# -g -fsanitize=address
 CXX			= clang++
 LOGFILE		= $(LOGPATH) `date +'%y.%m.%d %H:%M:%S'`
 
