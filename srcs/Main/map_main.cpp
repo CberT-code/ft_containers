@@ -15,37 +15,36 @@
 #include<map>
 #include<iterator>
 
-	bool fncomp(char lhs, char rhs){
-		return lhs < rhs ;
-	}
+	bool fncomp (char lhs, char rhs) {return lhs<rhs;}
 
 	struct classcomp {
-		bool operator() (const char& lhs, const char& rhs) const
-		{return lhs<rhs;}
+	bool operator() (const char& lhs, const char& rhs) const
+	{return lhs<rhs;}
 	};
 
 int map_main()
 {
 
- 	 std::map<char,int> mymap;
-  std::map<char,int>::iterator itlow,itup;
+  ft::map<char,int> first;
+first.insert(std::make_pair('c',45));
+std::cout << RED << "1" << RESET << std::endl;
+first.insert(std::make_pair('a',55));
+std::cout << RED << "2" << RESET << std::endl;
+first.insert(std::make_pair('b',65));
+//   first['a']=10;
+//   first['b']=30;
+//   first['c']=50;
+//   first['d']=70;
 
-  mymap['e']=100;
-  mymap['b']=40;
-  mymap['f']=80;
-  mymap['a']=20;
-  mymap['c']=60;
-  mymap['d']=80;
+  ft::map<char,int> second (first.begin(),first.end());
 
+  ft::map<char,int> third (second);
 
-  itlow=mymap.lower_bound ('b');  // itlow points to b
-  itup=mymap.upper_bound ('c');   // itup points to e (not d!)
+  ft::map<char,int,classcomp> fourth;                 // class as Compare
 
-  mymap.erase(itlow,itup);        // erases [itlow,itup)
+//   bool(*fn_pt)(char,char) = fncomp;
+//   ft::map<char,int,bool(*)(char,char)> fifth (fn_pt); // function pointer as Compare
 
-  // print content:
-  for (std::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
-    std::cout << it->first << " => " << it->second << '\n';
 
 	return 0;
 }

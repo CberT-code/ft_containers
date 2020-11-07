@@ -164,6 +164,7 @@ namespace ft
 			}
 			void								push_front (const value_type& val){
 				maillon<T> *new_start =  new maillon<T>;
+				memset(new_start, 0, sizeof(maillon<T>));
 
 				//Initialisation du nouveau premier maillon<T>
 				new_start->ptr = this->_al.allocate(1);
@@ -199,20 +200,23 @@ namespace ft
 			void 								push_back (const value_type& val){
 				if (this->_begin == NULL){
 					this->_begin = new maillon<T>;
+					memset(this->_begin, 0, sizeof(maillon<T>));
 					this->_begin->ptr = this->_al.allocate(1);
 					this->_al.construct(this->_begin->ptr, val);
+
 					this->_endsize = new maillon<T>;
+					memset(this->_endsize, 0, sizeof(maillon<T>));
 					this->_begin->prev = this->_endsize;
 					this->_begin->next = this->_endsize;
 					this->_endsize->prev = this->_begin;
 					this->_endsize->next = this->_begin;
-
 					this->_size = 2;
 					this->_endsize->ptr = reinterpret_cast<T *>(&this->_size);
 				}
 				else
 				{
 					maillon<T> *new_end =  new maillon<T>;
+					memset(new_end, 0, sizeof(maillon<T>));
 					maillon<T> *old_end =  this->_endsize->prev;
 
 					old_end->next = new_end;
@@ -258,6 +262,7 @@ namespace ft
 			}
 			Iterator							insert (Iterator position, const value_type& val){
 				maillon<T> *new_maillon = new maillon<T>;
+				memset(new_maillon, 0, sizeof(maillon<T>));
 
 				new_maillon->ptr = this->_al.allocate(1);
 				this->_al.construct(new_maillon->ptr, val);
@@ -338,9 +343,11 @@ namespace ft
 
 				if (position.get_it() == NULL){
 					this->_begin = new maillon<T>;
+					memset(this->_begin, 0, sizeof(maillon<T>));
 					this->_begin->ptr = i.get_it()->ptr;
 					i.get_it()->ptr = NULL;
 					this->_endsize = new maillon<T>;
+					memset(this->_endsize, 0, sizeof(maillon<T>));
 					this->_endsize->ptr = NULL;
 					this->_begin->prev = this->_endsize;
 					this->_begin->next = this->_endsize;
@@ -351,6 +358,7 @@ namespace ft
 				else{
 					//creation du maillon
 					maillon<T>	*stock = new maillon<T>;
+					memset(stock, 0, sizeof(maillon<T>));
 					stock->ptr = i.get_it()->ptr;
 					if (this->_begin == position.get_it()){
 						this->_begin = stock;
