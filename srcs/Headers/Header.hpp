@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:16:44 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/06 11:34:05 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/07 16:32:52 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,12 @@ template <class T>
 struct maillon
 {
 	maillon					*prev;
-	maillon					*next;	
+	maillon					*next;
+	maillon					*right;
+	maillon					*left;
 	T						*ptr;		
 };
 
-template<class Key, class T>
-struct maillontree
-{
-	maillontree				*prev;
-	maillontree				*right;
-	maillontree				*left;
-	T						*ptr;
-	Key						_key;	
-};
 
 # define RESET   		"\033[0m"
 # define BLACK   		"\033[30m"				/* Black */
@@ -49,19 +42,21 @@ struct maillontree
 # define BOLDCYAN    	"\033[1m\033[36m"      /* Bold Cyan */
 # define BOLDWHITE   	"\033[1m\033[37m"      /* Bold White */
 
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <stdio.h>
-#include <iomanip>
-#include <memory>
-#include <limits>
-#include <tgmath.h>
-#include <list>
 #include <algorithm>
-#include <utility>
 #include <cstddef>
 #include <deque>
+#include <iostream>
+#include <iomanip>
+#include <limits>
+#include <list>
+#include <memory>
+#include <sstream>
+#include <string>
+#include <cstring>
+#include <stdio.h>
+#include <tgmath.h>
+#include <utility>
+#include <variant>
 
 
 #include "../Iterator/InputIterator.hpp"

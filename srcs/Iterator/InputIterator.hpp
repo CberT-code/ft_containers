@@ -44,7 +44,7 @@ class InputIterator
 			return (*this->it->ptr);
 		}
 		T							*operator->(void){
-			return (*this->it);
+			return (this->it->ptr);
 		}
 
 		/**************************************************
@@ -67,7 +67,7 @@ class InputIterator
 
 	protected :
 		maillon<T>					*it;
-		maillon<T>					**begin;
+
 };
 
 #include "./Iterator.hpp"
