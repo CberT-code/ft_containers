@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/09 18:49:02 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/09 19:11:07 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -359,7 +359,12 @@ namespace ft
 				return (it);
 			}
 			const_Iterator 								lower_bound (const key_type& k) const{
-				return (this->lower_bound(k));
+				Iterator it = this->begin();
+
+				while (it->first < k){
+					it++;
+				}
+				return (it);
 			}
 			Iterator 									upper_bound (const key_type& k){
 				Iterator it = this->begin();
@@ -368,11 +373,18 @@ namespace ft
 					it++;
 				}
 				if (it->first == k)
-					it--;
+					it++;
 				return (it);
 			}
 			const_Iterator 								upper_bound (const key_type& k) const{
-				return (this->upper_bound(k));
+				Iterator it = this->begin();
+
+				while (it->first < k){
+					it++;
+				}
+				if (it->first == k)
+					it++;
+				return (it);
 			}
 			std::pair<const_Iterator,const_Iterator> 	equal_range (const key_type& k) const{
 				return (this->equal_range(k));

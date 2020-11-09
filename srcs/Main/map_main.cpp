@@ -131,22 +131,23 @@ int map_main()
 		compare_result(res.str(), "z => 300\ny => 200\nx => 100\n");
 	}catch(const std::exception &e){};
 
-	// std::cout << std::endl << BLUE << "**********          Empty        **********" << RESET << std::endl;
-	// try{
-	// 	std::stringstream 	res;
-	// 	ft::map<char,int> mymap;
+	std::cout << std::endl << BLUE << "**********          Empty        **********" << RESET << std::endl;
+	try{
+		std::stringstream 	res;
+		std::map<char,int> mymap;
+		
+		mymap['a']=10;
+		mymap['b']=20;
+		mymap['c']=30;
 
-	// 	mymap['a']=10;
-	// 	mymap['b']=20;
-	// 	mymap['c']=30;
-
-	// 	while (!mymap.empty())
-	// 	{
-	// 		res << mymap.begin()->first << " => " << mymap.begin()->second << '\n';
-	// 		mymap.erase(mymap.begin());
-	// 	}
-	// 	compare_result(res.str(), "a => 10\nb => 20\nc => 30\n");
-	// }catch(const std::exception &e){};
+		while (!mymap.empty())
+		{
+			std::cout << "test ici" << std::endl;
+			res << mymap.begin()->first << " => " << mymap.begin()->second << '\n';
+			mymap.erase(mymap.begin());
+		}
+		compare_result(res.str(), "a => 10\nb => 20\nc => 30\n");
+	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "**********          Size        **********" << RESET << std::endl;
 	try{
@@ -227,33 +228,33 @@ int map_main()
 		compare_result(res.str(), "element 'z' already existed with a value of 200\nmymap contains:\na => 100\nb => 300\nc => 400\nz => 200\nanothermap contains:\na => 100\nb => 300\n");
 	}catch(const std::exception &e){};
 
-	// std::cout << std::endl << BLUE << "**********        Erase      **********" << RESET << std::endl;
-	// try{
-	// 	std::stringstream 	res;
-	// 	ft::map<char,int> mymap;
-	// 	ft::map<char,int>::Iterator it;
+	std::cout << std::endl << BLUE << "**********        Erase      **********" << RESET << std::endl;
+	try{
+		std::stringstream 	res;
+		ft::map<char,int> mymap;
+		ft::map<char,int>::Iterator it;
 
-	// 	// insert some values:
-	// 	mymap['a']=10;
-	// 	mymap['b']=20;
-	// 	mymap['c']=30;
-	// 	mymap['d']=40;
-	// 	mymap['e']=50;
-	// 	mymap['f']=60;
+		// insert some values:
+		mymap['a']=10;
+		mymap['b']=20;
+		mymap['c']=30;
+		mymap['d']=40;
+		mymap['e']=50;
+		mymap['f']=60;
 
-	// 	it=mymap.find('b');
-	// 	mymap.erase (it);                   // erasing by iterator
+		it=mymap.find('b');
+		mymap.erase (it);                   // erasing by iterator
 
-	// 	mymap.erase ('c');                  // erasing by key
+		mymap.erase ('c');                  // erasing by key
 
-	// 	it=mymap.find ('e');
-	// 	mymap.erase ( it, mymap.end() );    // erasing by range
+		it=mymap.find ('e');
+		mymap.erase ( it, mymap.end() );    // erasing by range
 
-	// 	// show content:
-	// 	for (it=mymap.begin(); it!=mymap.end(); ++it)
-	// 		res << it->first << " => " << it->second << '\n';
-	// 	compare_result(res.str(), "a => 10\nd => 40\n");
-	// }catch(const std::exception &e){};
+		// show content:
+		for (it=mymap.begin(); it!=mymap.end(); ++it)
+			res << it->first << " => " << it->second << '\n';
+		compare_result(res.str(), "a => 10\nd => 40\n");
+	}catch(const std::exception &e){};
 
 	// std::cout << std::endl << BLUE << "**********         Swap        **********" << RESET << std::endl;
 	// try{
@@ -279,28 +280,28 @@ int map_main()
 	// 	compare_result(res.str(), "foo contains:\na => 11\nb => 22\nc => 33\nbar contains:\nx => 100\ny => 200\n");
 	// }catch(const std::exception &e){};
 
-	// std::cout << std::endl << BLUE << "**********        Reserve       **********" << RESET << std::endl;
-	// try{
-	// 	std::stringstream 	res;
-	// 	ft::map<char,int> mymap;
+	std::cout << std::endl << BLUE << "**********        Reserve //check clear       **********" << RESET << std::endl;
+	try{
+		std::stringstream 	res;
+		ft::map<char,int> mymap;
 
-	// 	mymap['x']=100;
-	// 	mymap['y']=200;
-	// 	mymap['z']=300;
+		mymap['x']=100;
+		mymap['y']=200;
+		mymap['z']=300;
 
-	// 	res << "mymap contains:\n";
-	// 	for (ft::map<char,int>::Iterator it=mymap.begin(); it!=mymap.end(); ++it)
-	// 		res << it->first << " => " << it->second << '\n';
+		res << "mymap contains:\n";
+		for (ft::map<char,int>::Iterator it=mymap.begin(); it!=mymap.end(); ++it)
+			res << it->first << " => " << it->second << '\n';
 
-	// 	mymap.clear();
-	// 	mymap['a']=1101;
-	// 	mymap['b']=2202;
+		// mymap.clear();
+		mymap['a']=1101;
+		mymap['b']=2202;
 
-	// 	res << "mymap contains:\n";
-	// 	for (ft::map<char,int>::Iterator it=mymap.begin(); it!=mymap.end(); ++it)
-	// 		res << it->first << " => " << it->second << '\n';
-	// 	compare_result(res.str(), "mymap contains:\nx => 100\ny => 200\nz => 300\nmymap contains:\na => 1101\nb => 2202\n");
-	// }catch(const std::exception &e){};
+		res << "mymap contains:\n";
+		for (ft::map<char,int>::Iterator it=mymap.begin(); it!=mymap.end(); ++it)
+			res << it->first << " => " << it->second << '\n';
+		compare_result(res.str(), "mymap contains:\nx => 100\ny => 200\nz => 300\nmymap contains:\na => 1101\nb => 2202\n");
+	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "**********      key_comp      **********" << RESET << std::endl;
 	try{
@@ -427,7 +428,7 @@ int map_main()
 		itlow=mymap.lower_bound ('b');  // itlow points to b
 		itup=mymap.upper_bound ('d');   // itup points to e (not d!)
 
-		// mymap.erase(itlow,itup);        // erases [itlow,itup)
+		mymap.erase(itlow,itup);        // erases [itlow,itup)
 
 		// print content:
 		for (ft::map<char,int>::Iterator it=mymap.begin(); it!=mymap.end(); ++it)
@@ -438,8 +439,8 @@ int map_main()
 	std::cout << std::endl << BLUE << "**********      Upper_bound      **********" << RESET << std::endl;
 	try{
 		std::stringstream 	res;
-		ft::map<char,int> mymap;
-		ft::map<char,int>::Iterator itlow,itup;
+		std::map<char,int> mymap;
+		std::map<char,int>::iterator itlow,itup;
 
 		mymap['a']=20;
 		mymap['b']=40;
@@ -450,10 +451,10 @@ int map_main()
 		itlow=mymap.lower_bound ('b');  // itlow points to b
 		itup=mymap.upper_bound ('d');   // itup points to e (not d!)
 
-		// mymap.erase(itlow,itup);        // erases [itlow,itup)
+		mymap.erase(itlow,itup);        // erases [itlow,itup)
 
 		// print content:
-		for (ft::map<char,int>::Iterator it=mymap.begin(); it!=mymap.end(); ++it)
+		for (std::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
 			res << it->first << " => " << it->second << '\n';
 		compare_result(res.str(), "a => 20\ne => 100\n");
 	}catch(const std::exception &e){};
