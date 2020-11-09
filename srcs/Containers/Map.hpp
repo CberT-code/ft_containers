@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/09 15:06:24 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/09 16:53:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,16 +253,36 @@ namespace ft
 			}
 
 			template <class InputIterator>
-			void 										insert (InputIterator first, InputIterator last){
+			void 										insert (InputIterator first, InputIterator last) {
 				while (first != last){
 					insert(*first);
 					first++;
 				}
 			}
-			// void 									erase (Iterator position){
-			// }
-			// size_type 								erase (const key_type& k){
-			// }
+			void 									erase (Iterator position) {
+				maillon<value_type> *tmp = position.get_it();
+				this->_al.deallocate(tmp->ptr, 1);
+				tmp->ptr = NULL;
+				tmp->prev->next = tmp->next;
+				if (tmp->next)
+					tmp->next->prev = tmp->prev;
+				delete tmp;
+				tmp = NULL;					
+				this->_size -= 1;
+			}
+			size_type 								erase (const key_type& k) {
+				size_t	tmpsize = this->_size;
+				this->erase(this->find(k));
+				return (tmpsize - this->_size);
+			}
+			void									erase(Iterator first, Iterator last) {
+				Iterator	tmp = first;
+
+				while (tmp != last) {
+					erase(tmp);
+					tmp++;
+				}
+			}
      		// void 									erase (Iterator first, Iterator last){
 	 		// }
 			// void 									swap (map& x){
