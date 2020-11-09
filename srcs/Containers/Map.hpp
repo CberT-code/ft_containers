@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/09 16:53:19 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/09 18:49:02 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,14 @@ namespace ft
 			}
 
 			~map(void){
-				clear();
+				// clear();
 			}
 
 			map											&operator=(const map &objmap){
-				this->clear();
+				// this->clear();
 				if (this != &objmap){
-					this->_size = objmap._size;
-					insert(objmap.begin(), objmap.end());
+					// this->_size = objmap._size;
+					// insert(objmap.begin(), objmap.end());
 				}
 				return (*this);
 			}
@@ -115,16 +115,16 @@ namespace ft
 				return (this->_endsize);
 			}
 			reverse_Iterator							rbegin(){
-				return (this->end());
+				return (this->_endsize->prev);
 			}
 			const_reverse_Iterator 						rbegin() const{
-				return (this->end());
+				return (this->_endsize->prev);
 			}
 			reverse_Iterator							rend(){
-				return (this->begin());
+				return (this->_endsize);
 			}
 			const_reverse_Iterator 						rend() const{
-				return (this->begin());
+				return (this->_endsize);
 			}
 	
 			/**************************************************
@@ -147,8 +147,8 @@ namespace ft
 			****************** Element Access *****************
 			**************************************************/
 
-			mapped_type& 								operator[] (const key_type& k){
-				return insert(std::make_pair(k, mapped_type())).first->second;
+			mapped_type& 								operator[] (const key_type& k){				
+				return insert(std::make_pair(k, mapped_type())).first->second; 
 			}
 
 			/**************************************************
@@ -158,6 +158,8 @@ namespace ft
 			std::pair<Iterator, bool> 					insert(const value_type &val){
 				Iterator it;
 
+				if (this->_begin->ptr != NULL && (it = this->find(val.first)) != this->end())
+					return (std::make_pair(it, false));
 				it = insert(this->_begin, val);
 				return (std::make_pair(it, true));
 			}
@@ -168,6 +170,7 @@ namespace ft
 				}
 				else if (this->_begin == NULL ){
 					//Creation begin
+					this->_begin = new maillon<value_type>;
 					memset(this->_begin, 0, sizeof(maillon<value_type>));
 					this->_begin->ptr = this->_al.allocate(1);
 					this->_al.construct(this->_begin->ptr, val);
@@ -190,6 +193,7 @@ namespace ft
 					memset(tmp, 0, sizeof(maillon<value_type>));
 					tmp->ptr = this->_al.allocate(1);
 					this->_al.construct(tmp->ptr, val);
+					this->_size += 1;
 
 					maillon<value_type> *cpy = this->begin().get_it();
 					if ((*cpy->ptr).first > (*tmp->ptr).first)
@@ -225,66 +229,63 @@ namespace ft
 								cpyTree = cpyTree->left;
 						}
 					}
-					position = cpy;
+					position = tmp;
 				}
 
+				// ft::map<char,int>::Iterator it;
+				// std::cout << YELLOW << "Affichage iterateurs " << RESET << std::endl << std::endl;
+  				// for (it = this->begin(); it != this->end(); ++it)
+   				// 	std::cout << "key = " << it->first << " value = " << it->second << std::endl;
+				// std::cout << std::endl << std::endl;
 
-				ft::map<char,int>::Iterator it;
-				std::cout << YELLOW << "Affichage iterateurs " << RESET << std::endl << std::endl;
-  				for (it = this->begin(); it != this->end(); ++it)
-   					std::cout << "key = " << it->first << " value = " << it->second << std::endl;
-				std::cout << std::endl << std::endl;
-
-				std::cout << GREEN << "Affichage arbre" << RESET << std::endl << std::endl;
-				maillon<value_type> *aff = this->_begin;
-					if (aff->ptr)
-						std::cout << "node = " << (*aff->ptr).first << std::endl;
-					if (aff->left)
-					 std::cout << "left son = " << (*aff->left->ptr).first << std::endl;
-					if (aff->right)
-					  std::cout << "right son = " << (*aff->right->ptr).first << std::endl;
-					if (aff->right && aff->right->right)
-						std::cout << "right right  son = " << (*aff->right->right->ptr).first << std::endl;
-				std::cout << std::endl << std::endl;
-				getchar();
+				// std::cout << GREEN << "Affichage arbre" << RESET << std::endl << std::endl;
+				// maillon<value_type> *aff = this->_begin;
+				// 	if (aff->ptr)
+				// 		std::cout << "node = " << (*aff->ptr).first << std::endl;
+				// 	if (aff->left)
+				// 	 std::cout << "left son = " << (*aff->left->ptr).first << std::endl;
+				// 	if (aff->right)
+				// 	  std::cout << "right son = " << (*aff->right->ptr).first << std::endl;
+				// 	if (aff->right && aff->right->right)
+				// 		std::cout << "right right  son = " << (*aff->right->right->ptr).first << std::endl;
+				// std::cout << std::endl << std::endl;
+				// getchar();
 
 
 				return (position);
 			}
 
 			template <class InputIterator>
-			void 										insert (InputIterator first, InputIterator last) {
+			void 										insert (InputIterator first, InputIterator last){
 				while (first != last){
 					insert(*first);
 					first++;
 				}
 			}
-			void 									erase (Iterator position) {
-				maillon<value_type> *tmp = position.get_it();
-				this->_al.deallocate(tmp->ptr, 1);
-				tmp->ptr = NULL;
-				tmp->prev->next = tmp->next;
-				if (tmp->next)
-					tmp->next->prev = tmp->prev;
-				delete tmp;
-				tmp = NULL;					
-				this->_size -= 1;
-			}
-			size_type 								erase (const key_type& k) {
-				size_t	tmpsize = this->_size;
-				this->erase(this->find(k));
-				return (tmpsize - this->_size);
-			}
-			void									erase(Iterator first, Iterator last) {
-				Iterator	tmp = first;
+			void 										erase (Iterator position) {
+ 				maillon<value_type> *tmp = position.get_it();
+ 				this->_al.deallocate(tmp->ptr, 1);
+ 				tmp->ptr = NULL;
+ 				tmp->prev->next = tmp->next;
+ 				if (tmp->next)
+ 					tmp->next->prev = tmp->prev;
+ 				delete tmp;
+ 				tmp = NULL;					
+ 				this->_size -= 1;
+ 			}
+ 			size_type 									erase (const key_type& k) {
+ 				size_t	tmpsize = this->_size;
+ 				this->erase(this->find(k));
+ 				return (tmpsize - this->_size);
+ 			}
+ 			void										erase(Iterator first, Iterator last) {
+ 				Iterator	tmp = first;
 
-				while (tmp != last) {
-					erase(tmp);
-					tmp++;
-				}
-			}
-     		// void 									erase (Iterator first, Iterator last){
-	 		// }
+ 				while (tmp != last) {
+ 					erase(tmp);
+ 					tmp++;
+ 				}
+ 			}
 			// void 									swap (map& x){
 			// }
 			void										clear(){
@@ -333,20 +334,26 @@ namespace ft
 			Iterator									find(const key_type& k){
 				Iterator it = this->begin();
 
-				while (it->first != k && it != NULL)
+				while (this->_begin && it != this->end() && it->first != k){
 					it++;
+				}
 				return (it);
 			}
 			const_Iterator								find(const key_type& k) const {
-				return (this->find(k));
+				Iterator it = this->begin();
+
+				while (this->_begin && it != this->end() && it->first != k){
+					it++;
+				}
+				return (it);
 			}
 			size_type 									count (const key_type& k) const{
-				return (this->find(k) != NULL);
+				return (this->find(k) != this->end());
 			}
 			Iterator 									lower_bound (const key_type& k){
 				Iterator it = this->begin();
 
-				while (this->key_comp(*it.first,k.first)){
+				while (it->first < k){
 					it++;
 				}
 				return (it);
@@ -357,10 +364,10 @@ namespace ft
 			Iterator 									upper_bound (const key_type& k){
 				Iterator it = this->begin();
 
-				while (this->key_comp(it->first, k.first)){
+				while (it->first < k){
 					it++;
 				}
-				if (it->first == k.first)
+				if (it->first == k)
 					it--;
 				return (it);
 			}
