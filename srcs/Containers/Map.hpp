@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   Map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
 /*   Updated: 2020/11/09 15:06:24 by cbertola         ###   ########.fr       */
@@ -168,7 +168,6 @@ namespace ft
 				}
 				else if (this->_begin == NULL ){
 					//Creation begin
-					this->_begin = new maillon<value_type>;
 					memset(this->_begin, 0, sizeof(maillon<value_type>));
 					this->_begin->ptr = this->_al.allocate(1);
 					this->_al.construct(this->_begin->ptr, val);
@@ -187,7 +186,6 @@ namespace ft
 					
 				}
 				else{
-					
 					maillon<value_type> *tmp = new maillon<value_type>;
 					memset(tmp, 0, sizeof(maillon<value_type>));
 					tmp->ptr = this->_al.allocate(1);
