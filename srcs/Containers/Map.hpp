@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/07 17:21:00 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/09 13:26:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,16 @@ namespace ft
 			explicit 								map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()){
 				this->_al = alloc;
 				this->_comp = comp;
-				this->_begin = NULL;
+				this->_begin = new maillon<value_type>;
+				this->_begin->left = NULL;
+				this->_begin->right = NULL;
+				this->_begin->prev = NULL;
+				this->_begin->next = NULL;
+				memset(this->_begin, 0, sizeof(maillon<value_type>));
+				this->_begin->ptr = NULL;
 				this->_endsize = NULL;
 				this->_size = 0;
+				std::cout << "YES " << std::endl;
 			}
 
 			template<class InputIterator>
@@ -156,9 +163,8 @@ namespace ft
 				return (std::make_pair(it, true));
 			}
 			Iterator 								insert (Iterator position, const value_type& val){
-				if (this->_begin == NULL){
+				if (this->_begin == NULL || this->_begin->ptr == NULL){
 					//Creation begin
-					this->_begin = new maillon<value_type>;
 					memset(this->_begin, 0, sizeof(maillon<value_type>));
 					this->_begin->ptr = this->_al.allocate(1);
 					this->_al.construct(this->_begin->ptr, val);
@@ -175,7 +181,7 @@ namespace ft
 					this->_endsize->next = this->_begin;
 					this->_size = 2;
 				}
-				else{
+				else {
 
 					//compare egality
 					// if (this->find(val.first))
@@ -184,12 +190,13 @@ namespace ft
 					//creation maillon
 					maillon<value_type> *tmp = new maillon<value_type>;
 					memset(tmp, 0, sizeof(maillon<value_type>));
-					this->_begin->ptr = this->_al.allocate(1);
-					this->_al.construct(this->_begin->ptr, val);
+					tmp->ptr = this->_al.allocate(1);
+					this->_al.construct(tmp->ptr, val);
+					std::cout << "TMP VALUE 1 : " << 0 << std::endl; 
 
 					// On le place pour les iterateurs
-					std::cout << YELLOW << (position)->first << RESET << std::endl;
-					if (!(position->first < (*tmp->ptr).first && ((++position) == this->end() || position->first > (*tmp->ptr).first))){
+					std::cout << YELLOW << " -> " << (position)->first << RESET << std::endl;
+					if (tmp != NULL && tmp->ptr && !(position->first < (*tmp->ptr).first && ((++position) == this->end() || position->first > (*tmp->ptr).first))){
 					std::cout << YELLOW << (position)->first << RESET << std::endl;
 						position = this->begin();
 						while (position->first < (*tmp->ptr).first)
@@ -205,15 +212,15 @@ namespace ft
 
 					// On le place pour l'arbre binaire
 					maillon<value_type> *cpy = this->_begin;
-					while (cpy->right != tmp && cpy->left != tmp)
+					std::cout << "VALUE : " << cpy->ptr->first << " TMP VALUE " << 0 << std::endl;
+					while (tmp->ptr && cpy->right != tmp && cpy->left != tmp)
 					{
-						if ((*cpy->ptr).first < (*tmp->ptr).first){
+						if (tmp->ptr != NULL && (*cpy->ptr).first < (*tmp->ptr).first){
 							if (cpy->right == NULL)
 								cpy->right = tmp;
 							else
 								cpy = cpy->right;
-						}
-						else if ((*tmp->ptr).first > (*cpy->ptr).first){
+						} else if (tmp->ptr->first > cpy->ptr->first){
 							if (cpy->left == NULL)
 								cpy->left = tmp;
 							else
