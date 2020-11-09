@@ -25,25 +25,19 @@
 int map_main()
 {
 
-  ft::map<char,int> first;
-first.insert(std::make_pair('c',45));
-std::cout << RED << "1" << RESET << std::endl;
-first.insert(std::make_pair('a',55));
-std::cout << RED << "2" << RESET << std::endl;
-first.insert(std::make_pair('b',65));
-//   first['a']=10;
-//   first['b']=30;
-//   first['c']=50;
-//   first['d']=70;
+ 	ft::map<char,int> mymap;
 
-  ft::map<char,int> second (first.begin(),first.end());
+  	// first insert function version (single parameter):
 
-  ft::map<char,int> third (second);
+  	// second insert function version (with hint position):
+  	ft::map<char,int>::Iterator it = mymap.begin();
+  	mymap.insert (it, std::pair<char,int>('b',300));  // max efficiency inserting
 
-  ft::map<char,int,classcomp> fourth;                 // class as Compare
+ 	mymap.insert (it, std::pair<char,int>('d',400));  // no max efficiency inserting
+	mymap.insert (it, std::pair<char,int>('a',200));  // no max efficiency inserting
 
-//   bool(*fn_pt)(char,char) = fncomp;
-//   ft::map<char,int,bool(*)(char,char)> fifth (fn_pt); // function pointer as Compare
+	mymap.insert (it, std::pair<char,int>('f',10));  // no max efficiency inserting
+
 
 
 	return 0;

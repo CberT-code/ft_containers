@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Map.hpp                                            :+:      :+:    :+:   */
+/*   Map3.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/09 15:06:24 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/09 14:18:46 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#ifndef MAP_HPP
-#define MAP_HPP
+#ifndef MAP3_HPP
+#define MAP3_HPP
 #include "../Headers/Header.hpp"
 
 namespace ft
@@ -41,25 +41,12 @@ namespace ft
 			****************** Form Coplien *******************
 			**************************************************/
 
-			explicit 									map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()){
-				//Creation begin
-				this->_begin = new maillon<value_type>;
-				memset(this->_begin, 0, sizeof(maillon<value_type>));
-				this->_begin->ptr = NULL;
-
-				//Creation endsize
-				this->_endsize = new maillon<value_type>;
-				memset(this->_endsize, 0, sizeof(maillon<value_type>));
-				this->_endsize->ptr = reinterpret_cast<value_type *>(&this->_size);
-
-				//pointeurs
-				this->_begin->prev = this->_endsize;
-				this->_begin->next = this->_endsize;
-				this->_endsize->prev = this->_begin;
-				this->_endsize->next = this->_begin;
-				this->_size = 2;
+			explicit 								map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()){
 				this->_al = alloc;
 				this->_comp = comp;
+				this->_begin = NULL;
+				this->_endsize = NULL;
+				this->_size = 0;
 			}
 
 			template<class InputIterator>
@@ -83,7 +70,7 @@ namespace ft
 				clear();
 			}
 
-			map											&operator=(const map &objmap){
+			map										&operator=(const map &objmap){
 				this->clear();
 				if (this != &objmap){
 					this->_size = objmap._size;
@@ -96,34 +83,34 @@ namespace ft
 			******************** Iterators ********************
 			**************************************************/
 
-			Iterator									begin(){
+			Iterator								begin(){
 				maillon<value_type> *tmp = this->_begin;
-				while (tmp && tmp->left != NULL)
+				while (tmp->left != NULL)
 					tmp = tmp->left;
 				return (tmp);
 			}
-			const_Iterator 								begin() const{
+			const_Iterator 							begin() const{
 				maillon<value_type> *tmp = this->_begin;
-				while (tmp && tmp->left != NULL)
+				while (tmp->left != NULL)
 					tmp = tmp->left;
 				return (tmp);
 			}
-			Iterator									end(){
+			Iterator								end(){
 				return (this->_endsize);
 			}
-			const_Iterator 								end() const{
+			const_Iterator 							end() const{
 				return (this->_endsize);
 			}
-			reverse_Iterator							rbegin(){
+			reverse_Iterator						rbegin(){
 				return (this->end());
 			}
-			const_reverse_Iterator 						rbegin() const{
+			const_reverse_Iterator 					rbegin() const{
 				return (this->end());
 			}
-			reverse_Iterator							rend(){
+			reverse_Iterator						rend(){
 				return (this->begin());
 			}
-			const_reverse_Iterator 						rend() const{
+			const_reverse_Iterator 					rend() const{
 				return (this->begin());
 			}
 	
@@ -131,23 +118,23 @@ namespace ft
 			********************* Capacity ********************
 			**************************************************/
 
-			bool										empty(void) const {
+			bool									empty(void) const {
 				return (this->_begin == NULL);
 			}
 
-			size_type									size(void) const {
+			size_type								size(void) const {
 				return (this->_size - 1);
 			}
 
-			size_type									max_size() const{
+			size_type								max_size() const{
 				return (std::numeric_limits<std::size_t>::max() / sizeof(this->_begin));
 			}
 
-			/**************************a	a************************
+			/**************************************************
 			****************** Element Access *****************
 			**************************************************/
 
-			mapped_type& 								operator[] (const key_type& k){
+			mapped_type& 							operator[] (const key_type& k){
 				return insert(std::make_pair(k, mapped_type())).first->second;
 			}
 
@@ -157,17 +144,15 @@ namespace ft
 
 			std::pair<Iterator, bool> 					insert(const value_type &val){
 				Iterator it;
-
+				// if ((it = this->find(val.first)) != NULL)
+				// 	return (std::make_pair(it, false));
 				it = insert(this->_begin, val);
 				return (std::make_pair(it, true));
 			}
-			Iterator 									insert (Iterator position, const value_type& val){
-				if (this->_begin->ptr == NULL){
-					this->_begin->ptr = this->_al.allocate(1);
-					this->_al.construct(this->_begin->ptr, val);
-				}
-				else if (this->_begin == NULL ){
+			Iterator 								insert (Iterator position, const value_type& val){
+				if (this->_begin == NULL){
 					//Creation begin
+					this->_begin = new maillon<value_type>;
 					memset(this->_begin, 0, sizeof(maillon<value_type>));
 					this->_begin->ptr = this->_al.allocate(1);
 					this->_al.construct(this->_begin->ptr, val);
@@ -183,77 +168,61 @@ namespace ft
 					this->_endsize->prev = this->_begin;
 					this->_endsize->next = this->_begin;
 					this->_size = 2;
-					
 				}
 				else{
+
+					//compare egality
+					// if (this->find(val.first))
+					// 		return (this->find(val.first));
+
+					//creation maillon
 					maillon<value_type> *tmp = new maillon<value_type>;
 					memset(tmp, 0, sizeof(maillon<value_type>));
-					tmp->ptr = this->_al.allocate(1);
-					this->_al.construct(tmp->ptr, val);
+					this->_begin->ptr = this->_al.allocate(1);
+					this->_al.construct(this->_begin->ptr, val);
 
-					maillon<value_type> *cpy = this->begin().get_it();
-					if ((*cpy->ptr).first > (*tmp->ptr).first)
+					// On le place pour les iterateurs
+					std::cout << YELLOW << (position)->first << RESET << std::endl;
+					std::cout << YELLOW << position.get_it() << RESET << std::endl;
+					position++;
+					std::cout << YELLOW << position.get_it() << RESET << std::endl;
+					std::cout << YELLOW << this->end().get_it() << RESET << std::endl;
+					if (!(position->first < (*tmp->ptr).first && ((++position) == this->end() || position->first > (*tmp->ptr).first))){
+					// std::cout << YELLOW << (position)->first << RESET << std::endl;
+						position = this->begin();
+						while (position->first < (*tmp->ptr).first && position != this->end())
+							position++;
+					// }
+					std::cout << YELLOW << "1" << RESET << std::endl;
+					position.get_it()->prev = tmp;
+					tmp->next = position.get_it();
+					position--;
+					position.get_it()->next = tmp;
+					tmp->prev = position.get_it();
+					position++;
+
+					// On le place pour l'arbre binaire
+					maillon<value_type> *cpy = this->_begin;
+					while (cpy->right != tmp && cpy->left != tmp)
 					{
-						tmp->prev = this->_endsize;
-						tmp->next = cpy;
-						cpy->prev = tmp;
-						this->_endsize->next = tmp;
-					}
-					else
-					{
-						while ((*cpy->ptr).first < (*tmp->ptr).first && cpy != this->_endsize)
-							cpy = cpy->next;
-						tmp->prev = cpy->prev;
-						tmp->next = cpy;
-						cpy->prev->next = tmp;
-						cpy->prev = tmp;
-					}
-				
-					maillon<value_type> *cpyTree = this->_begin;
-					while (cpyTree->right != tmp && cpyTree->left != tmp)
-					{
-						if ((*cpyTree->ptr).first < (*tmp->ptr).first){
-						if (cpyTree->right == NULL)
-								cpyTree->right = tmp;
+						if ((*cpy->ptr).first < (*tmp->ptr).first){
+							if (cpy->right == NULL)
+								cpy->right = tmp;
 							else
-								cpyTree = cpyTree->right;
+								cpy = cpy->right;
 						}
-						else if ((*cpyTree->ptr).first > (*tmp->ptr).first){
-							if (cpyTree->left == NULL)
-								cpyTree->left = tmp;
+						else if ((*tmp->ptr).first > (*cpy->ptr).first){
+							if (cpy->left == NULL)
+								cpy->left = tmp;
 							else
-								cpyTree = cpyTree->left;
+								cpy = cpy->left;
 						}
 					}
-					position = cpy;
 				}
-
-
-				ft::map<char,int>::Iterator it;
-				std::cout << YELLOW << "Affichage iterateurs " << RESET << std::endl << std::endl;
-  				for (it = this->begin(); it != this->end(); ++it)
-   					std::cout << "key = " << it->first << " value = " << it->second << std::endl;
-				std::cout << std::endl << std::endl;
-
-				std::cout << GREEN << "Affichage arbre" << RESET << std::endl << std::endl;
-				maillon<value_type> *aff = this->_begin;
-					if (aff->ptr)
-						std::cout << "node = " << (*aff->ptr).first << std::endl;
-					if (aff->left)
-					 std::cout << "left son = " << (*aff->left->ptr).first << std::endl;
-					if (aff->right)
-					  std::cout << "right son = " << (*aff->right->ptr).first << std::endl;
-					if (aff->right && aff->right->right)
-						std::cout << "right right  son = " << (*aff->right->right->ptr).first << std::endl;
-				std::cout << std::endl << std::endl;
-				getchar();
-
-
 				return (position);
 			}
-
 			template <class InputIterator>
-			void 										insert (InputIterator first, InputIterator last){
+			void 									insert (InputIterator first, InputIterator last){
 				while (first != last){
 					insert(*first);
 					first++;
@@ -267,7 +236,7 @@ namespace ft
 	 		// }
 			// void 									swap (map& x){
 			// }
-			void										clear(){
+			void									clear(){
 				while (this->_size){
 					if (this->_size == 2)
 					{
@@ -300,7 +269,7 @@ namespace ft
 			******************** Observers ********************
 			**************************************************/
 
-			key_compare 								key_comp() const{
+			key_compare 							key_comp() const{
 				return (this->_comp);
 			}
 			// value_compare 							value_comp() const{
@@ -310,20 +279,20 @@ namespace ft
 			******************** Operations *******************
 			**************************************************/
 
-			Iterator									find(const key_type& k){
+			Iterator								find(const key_type& k){
 				Iterator it = this->begin();
 
 				while (it->first != k && it != NULL)
 					it++;
 				return (it);
 			}
-			const_Iterator								find(const key_type& k) const {
+			const_Iterator							find(const key_type& k) const {
 				return (this->find(k));
 			}
-			size_type 									count (const key_type& k) const{
+			size_type 								count (const key_type& k) const{
 				return (this->find(k) != NULL);
 			}
-			Iterator 									lower_bound (const key_type& k){
+			Iterator 								lower_bound (const key_type& k){
 				Iterator it = this->begin();
 
 				while (this->key_comp(*it.first,k.first)){
@@ -331,10 +300,10 @@ namespace ft
 				}
 				return (it);
 			}
-			const_Iterator 								lower_bound (const key_type& k) const{
+			const_Iterator 							lower_bound (const key_type& k) const{
 				return (this->lower_bound(k));
 			}
-			Iterator 									upper_bound (const key_type& k){
+			Iterator 								upper_bound (const key_type& k){
 				Iterator it = this->begin();
 
 				while (this->key_comp(it->first, k.first)){
@@ -344,7 +313,7 @@ namespace ft
 					it--;
 				return (it);
 			}
-			const_Iterator 								upper_bound (const key_type& k) const{
+			const_Iterator 							upper_bound (const key_type& k) const{
 				return (this->upper_bound(k));
 			}
 			std::pair<const_Iterator,const_Iterator> 	equal_range (const key_type& k) const{
