@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/10 11:29:37 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/10 12:01:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ namespace ft
 			}
 
 			~map(void){
-				// clear();
+				 clear();
 			}
 
 			map											&operator=(const map &objmap){
@@ -264,34 +264,22 @@ namespace ft
 				std::swap(x._comp, this->_comp);
 			}
 			void										clear(){
-				while (this->_size){
-					if (this->_size == 2)
-					{
-						if (this->_begin->ptr) {
-							this->_al.deallocate(this->_begin->ptr, 1);
+				Iterator cpy;
+				Iterator it = this->begin();
+				while (it != this->end()) {
+					if (it.get_it()->ptr) {
+							this->_al.deallocate(it.get_it()->ptr, 1);
+							it.get_it()->ptr = NULL;
 						}
-						delete (this->_begin);
-						delete (this->_endsize);
-						this->_begin = NULL;
-						this->_endsize = NULL;
-						this->_size = 0;
-					}
-					else
-					{
-						maillon<value_type> *replaced = this->_endsize->prev;
-						maillon<value_type> *new_end = this->_endsize->prev->prev;
-						
-						if (replaced->ptr) {
-							this->_al.deallocate(replaced->ptr, 1);
-						}
-						this->_endsize->prev = new_end;
-						new_end->next = this->_endsize;
-						delete (replaced);
-						this->_size -= 1;
-					}
+					cpy = it;
+					it++;
+					delete cpy.get_it();
 				}
+				delete this->_endsize;
+				this->_endsize = NULL;
+				this->_begin = NULL;
+				this->_size = 0;
 			}
-
 			/**************************************************
 			******************** Observers ********************
 			**************************************************/
