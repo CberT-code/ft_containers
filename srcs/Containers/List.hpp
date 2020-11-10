@@ -290,9 +290,9 @@ namespace ft
 				return (last);
 			}
 			void								swap (list& x){
-				std::swap(x._begin, this->_begin);
-				std::swap(x._size, this->_size);
-				std::swap(x._al, this->_al);
+				std::swap(this->_begin, x._begin);
+				std::swap(this->_size, x._size);
+				std::swap(this->_al, x._al);
 			}
 			void								resize (size_type n, value_type val = value_type()){
 			while (this->_size > n)
