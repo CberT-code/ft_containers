@@ -42,6 +42,21 @@ class BidirectionalIterator : public ForwardIterator<T>
 			return (*this);
 		}
 
+		/**************************************************
+		********* operator '++a' 'a++' '*a++' *************
+		**************************************************/
+		BidirectionalIterator				operator++(int){
+			BidirectionalIterator I = *this;
+			if (this->it && this->it->next)
+				this->it = this->it->next;
+			return (I);
+		}
+		BidirectionalIterator				operator++(void){
+			if (this->it && this->it->next)
+				this->it = this->it->next;
+			return (*this);
+		}
+
 };
 
 #endif
