@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/10 10:17:57 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/10 11:29:37 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,9 @@ namespace ft
 			**************************************************/
 
 			explicit 									map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()){
-				//Creation begin
-				this->_begin = new maillon<value_type>;
-				memset(this->_begin, 0, sizeof(maillon<value_type>));
-				this->_begin->ptr = NULL;
-
-				//Creation endsize
-				this->_endsize = new maillon<value_type>;
-				memset(this->_endsize, 0, sizeof(maillon<value_type>));
-				this->_endsize->ptr = reinterpret_cast<value_type *>(&this->_size);
-
-				//pointeurs
-				this->_begin->prev = this->_endsize;
-				this->_begin->next = this->_endsize;
-				this->_endsize->prev = this->_begin;
-				this->_endsize->next = this->_begin;
-				this->_size = 2;
+				this->_begin = NULL;
+				this->_endsize = NULL;
+				this->_size = 0;
 				this->_al = alloc;
 				this->_comp = comp;
 			}
@@ -85,9 +72,15 @@ namespace ft
 
 			map											&operator=(const map &objmap){
 				// this->clear();
+				this->_begin = NULL;
+				this->_endsize = NULL;
+				this->_size = 0;
 				if (this != &objmap){
-					// this->_size = objmap._size;
-					// insert(objmap.begin(), objmap.end());
+					if (objmap._size == 0)
+						insert(objmap.begin(), objmap.end());
+					this->_size = objmap._size;
+					std::cout << this->_size << std::endl;
+					this->_comp = objmap._comp;
 				}
 				return (*this);
 			}
@@ -136,6 +129,8 @@ namespace ft
 			}
 
 			size_type									size(void) const {
+				if (this->_size == 0)
+					return (0);
 				return (this->_size - 1);
 			}
 
@@ -158,17 +153,13 @@ namespace ft
 			std::pair<Iterator, bool> 					insert(const value_type &val){
 				Iterator it;
 
-				if (this->_begin->ptr != NULL && (it = this->find(val.first)) != this->end())
+				if (this->_begin != NULL && this->_begin->ptr != NULL && (it = this->find(val.first)) != this->end())
 					return (std::make_pair(it, false));
 				it = insert(this->_begin, val);
 				return (std::make_pair(it, true));
 			}
 			Iterator 									insert (Iterator position, const value_type& val){
-				if (this->_begin->ptr == NULL){
-					this->_begin->ptr = this->_al.allocate(1);
-					this->_al.construct(this->_begin->ptr, val);
-				}
-				else if (this->_begin == NULL ){
+				if (this->_size == 0 ){
 					//Creation begin
 					this->_begin = new maillon<value_type>;
 					memset(this->_begin, 0, sizeof(maillon<value_type>));
@@ -186,6 +177,7 @@ namespace ft
 					this->_endsize->prev = this->_begin;
 					this->_endsize->next = this->_begin;
 					this->_size = 2;
+					position = this->_begin;
 					
 				}
 				else{
@@ -231,27 +223,6 @@ namespace ft
 					}
 					position = tmp;
 				}
-
-				// ft::map<char,int>::Iterator it;
-				// std::cout << YELLOW << "Affichage iterateurs " << RESET << std::endl << std::endl;
-  				// for (it = this->begin(); it != this->end(); ++it)
-   				// 	std::cout << "key = " << it->first << " value = " << it->second << std::endl;
-				// std::cout << std::endl << std::endl;
-
-				// std::cout << GREEN << "Affichage arbre" << RESET << std::endl << std::endl;
-				// maillon<value_type> *aff = this->_begin;
-				// 	if (aff->ptr)
-				// 		std::cout << "node = " << (*aff->ptr).first << std::endl;
-				// 	if (aff->left)
-				// 	 std::cout << "left son = " << (*aff->left->ptr).first << std::endl;
-				// 	if (aff->right)
-				// 	  std::cout << "right son = " << (*aff->right->ptr).first << std::endl;
-				// 	if (aff->right && aff->right->right)
-				// 		std::cout << "right right  son = " << (*aff->right->right->ptr).first << std::endl;
-				// std::cout << std::endl << std::endl;
-				// getchar();
-
-
 				return (position);
 			}
 
