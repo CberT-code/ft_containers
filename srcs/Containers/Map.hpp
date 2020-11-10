@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/10 12:01:26 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/10 12:50:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,35 +233,48 @@ namespace ft
 					first++;
 				}
 			}
-			void 										erase (Iterator position) {
- 				maillon<value_type> *tmp = position.get_it();
- 				this->_al.deallocate(tmp->ptr, 1);
- 				tmp->ptr = NULL;
- 				tmp->prev->next = tmp->next;
- 				if (tmp->next)
- 					tmp->next->prev = tmp->prev;
- 				delete tmp;
- 				tmp = NULL;					
- 				this->_size -= 1;
- 			}
- 			size_type 									erase (const key_type& k) {
- 				size_t	tmpsize = this->_size;
- 				this->erase(this->find(k));
- 				return (tmpsize - this->_size);
- 			}
- 			void										erase(Iterator first, Iterator last) {
- 				Iterator	tmp = first;
+			void 									erase(Iterator position) {
+				maillon<value_type> *tmp = position.get_it();
+				tmp->prev->next = tmp->next;
+				if (tmp->next)
+					tmp->next->prev = tmp->prev;
+				if (tmp->right) {
+					maillon<value_type> tmpi = this->upper_bound(tmp->ptr->first).get_it();
+					for (Iterator ite = this->begin(); ite != this->end(); ite++) {
+						if (ite.get_it()->left == tmpi)
+							ite.get_it()->left = NULL;
+						else if (ite.get_it()->right = tmpi)
+							ite.get_it()->right = NULL;
+					}
+					if (tmp != this->_begin)
+						(position--).get_it()->left = tmpi;
+					else
+						this->_begin = tmpi;
+					tmpi->left = tmp->left;
+					tmpi->right = tmp->right;
+				} else if(tmp && tmp->left)
+					if (tmp != this->_begin)
+						(position--)->get_it()->left = tmp->left;
+					else
+						this->_begin = tmp->left
+				this->_al.deallocate(tmp->ptr, 1);
+				tmp->ptr = NULL;
+				delete tmp;
+				tmp = NULL;					
+				this->_size -= 1;
+			}
+			size_type 								erase (const key_type& k) {
+				size_t	tmpsize = this->_size;
+				this->erase(this->find(k));
+				return (tmpsize - this->_size);
+			}
+			void									erase(Iterator first, Iterator last) {
+				Iterator	tmp = first;
 
- 				while (tmp != last) {
- 					erase(tmp);
- 					tmp++;
- 				}
- 			}
-			void 									swap (map& x){
-				std::swap(x._begin, this->_begin);
-				std::swap(x._endsize, this->_endsize);
-				std::swap(x._size, this->_size);
-				std::swap(x._comp, this->_comp);
+				while (tmp != last) {
+					erase(tmp);
+					tmp++;
+				}
 			}
 			void										clear(){
 				Iterator cpy;
