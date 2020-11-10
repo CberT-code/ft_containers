@@ -46,7 +46,7 @@ class ReverseInputIterator
 			return (*this->it->ptr);
 		}
 		T							*operator->(void){
-			return (*this->it);
+			return (this->it->ptr);
 		}
 
 		/**************************************************
