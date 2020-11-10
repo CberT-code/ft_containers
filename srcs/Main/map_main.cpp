@@ -142,7 +142,6 @@ int map_main()
 
 		while (!mymap.empty())
 		{
-			std::cout << "test ici" << std::endl;
 			res << mymap.begin()->first << " => " << mymap.begin()->second << '\n';
 			mymap.erase(mymap.begin());
 		}
@@ -256,29 +255,29 @@ int map_main()
 		compare_result(res.str(), "a => 10\nd => 40\n");
 	}catch(const std::exception &e){};
 
-	// std::cout << std::endl << BLUE << "**********         Swap        **********" << RESET << std::endl;
-	// try{
-	// 	std::stringstream 	res;
-	// 	ft::map<char,int> foo,bar;
+	std::cout << std::endl << BLUE << "**********         Swap        **********" << RESET << std::endl;
+	try{
+		std::stringstream 	res;
+		ft::map<char,int> foo,bar;
 
-	// 	foo['x']=100;
-	// 	foo['y']=200;
+		foo['x']=100;
+		foo['y']=200;
 
-	// 	bar['a']=11;
-	// 	bar['b']=22;
-	// 	bar['c']=33;
+		bar['a']=11;
+		bar['b']=22;
+		bar['c']=33;
 
-	// 	foo.swap(bar);
+		foo.swap(bar);
 
-	// 	std::cout << "foo contains:\n";
-	// 	for (ft::map<char,int>::Iterator it=foo.begin(); it!=foo.end(); ++it)
-	// 		std::cout << it->first << " => " << it->second << '\n';
+		res << "foo contains:\n";
+		for (ft::map<char,int>::Iterator it=foo.begin(); it!=foo.end(); ++it)
+			res << it->first << " => " << it->second << '\n';
 
-	// 	std::cout << "bar contains:\n";
-	// 	for (ft::map<char,int>::Iterator it=bar.begin(); it!=bar.end(); ++it)
-	// 		std::cout << it->first << " => " << it->second << '\n';
-	// 	compare_result(res.str(), "foo contains:\na => 11\nb => 22\nc => 33\nbar contains:\nx => 100\ny => 200\n");
-	// }catch(const std::exception &e){};
+		res << "bar contains:\n";
+		for (ft::map<char,int>::Iterator it=bar.begin(); it!=bar.end(); ++it)
+			res << it->first << " => " << it->second << '\n';
+		compare_result(res.str(), "foo contains:\na => 11\nb => 22\nc => 33\nbar contains:\nx => 100\ny => 200\n");
+	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "**********        Reserve //check clear       **********" << RESET << std::endl;
 	try{

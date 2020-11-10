@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/09 19:11:07 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/10 10:17:57 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,8 +286,12 @@ namespace ft
  					tmp++;
  				}
  			}
-			// void 									swap (map& x){
-			// }
+			void 									swap (map& x){
+				std::swap(x._begin, this->_begin);
+				std::swap(x._endsize, this->_endsize);
+				std::swap(x._size, this->_size);
+				std::swap(x._comp, this->_comp);
+			}
 			void										clear(){
 				while (this->_size){
 					if (this->_size == 2)
