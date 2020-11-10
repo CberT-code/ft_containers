@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/09 16:53:19 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/10 12:50:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,19 +253,38 @@ namespace ft
 			}
 
 			template <class InputIterator>
-			void 										insert (InputIterator first, InputIterator last) {
+			void 									insert(InputIterator first, InputIterator last) {
 				while (first != last){
 					insert(*first);
 					first++;
 				}
 			}
-			void 									erase (Iterator position) {
+			void 									erase(Iterator position) {
 				maillon<value_type> *tmp = position.get_it();
-				this->_al.deallocate(tmp->ptr, 1);
-				tmp->ptr = NULL;
 				tmp->prev->next = tmp->next;
 				if (tmp->next)
 					tmp->next->prev = tmp->prev;
+				if (tmp->right) {
+					maillon<value_type> tmpi = this->upper_bound(tmp->ptr->first).get_it();
+					for (Iterator ite = this->begin(); ite != this->end(); ite++) {
+						if (ite.get_it()->left == tmpi)
+							ite.get_it()->left = NULL;
+						else if (ite.get_it()->right = tmpi)
+							ite.get_it()->right = NULL;
+					}
+					if (tmp != this->_begin)
+						(position--).get_it()->left = tmpi;
+					else
+						this->_begin = tmpi;
+					tmpi->left = tmp->left;
+					tmpi->right = tmp->right;
+				} else if(tmp && tmp->left)
+					if (tmp != this->_begin)
+						(position--)->get_it()->left = tmp->left;
+					else
+						this->_begin = tmp->left
+				this->_al.deallocate(tmp->ptr, 1);
+				tmp->ptr = NULL;
 				delete tmp;
 				tmp = NULL;					
 				this->_size -= 1;
