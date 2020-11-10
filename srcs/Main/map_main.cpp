@@ -24,11 +24,11 @@
 
 int map_main()
 {
-	std::cout << std::endl << std::endl << YELLOW;
-	std::cout << "***********************************************************" << std::endl;
-	std::cout << "*****************             MAP         *****************" << std::endl;
-	std::cout << "***********************************************************" << std::endl;
-	std::cout << RESET << std::endl << std::endl;
+	// std::cout << std::endl << std::endl << YELLOW;
+	// std::cout << "***********************************************************" << std::endl;
+	// std::cout << "*****************             MAP         *****************" << std::endl;
+	// std::cout << "***********************************************************" << std::endl;
+	// std::cout << RESET << std::endl << std::endl;
 
 	// std::cout << std::endl << BLUE << "**********     Constructor      **********" << RESET << std::endl;
 	// try{
@@ -58,11 +58,13 @@ int map_main()
 		ft::map<char,int> second;
 
 		first['x']=8;
+		std::cout << "test ici on entre" << std::endl;
 		first['y']=16;
 		first['z']=32;
 
 		second=first;                // second now contains 3 ints
 		first=ft::map<char,int>();  // and first is now empty
+		std::cout << "test ici on sort" << std::endl;
 
 		res << "Size of first: " << first.size() << '\n';
 		res << "Size of second: " << second.size();
