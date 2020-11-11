@@ -131,7 +131,7 @@ namespace ft
 				return (this->_size);
 			}
 			size_type							max_size() const{
-				return (std::numeric_limits<std::size_t>::max() / sizeof(value_type));
+				return (std::numeric_limits<std::size_t>::max() / sizeof(this->_begin));
 			}
 
 			/**************************************************
@@ -376,12 +376,12 @@ namespace ft
 
 				while (start != end){
 					while (start != end){
-						if (comp(*end->ptr, *start->ptr)){
+						if (comp(*end->ptr, *start->ptr) == true){
 							std::swap(start->ptr, end->ptr);
 							end = end->prev;
 						}
 						else{
-						end = end->prev;
+							end = end->prev;
 						}
 					}
 					end = this->_begin->prev;
@@ -483,7 +483,7 @@ namespace ft
 				}
 			}
 			void								merge(list &x) {
-				this->splice(this->begin(), x);
+				this->splice(this->end(), x);
 				this->sort();
 			}
 			template<class Compare>
@@ -494,12 +494,13 @@ namespace ft
 
 				while (x.size())
 				{
-					if (comp(*itx,*it))
+					if (comp(*itx,*it) || it == this->end())
 						this->splice(it, x, itx);
 					else
 						it++;
 					itx = x.begin();
 				}
+				//this->sort(comp);
 			}
 			void 								reverse(void){
 
