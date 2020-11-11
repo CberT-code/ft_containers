@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/11 10:19:54 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/11 11:28:26 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,29 +63,39 @@ namespace ft
 			**************************************************/
 
 			explicit 									map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()){
-				this->_begin = NULL;
-				this->_size = 0;
+				this->_begin = new maillon<value_type>;
+				memset(this->_begin, 0, sizeof(maillon<value_type>));
+				this->_begin->ptr = reinterpret_cast<value_type *>(&this->_size);
+				this->_begin->prev = this->_begin;
+				this->_begin->next = this->_begin;
 				this->_al = alloc;
 				this->_comp = comp;
 			}
 
 			template<class InputIterator>
 			map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()){
+				this->_begin = new maillon<value_type>;
+				memset(this->_begin, 0, sizeof(maillon<value_type>));
+				this->_begin->ptr = reinterpret_cast<value_type *>(&this->_size);
+				this->_begin->prev = this->_begin;
+				this->_begin->next = this->_begin;
 				this->_al = alloc;
 				this->_comp = comp;
-				this->_begin = NULL;
-				this->_size = 0;
 				insert(first, last);
 			}
 
 			map(const map &objmap){
-				this->_begin = NULL;
-				this->_size = 0;
+				this->_begin = new maillon<value_type>;
+				memset(this->_begin, 0, sizeof(maillon<value_type>));
+				this->_begin->ptr = reinterpret_cast<value_type *>(&this->_size);
+				this->_begin->prev = this->_begin;
+				this->_begin->next = this->_begin;
 				operator=(objmap);
 			}
 
 			~map(void){
 				 clear();
+				 delete this->_begin;
 			}
 
 			map											&operator=(const map &objmap){
@@ -113,35 +123,33 @@ namespace ft
 			}
 			const_Iterator 								begin() const{
 				maillon<value_type> *tmp = this->_begin;
-				while (tmp && tmp->left != NULL){
+				while (tmp && tmp->left != NULL)
 					tmp = tmp->left;
-
-				}
 				return (tmp);
 			}
 			Iterator									end(){
-				return (this->_begin->prev);
+				return (this->_begin);
 			}
 			const_Iterator 								end() const{
-				return (this->_begin->prev);
+				return (this->_begin);
 			}
 			reverse_Iterator							rbegin(){
-				return (this->_begin->prev);
+								maillon<value_type> *tmp = this->_begin;
+				while (tmp && tmp->right != NULL)
+					tmp = tmp->right;
+				return (tmp);
 			}
 			const_reverse_Iterator 						rbegin() const{
-				return (this->_begin->prev);
+								maillon<value_type> *tmp = this->_begin;
+				while (tmp && tmp->right != NULL)
+					tmp = tmp->right;
+				return (tmp);
 			}
 			reverse_Iterator							rend(){
-				maillon<value_type> *tmp = this->_begin;
-				while (tmp && tmp->left != NULL)
-					tmp = tmp->left;
-				return (tmp);
+				return (this->_begin);
 			}
 			const_reverse_Iterator 						rend() const{
-				maillon<value_type> *tmp = this->_begin;
-				while (tmp && tmp->left != NULL)
-					tmp = tmp->left;
-				return (tmp);
+				return (this->_begin);
 			}
 	
 			/**************************************************
@@ -149,13 +157,11 @@ namespace ft
 			**************************************************/
 
 			bool										empty(void) const {
-				return (this->size() == 0);
+				return (!this->size());
 			}
 
 			size_type									size(void) const {
-				if (this->_size == 0)
-					return (0);
-				return (this->_size - 1);
+				return (this->_size);
 			}
 
 			size_type									max_size() const{
@@ -177,53 +183,32 @@ namespace ft
 			std::pair<Iterator, bool> 					insert(const value_type &val){
 				Iterator it;
 
-				if (this->_begin != NULL && this->_begin->ptr != NULL && (it = this->find(val.first)) != this->end())
+				if (this->size() && this->_begin->next != this->_begin && (it = this->find(val.first)) != this->end())
 					return (std::make_pair(it, false));
 				it = insert(this->_begin, val);
 							
 				return (std::make_pair(it, true));
 			}
 			Iterator 									insert(Iterator position, const value_type& val){
-				if (this->_size == 0 ){
-					//Creation begin
-					this->_begin = new maillon<value_type>;
-					memset(this->_begin, 0, sizeof(maillon<value_type>));
 
-					this->_begin->ptr = this->_al.allocate(1);
-					this->_al.construct(this->_begin->ptr, val);
-
-					//Creation endsize
-					this->_endsize = new maillon<value_type>;
-					memset(this->_endsize, 0, sizeof(maillon<value_type>));
-					this->_endsize->ptr = reinterpret_cast<value_type *>(&this->_size);
-
-					//pointeurs
-					this->_begin->prev = this->_endsize;
-					this->_begin->next = this->_endsize;
-					this->_endsize->prev = this->_begin;
-					this->_endsize->next = this->_begin;
-					this->_size = 2;
-					position = this->_begin;
-					
-				}
-				else{
 					maillon<value_type> *tmp = new maillon<value_type>;
 					memset(tmp, 0, sizeof(maillon<value_type>));
 					tmp->ptr = this->_al.allocate(1);
 					this->_al.construct(tmp->ptr, val);
 					this->_size += 1;
 
+
 					maillon<value_type> *cpy = this->begin().get_it();
 					if ((*cpy->ptr).first > (*tmp->ptr).first)
 					{
-						tmp->prev = this->_endsize;
+						tmp->prev = this->_begin;
 						tmp->next = cpy;
 						cpy->prev = tmp;
-						this->_endsize->next = tmp;
+						this->_begin->next = tmp;
 					}
 					else
 					{
-						while (cpy != this->_endsize && (*cpy->ptr).first < (*tmp->ptr).first)
+						while (cpy != this->_begin && (*cpy->ptr).first < (*tmp->ptr).first)
 							cpy = cpy->next;
 						tmp->prev = cpy->prev;
 						tmp->next = cpy;
@@ -231,24 +216,29 @@ namespace ft
 						cpy->prev = tmp;
 					}
 				
-					maillon<value_type> *cpyTree = this->_begin;
-					while (cpyTree->right != tmp && cpyTree->left != tmp)
-					{
-						if ((*cpyTree->ptr).first < (*tmp->ptr).first){
-						if (cpyTree->right == NULL)
-								cpyTree->right = tmp;
-							else
-								cpyTree = cpyTree->right;
+					std::cout << RED << "test ici" << RESET << std::endl;
+					std::cout << RED << this->size() << RESET << std::endl;
+					if (this->size() > 1){
+						maillon<value_type> *cpyTree = this->_begin->next;
+						while (cpyTree->right != tmp && cpyTree->left != tmp)
+						{
+							if ((*cpyTree->ptr).first < (*tmp->ptr).first){
+							if (cpyTree->right == NULL)
+									cpyTree->right = tmp;
+								else
+									cpyTree = cpyTree->right;
+							}
+							else if ((*cpyTree->ptr).first > (*tmp->ptr).first){
+								if (cpyTree->left == NULL)
+									cpyTree->left = tmp;
+								else
+									cpyTree = cpyTree->left;
+							}
 						}
-						else if ((*cpyTree->ptr).first > (*tmp->ptr).first){
-							if (cpyTree->left == NULL)
-								cpyTree->left = tmp;
-							else
-								cpyTree = cpyTree->left;
-						}
+					std::cout << RED << "test ici" << RESET << std::endl;
 					}
 					position = tmp;
-				}
+
 				return (position);
 			}
 
@@ -274,30 +264,27 @@ namespace ft
 						else if (ite.get_it()->right == tmpi)
 							ite.get_it()->right = NULL;
 					}
-					if (tmp != this->_begin)
+					if (tmp != this->_begin->next)
 						(position--).get_it()->left = tmpi;
 					else
-						this->_begin = tmpi;
+						this->_begin->next = tmpi;
 					tmpi->left = tmp->left;
 					tmpi->right = tmp->right;
 				} else if(tmp && tmp->left){
-					if (tmp != this->_begin)
+					if (tmp != this->_begin->next)
 						(position--).get_it()->left = tmp->left;
 					else
-						this->_begin = tmp->left;
+						this->_begin->next->next = tmp->left;
 				}
 				this->_al.deallocate(tmp->ptr, 1);
 				tmp->ptr = NULL;
 				delete tmp;
 				tmp = NULL;					
 				this->_size -= 1;
-
-				// Si on supprime le dernier maillon
-				if (this->_size == 1)
-					this->clear();
 			}
 			size_type 									erase(const key_type& k) {
 				size_t	tmpsize = this->_size;
+				
 				this->erase(this->find(k));
 				return (tmpsize - this->_size);
 			}
@@ -312,13 +299,14 @@ namespace ft
 			}
 			void 										swap(map& x){
 				std::swap(x._begin, this->_begin);
-				std::swap(x._endsize, this->_endsize);
 				std::swap(x._size, this->_size);
 				std::swap(x._comp, this->_comp);
+				std::swap(x._al, this->_al);
 			}
 			void										clear(){
 				Iterator cpy;
 				Iterator it = this->begin();
+				
 				while (it != this->end()) {
 					if (it.get_it()->ptr) {
 						this->_al.deallocate(it.get_it()->ptr, 1);
@@ -328,9 +316,6 @@ namespace ft
 					it++;
 					delete cpy.get_it();
 				}
-				delete this->_endsize;
-				this->_endsize = NULL;
-				this->_begin = NULL;
 				this->_size = 0;
 			}
 			/**************************************************
@@ -351,7 +336,7 @@ namespace ft
 			Iterator									find(const key_type& k){
 				Iterator it = this->begin();
 
-				while (this->_begin && it != this->end() && it->first != k){
+				while (it != this->end() && it->first != k){
 					it++;
 				}
 				return (it);
@@ -359,7 +344,7 @@ namespace ft
 			const_Iterator								find(const key_type& k) const {
 				Iterator it = this->begin();
 
-				while (this->_begin && it != this->end() && it->first != k){
+				while (it != this->end() && it->first != k){
 					it++;
 				}
 				return (it);
@@ -411,7 +396,6 @@ namespace ft
 			}
 
 		private:
-			maillon<value_type>							*_begin;
 			maillon<value_type>							*_begin;
 			size_t										_size;
 			allocator_type								_al;
