@@ -17,7 +17,8 @@ static void print_map(T &map)
 
 static void constructors(void)
 {
-	print_header("Constructors / Copy");
+	//print_header("Constructors / Copy");
+	std::cout << YELLOW << "CONSTRUCTEUR" << RESET << std::endl;
 	std::pair<int, int> a[] = {std::make_pair(0, 1), std::make_pair(1, 0), std::make_pair(2, 1)};
 	ft::map<int, int> m1;
 	std::map<int, int> m2;
@@ -30,6 +31,7 @@ static void constructors(void)
 	check("(copy) m5 == m6", (m3 == m4));
 	ft::map<int, int> m7;
 	std::map<int, int> m8;
+	std::cout << "test ici" << std::endl;
 	m7[0] = 1;
 	m7[1] = 2;
 	m7[2] = 3;
@@ -130,11 +132,9 @@ static void erase(void)
 	check("m1 == m2", m1 == m2);
 	m1.erase(++m1.begin(), --m1.end());
 	m2.erase(++m2.begin(), --m2.end());
-
+	check("m1 == m2", m1 == m2);
 	m1.erase("a");
 	m2.erase("a");
-
-	check("m1 == m2", m1 == m2);
 	check("m1 == m2", m1 == m2);
 }
 
