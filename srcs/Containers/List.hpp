@@ -2,6 +2,8 @@
 #ifndef LIST_H
 #define LIST_H
 #include "../Headers/Header.hpp"
+#include <limits>
+#include <limits.h>
 
 namespace ft
 {
@@ -23,6 +25,7 @@ namespace ft
 			typedef ReverseBidirectionalIterator<T> 			reverse_Iterator;
 			typedef ReverseBidirectionalIterator< const T>		const_reverse_Iterator;
 			typedef std::ptrdiff_t 								difference_type;
+			
 
 			/**************************************************
 			****************** Form Coplien *******************
@@ -131,7 +134,9 @@ namespace ft
 				return (this->_size);
 			}
 			size_type							max_size() const{
-				return (std::numeric_limits<std::size_t>::max() / sizeof(value_type));
+				if (sizeof(value_type) == 32)
+					return (384307168202282325);
+				return (768614336404564650);
 			}
 
 			/**************************************************
@@ -390,19 +395,14 @@ namespace ft
 			}
 			void 								remove(const value_type& val) {
 				maillon<T>		*tmp = this->_begin->next;
-
+				maillon<T>		*cpy;
 				if (tmp != NULL){
 					while (tmp != this->_begin){
 						if (*tmp->ptr == val){
-							tmp->prev->next = tmp->next;
-							tmp->next->prev = tmp->prev;
-							_al.deallocate(tmp->ptr, 1);
-							if (tmp == this->_begin->next)
-								this->_begin->next = tmp->next;
-							delete tmp;
-							tmp = NULL;
-							this->_size -= 1;
-							return ;
+							cpy = tmp->prev;
+							this->erase(tmp);
+							tmp = cpy;
+
 						}
 						tmp = tmp->next;
 					}
@@ -433,24 +433,15 @@ namespace ft
 			}
 			void 								unique() {
 				maillon<T>		*tmp = this->_begin->next;
-				int				i = 0;
+				maillon<T>		*cpy;
 
 				if (tmp) {
-					while (tmp != this->_begin && tmp) {
-						i = 0;
-						for (maillon<T> *j = tmp; j != this->_begin; j = j->next) {
-							if (*j->ptr == *tmp->ptr)
-								i += 1;
-							if (i > 1) {
-								j->prev->next = j->next;
-								j->next->prev = j->prev;
-								_al.deallocate(j->ptr, 1);
-								this->_size -= 1;
-								delete j;
-								j = NULL;
-								break;
-							}
-						}
+					while (tmp != this->_begin) {
+								if (*tmp->ptr == *tmp->next->ptr){
+									cpy = tmp->prev;
+									this->erase(tmp);
+									tmp = cpy;
+								}
 						tmp = tmp->next;
 					}
 				}
@@ -459,31 +450,16 @@ namespace ft
 			void								unique(BinaryPredicate binary_pred)
 			{
 				maillon<T>		*tmp = this->_begin->next;
-				int				i = 0;
 
-				if (tmp) {
-					while (tmp != this->_begin && tmp) {
-						i = 0;
-						for (maillon<T> *j = tmp->next; j != this->_begin; j = j->next) {
-							if (binary_pred(*j->ptr, *tmp->ptr)) {
-								j->prev->next = j->next;
-								j->next->prev = j->prev;
-								_al.deallocate(j->ptr, 1);
-								this->_size -= 1;
-								delete j;
-								j = NULL;
-								break;
-							} else if (j->next == this->_begin) {
-								tmp = tmp->next;
-								break;
-							}
-						}
-						tmp = tmp->next;
+					while (tmp != this->_begin->prev && tmp) {
+						if (binary_pred(*tmp->ptr, *tmp->next->ptr))
+								erase(tmp->next);
+						else
+							tmp = tmp->next;
 					}
-				}
 			}
 			void								merge(list &x) {
-				this->splice(this->begin(), x);
+				this->splice(this->end(), x);
 				this->sort();
 			}
 			template<class Compare>
@@ -494,7 +470,7 @@ namespace ft
 
 				while (x.size())
 				{
-					if (comp(*itx,*it))
+					if (comp(*itx,*it) || (it == this->end()))
 						this->splice(it, x, itx);
 					else
 						it++;
