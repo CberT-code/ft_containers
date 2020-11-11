@@ -58,13 +58,11 @@ int map_main()
 		ft::map<char,int> second;
 
 		first['x']=8;
-		std::cout << "test ici on entre" << std::endl;
 		first['y']=16;
 		first['z']=32;
 
 		second=first;                // second now contains 3 ints
 		first=ft::map<char,int>();  // and first is now empty
-		std::cout << "test ici on sort" << std::endl;
 
 		res << "Size of first: " << first.size() << '\n';
 		res << "Size of second: " << second.size();
@@ -242,13 +240,13 @@ int map_main()
 		mymap['d']=40;
 		mymap['e']=50;
 		mymap['f']=60;
-
 		it=mymap.find('b');
 		mymap.erase (it);                   // erasing by iterator
 
 		mymap.erase ('c');                  // erasing by key
 
 		it=mymap.find ('e');
+
 		mymap.erase ( it, mymap.end() );    // erasing by range
 
 		// show content:
@@ -281,7 +279,7 @@ int map_main()
 		compare_result(res.str(), "foo contains:\na => 11\nb => 22\nc => 33\nbar contains:\nx => 100\ny => 200\n");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "**********        Reserve //check clear       **********" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        Reserve      **********" << RESET << std::endl;
 	try{
 		std::stringstream 	res;
 		ft::map<char,int> mymap;
@@ -294,7 +292,7 @@ int map_main()
 		for (ft::map<char,int>::Iterator it=mymap.begin(); it!=mymap.end(); ++it)
 			res << it->first << " => " << it->second << '\n';
 
-		// mymap.clear();
+		mymap.clear();
 		mymap['a']=1101;
 		mymap['b']=2202;
 
@@ -327,50 +325,50 @@ int map_main()
 		compare_result(res.str(), "mymap contains:\na => 100\nb => 200\nc => 300\n");
 	}catch(const std::exception &e){};
 
-	// std::cout << std::endl << BLUE << "**********          value_comp          **********" << RESET << std::endl;
-	// try{
-	// 	std::stringstream 	res;
-	// 	ft::map<char,int> mymap;
+	std::cout << std::endl << BLUE << "**********          value_comp          **********" << RESET << std::endl;
+	try{
+		std::stringstream 	res;
+		ft::map<char,int> mymap;
 
-	// 	mymap['x']=1001;
-	// 	mymap['y']=2002;
-	// 	mymap['z']=3003;
+		mymap['x']=1001;
+		mymap['y']=2002;
+		mymap['z']=3003;
 
-	// 	std::cout << "mymap contains:\n";
+		res << "mymap contains:\n";
 
-	// 	std::pair<char,int> highest = *mymap.rbegin();          // last element
+		std::pair<char,int> highest = *mymap.rbegin();          // last element
 
-	// 	ft::map<char,int>::Iterator it = mymap.begin();
-	// 	do {
-	// 		std::cout << it->first << " => " << it->second << '\n';
-	// 	} while ( mymap.value_comp()(*it++, highest) );
+		ft::map<char,int>::Iterator it = mymap.begin();
+		do {
+			res << it->first << " => " << it->second << '\n';
+		} while ( mymap.value_comp()(*it++, highest) );
 
-	// 	compare_result(res.str(), "myvector contains: 0 1 2 3 4 5 6 7 8 9");
-	// }catch(const std::exception &e){};
+		compare_result(res.str(), "mymap contains:\nx => 1001\ny => 2002\nz => 3003\n");
+	}catch(const std::exception &e){};
 
-	// std::cout << std::endl << BLUE << "**********         Find        **********" << RESET << std::endl;
-	// try{
-	// 	std::stringstream 	res;
-	// 	ft::map<char,int> mymap;
-	// 	ft::map<char,int>::Iterator it;
+	std::cout << std::endl << BLUE << "**********         Find        **********" << RESET << std::endl;
+	try{
+		std::stringstream 	res;
+		ft::map<char,int> mymap;
+		ft::map<char,int>::Iterator it;
 
-	// 	mymap['a']=50;
-	// 	mymap['b']=100;
-	// 	mymap['c']=150;
-	// 	mymap['d']=200;
+		mymap['a']=50;
+		mymap['b']=100;
+		mymap['c']=150;
+		mymap['d']=200;
 
-	// 	it = mymap.find('b');
-	// 	if (it != mymap.end())
-	// 		mymap.erase (it);
+		it = mymap.find('b');
+		if (it != mymap.end())
+			mymap.erase (it);
 
-	// 	// print content:
-	// 	res << "elements in mymap:" << '\n';
-	// 	res << "a => " << mymap.find('a')->second << '\n';
-	// 	res << "c => " << mymap.find('c')->second << '\n';
-	// 	res << "d => " << mymap.find('d')->second << '\n';
+		// print content:
+		res << "elements in mymap:" << '\n';
+		res << "a => " << mymap.find('a')->second << '\n';
+		res << "c => " << mymap.find('c')->second << '\n';
+		res << "d => " << mymap.find('d')->second << '\n';
 
-	// 	compare_result(res.str(), "elements in mymap:\na => 50\nc => 150\nd => 200\n");
-	// }catch(const std::exception &e){};
+		compare_result(res.str(), "elements in mymap:\na => 50\nc => 150\nd => 200\n");
+	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "**********         Back         **********" << RESET << std::endl;
 	try{

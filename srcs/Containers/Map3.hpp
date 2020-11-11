@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/09 14:18:46 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/10 18:10:14 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ namespace ft
 					//pointeurs
 					this->_begin->prev = this->_endsize;
 					this->_begin->next = this->_endsize;
-					this->_endsize->prev = this->_begin;
+					this->_begin = this->_begin;
 					this->_endsize->next = this->_begin;
 					this->_size = 2;
 				}
@@ -251,13 +251,13 @@ namespace ft
 					}
 					else
 					{
-						maillon<value_type> *replaced = this->_endsize->prev;
-						maillon<value_type> *new_end = this->_endsize->prev->prev;
+						maillon<value_type> *replaced = this->_begin;
+						maillon<value_type> *new_end = this->_begin->prev;
 						
 						if (replaced->ptr) {
 							this->_al.deallocate(replaced->ptr, 1);
 						}
-						this->_endsize->prev = new_end;
+						this->_begin = new_end;
 						new_end->next = this->_endsize;
 						delete (replaced);
 						this->_size -= 1;

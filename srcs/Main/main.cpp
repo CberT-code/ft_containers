@@ -11,8 +11,8 @@ void 			compare_result(std::string res1, std::string res2)
 }
 
 int main(void) {
-	// list_main();
-	// getchar();
+	list_main();
+	getchar();
 	// getchar();
 	// std::system("clear");
 	// vector_main();
@@ -26,6 +26,6 @@ int main(void) {
 	// stack_main();
 	// getchar();
 	// std::system("clear");
-	map_main();
+	// map_main();
 	return (1);
 }

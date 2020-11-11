@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/10 12:01:26 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/10 18:11:11 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 #include "../Headers/Header.hpp"
+#include <map>
 
 namespace ft
 {
+		
 	template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<std::pair<const Key,T> > >
 	class map
 	{
@@ -26,16 +28,35 @@ namespace ft
 			typedef std::pair<const key_type, mapped_type> 			value_type;
 			typedef std::less<key_type>								key_compare;
 			typedef Alloc 											allocator_type;
-			typedef BidirectionalIterator<value_type>						Iterator;
+			typedef BidirectionalIterator<value_type>				Iterator;
 			typedef T												&reference;
 			typedef const T&										const_reference;
 			typedef T*												pointer;
 			typedef const T*										const_pointer;
 			typedef const Iterator 									const_Iterator;
 			typedef size_t											size_type;
-			typedef ReverseBidirectionalIterator<value_type> 				reverse_Iterator;
+			typedef ReverseBidirectionalIterator<value_type> 		reverse_Iterator;
 			typedef ReverseBidirectionalIterator<const T>			const_reverse_Iterator;
 			typedef std::ptrdiff_t 									difference_type;
+
+			class value_compare
+			{ 
+				friend class map;
+				
+				protected:
+					Compare comp;
+					value_compare (Compare c) : comp(c) {}  // constructed with map's comparison object
+				
+				public:
+					typedef bool result_type;
+					typedef value_type first_argument_type;
+					typedef value_type second_argument_type;
+
+					bool operator() (const value_type& x, const value_type& y) const
+					{
+						return comp(x.first, y.first);
+					}
+			};
 
 			/**************************************************
 			****************** Form Coplien *******************
@@ -71,7 +92,7 @@ namespace ft
 			}
 
 			map											&operator=(const map &objmap){
-				// this->clear();
+				this->clear();
 				this->_begin = NULL;
 				this->_endsize = NULL;
 				this->_size = 0;
@@ -79,7 +100,6 @@ namespace ft
 					if (objmap._size == 0)
 						insert(objmap.begin(), objmap.end());
 					this->_size = objmap._size;
-					std::cout << this->_size << std::endl;
 					this->_comp = objmap._comp;
 				}
 				return (*this);
@@ -97,8 +117,10 @@ namespace ft
 			}
 			const_Iterator 								begin() const{
 				maillon<value_type> *tmp = this->_begin;
-				while (tmp && tmp->left != NULL)
+				while (tmp && tmp->left != NULL){
 					tmp = tmp->left;
+
+				}
 				return (tmp);
 			}
 			Iterator									end(){
@@ -138,7 +160,7 @@ namespace ft
 				return (std::numeric_limits<std::size_t>::max() / sizeof(this->_begin));
 			}
 
-			/**************************a	a************************
+			/**************************************************
 			****************** Element Access *****************
 			**************************************************/
 
@@ -158,11 +180,12 @@ namespace ft
 				it = insert(this->_begin, val);
 				return (std::make_pair(it, true));
 			}
-			Iterator 									insert (Iterator position, const value_type& val){
+			Iterator 									insert(Iterator position, const value_type& val){
 				if (this->_size == 0 ){
 					//Creation begin
 					this->_begin = new maillon<value_type>;
 					memset(this->_begin, 0, sizeof(maillon<value_type>));
+
 					this->_begin->ptr = this->_al.allocate(1);
 					this->_al.construct(this->_begin->ptr, val);
 
@@ -227,37 +250,64 @@ namespace ft
 			}
 
 			template <class InputIterator>
-			void 										insert (InputIterator first, InputIterator last){
+			void 										insert(InputIterator first, InputIterator last){
 				while (first != last){
 					insert(*first);
 					first++;
 				}
 			}
-			void 										erase (Iterator position) {
- 				maillon<value_type> *tmp = position.get_it();
- 				this->_al.deallocate(tmp->ptr, 1);
- 				tmp->ptr = NULL;
- 				tmp->prev->next = tmp->next;
- 				if (tmp->next)
- 					tmp->next->prev = tmp->prev;
- 				delete tmp;
- 				tmp = NULL;					
- 				this->_size -= 1;
- 			}
- 			size_type 									erase (const key_type& k) {
- 				size_t	tmpsize = this->_size;
- 				this->erase(this->find(k));
- 				return (tmpsize - this->_size);
- 			}
- 			void										erase(Iterator first, Iterator last) {
- 				Iterator	tmp = first;
+			void 										erase(Iterator position) {
+				maillon<value_type> *tmp = position.get_it();
+				tmp->prev->next = tmp->next;
+				tmp->next->prev = tmp->prev;
 
- 				while (tmp != last) {
- 					erase(tmp);
- 					tmp++;
- 				}
- 			}
-			void 									swap (map& x){
+
+				// arbre
+				if (tmp->right) {
+					maillon<value_type> *tmpi = this->upper_bound(tmp->ptr->first).get_it();
+					for (Iterator ite = this->begin(); ite != this->end(); ite++) {
+						if (ite.get_it()->left == tmpi)
+							ite.get_it()->left = NULL;
+						else if (ite.get_it()->right == tmpi)
+							ite.get_it()->right = NULL;
+					}
+					if (tmp != this->_begin)
+						(position--).get_it()->left = tmpi;
+					else
+						this->_begin = tmpi;
+					tmpi->left = tmp->left;
+					tmpi->right = tmp->right;
+				} else if(tmp && tmp->left){
+					if (tmp != this->_begin)
+						(position--).get_it()->left = tmp->left;
+					else
+						this->_begin = tmp->left;
+				}
+				this->_al.deallocate(tmp->ptr, 1);
+				tmp->ptr = NULL;
+				delete tmp;
+				tmp = NULL;					
+				this->_size -= 1;
+
+				// Si on supprime le dernier maillon
+				if (this->_size == 1)
+					this->clear();
+			}
+			size_type 									erase(const key_type& k) {
+				size_t	tmpsize = this->_size;
+				this->erase(this->find(k));
+				return (tmpsize - this->_size);
+			}
+			void										erase(Iterator first, Iterator last) {
+				Iterator	tmp;
+
+				while (first != last) {
+					tmp = first;
+					first++;
+					erase(tmp);
+				}
+			}
+			void 										swap(map& x){
 				std::swap(x._begin, this->_begin);
 				std::swap(x._endsize, this->_endsize);
 				std::swap(x._size, this->_size);
@@ -268,9 +318,9 @@ namespace ft
 				Iterator it = this->begin();
 				while (it != this->end()) {
 					if (it.get_it()->ptr) {
-							this->_al.deallocate(it.get_it()->ptr, 1);
-							it.get_it()->ptr = NULL;
-						}
+						this->_al.deallocate(it.get_it()->ptr, 1);
+						it.get_it()->ptr = NULL;
+					}
 					cpy = it;
 					it++;
 					delete cpy.get_it();
@@ -287,8 +337,9 @@ namespace ft
 			key_compare 								key_comp() const{
 				return (this->_comp);
 			}
-			// value_compare 							value_comp() const{
-			// }
+			value_compare 								value_comp(void) const{
+				return value_compare(this->_comp);
+			}
 			
 			/**************************************************
 			******************** Operations *******************
@@ -310,10 +361,10 @@ namespace ft
 				}
 				return (it);
 			}
-			size_type 									count (const key_type& k) const{
+			size_type 									count(const key_type& k) const{
 				return (this->find(k) != this->end());
 			}
-			Iterator 									lower_bound (const key_type& k){
+			Iterator 									lower_bound(const key_type& k){
 				Iterator it = this->begin();
 
 				while (it->first < k){
@@ -321,7 +372,7 @@ namespace ft
 				}
 				return (it);
 			}
-			const_Iterator 								lower_bound (const key_type& k) const{
+			const_Iterator 								lower_bound(const key_type& k) const{
 				Iterator it = this->begin();
 
 				while (it->first < k){
@@ -329,9 +380,17 @@ namespace ft
 				}
 				return (it);
 			}
-			Iterator 									upper_bound (const key_type& k){
+			Iterator 									upper_bound(const key_type& k){
 				Iterator it = this->begin();
 
+				while (it->first < k && it != this->end())
+					it++;
+				if (it->first == k)
+					it++;
+				return (it);
+			}
+			const_Iterator 								upper_bound(const key_type& k) const{
+				Iterator it = this->begin();
 				while (it->first < k){
 					it++;
 				}
@@ -339,31 +398,21 @@ namespace ft
 					it++;
 				return (it);
 			}
-			const_Iterator 								upper_bound (const key_type& k) const{
-				Iterator it = this->begin();
-
-				while (it->first < k){
-					it++;
-				}
-				if (it->first == k)
-					it++;
-				return (it);
-			}
-			std::pair<const_Iterator,const_Iterator> 	equal_range (const key_type& k) const{
+			std::pair<const_Iterator,const_Iterator> 	equal_range(const key_type& k) const{
 				return (this->equal_range(k));
 			}
-			std::pair<Iterator,Iterator>             	equal_range (const key_type& k){
+			std::pair<Iterator,Iterator>             	equal_range(const key_type& k){
 				Iterator it = this->lower_bound(k);
 				Iterator ite = this->upper_bound(k);
 				return (std::make_pair(it,ite));
 			}
 
 		private:
-			maillon<value_type>						*_begin;
-			maillon<value_type>						*_endsize;
-			size_t									_size;
-			allocator_type							_al;
-			key_compare								_comp;
+			maillon<value_type>							*_begin;
+			maillon<value_type>							*_endsize;
+			size_t										_size;
+			allocator_type								_al;
+			key_compare									_comp;
 
 	};
 
