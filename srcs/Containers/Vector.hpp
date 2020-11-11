@@ -68,8 +68,10 @@ namespace ft
 				this->clear();
 				if (this != &src){
 					this->_array = new T[src._capacity];
+					assign(src.begin(), src.end());
 					this->_capacity = src._capacity;
 					this->_size = src._size;
+					this->_al = src._al;
 				}
 				return (*this);
 			}
@@ -111,7 +113,8 @@ namespace ft
 				return (this->_size);
 			}
 			size_type							max_size() const{
-				return (1073741823);
+				size_type res = (pow(2, 64) / sizeof(value_type));
+                return (res - 1);
 			}
 			void								resize (size_type n, value_type val = value_type()){
 				if (n <= this->_size)

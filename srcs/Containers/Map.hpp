@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/11 18:38:38 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/11 20:53:19 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,14 @@
 
 namespace ft
 {
-		
 	template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<std::pair<const Key,T> > >
 	class map
 	{
 		public:
 			typedef Key												key_type;
 			typedef T												mapped_type;
-			typedef std::pair<const key_type, mapped_type> 			value_type;
-			typedef std::less<key_type>								key_compare;
+			typedef std::pair<const key_type, mapped_type> 			    value_type;
+			typedef Compare											key_compare;
 			typedef Alloc 											allocator_type;
 			typedef BidirectionalIterator<value_type>				Iterator;
 			typedef T												&reference;
@@ -163,7 +162,11 @@ namespace ft
 			}
 
 			size_type									max_size() const{
-				return (std::numeric_limits<std::size_t>::max() / sizeof(this->_begin));
+						// std::numeric_limits<size_type>::max() / (sizeof(maillon<value_type>))
+						// std::numeric_limits<size_type>::max() / (sizeof(maillon<value_type>) + sizeof(pointer))) / 2;
+
+						return (std::numeric_limits<T>::max() / sizeof(maillon<value_type>));
+				
 			}
 
 			/**************************************************

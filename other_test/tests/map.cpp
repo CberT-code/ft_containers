@@ -63,6 +63,7 @@ static void max_size(void)
 	check("m1.max_size() == m2.max_size()", m1.max_size(), m2.max_size());
 	ft::map<std::string, int> m3;
 	std::map<std::string, int> m4;
+	std::cout << m4.max_size() << std::endl;
 	check("m3.max_size() == m4.max_size()", m3.max_size(), m4.max_size());
 }
 

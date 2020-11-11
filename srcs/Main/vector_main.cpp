@@ -164,7 +164,7 @@ int vector_main(void) {
 
 		compare_result(res.str(), "size: 100");
 		compare_result(res1.str(), "capacity: 128");
-		compare_result(res2.str(), "max_size: 1073741823");
+		compare_result(res2.str(), "max_size: 4611686018427387903");
 	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "**********       Resize        **********" << RESET << std::endl;
@@ -201,7 +201,7 @@ int vector_main(void) {
 		res2 << "max_size: " << (int) myvector.max_size();
 		compare_result(res.str(), "size: 100");
 		compare_result(res1.str(), "capacity: 128");
-		compare_result(res2.str(), "max_size: 1073741823");
+		compare_result(res2.str(), "max_size: -1");
 	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "**********        Empty        **********" << RESET << std::endl;

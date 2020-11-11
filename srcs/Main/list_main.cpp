@@ -173,18 +173,18 @@ int list_main()
 
 	}catch(const std::exception &e){};
 
-	// std::cout << std::endl << BLUE << "*********** max_size *  **********" << RESET << std::endl;
-	// try{
-	// 	size_t i;
-	// 	ft::list<int> mylist;
+	std::cout << std::endl << BLUE << "*********** max_size *  **********" << RESET << std::endl;
+	try{
+		size_t i;
+		ft::list<int> mylist;
 
-	// 	std::cout << "Enter number of elements: ";
-	// 	std::cin >> i;
+		std::cout << "Enter number of elements: ";
+		std::cin >> i;
 
-	// 	if (i < mylist.max_size()) 
-	// 		mylist.resize(i);
-	// 	else std::cout << "That size exceeds the limit.\n";
-	// }catch(const std::exception &e){};
+		if (i < mylist.max_size()) 
+			mylist.resize(i);
+		else std::cout << "That size exceeds the limit.\n";
+	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "**********        front         **********" << RESET << std::endl;
 	try{

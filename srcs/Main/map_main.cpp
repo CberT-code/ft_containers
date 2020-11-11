@@ -24,32 +24,30 @@
 
 int map_main()
 {
-	// std::cout << std::endl << std::endl << YELLOW;
-	// std::cout << "***********************************************************" << std::endl;
-	// std::cout << "*****************             MAP         *****************" << std::endl;
-	// std::cout << "***********************************************************" << std::endl;
-	// std::cout << RESET << std::endl << std::endl;
+	std::cout << std::endl << std::endl << YELLOW;
+	std::cout << "***********************************************************" << std::endl;
+	std::cout << "*****************             MAP         *****************" << std::endl;
+	std::cout << "***********************************************************" << std::endl;
+	std::cout << RESET << std::endl << std::endl;
 
-	// std::cout << std::endl << BLUE << "**********     Constructor      **********" << RESET << std::endl;
-	// try{
-	// 	std::stringstream 	res;
-	// 	ft::map<char,int> first;
+	std::cout << std::endl << BLUE << "**********     Constructor      **********" << RESET << std::endl;
+	try{
+		ft::map<char,int> first;
 
-	// 	first['a']=10;
-	// 	first['b']=30;
-	// 	first['c']=50;
-	// 	first['d']=70;
+		first['a']=10;
+		first['b']=30;
+		first['c']=50;
+		first['d']=70;
 
-	// 	ft::map<char,int> second (first.begin(),first.end());
+		ft::map<char,int> second (first.begin(),first.end());
 
-	// 	ft::map<char,int> third (second);
+		ft::map<char,int> third (second);
 
-	// 	ft::map<char,int,classcomp> fourth;                 // class as Compare
+		ft::map<char,int,classcomp> fourth;                 // class as Compare
 
-	// 	bool(*fn_pt)(char,char) = fncomp;
-	// 	ft::map<char,int,bool(*)(char,char)> fifth (fn_pt); 
-	// 	compare_result(res.str(), "The contents of fifth are: 16 2 77 29");
-	// }catch(const std::exception &e){};
+		bool(*fn_pt)(char,char) = fncomp;
+		ft::map<char,int,bool(*)(char,char)> fifth (fn_pt);
+	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "**********       Operator=        **********" << RESET << std::endl;
 	try{
@@ -163,14 +161,15 @@ int map_main()
 	std::cout << std::endl << BLUE << "**********        Max_size      **********" << RESET << std::endl;
 	try{
 		int i;
+		std::stringstream 	res;
 		ft::map<int,int> mymap;
-
 		if (mymap.max_size()>1000)
 		{
 			for (i=0; i<1000; i++) mymap[i]=0;
-			std::cout << "The map contains 1000 elements.\n";
+			res << "The map contains 1000 elements.";
 		}
-		else std::cout << "The map could not hold 1000 elements.\n";
+		else res << "The map could not hold 1000 elements.\n";
+		compare_result(res.str(), "The map contains 1000 elements.");
 	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "**********        Operator[]     **********" << RESET << std::endl;

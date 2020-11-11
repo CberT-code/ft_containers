@@ -2,8 +2,6 @@
 #ifndef LIST_H
 #define LIST_H
 #include "../Headers/Header.hpp"
-#include <limits>
-#include <limits.h>
 
 namespace ft
 {
