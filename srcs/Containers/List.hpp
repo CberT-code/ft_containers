@@ -125,12 +125,10 @@ namespace ft
 			**************************************************/
 
 			bool								empty() const{
-				if (this->_size == 0)
-					return  (true);
-				return (false);
+				return (this->_size == 0);
 			}
 			size_type							size() const{
-				return (this->_size < 2 ? 0 : this->_size);
+				return (this->_size);
 			}
 			size_type							max_size() const{
 				return (std::numeric_limits<std::size_t>::max() / sizeof(value_type));
@@ -494,8 +492,7 @@ namespace ft
 				Iterator it = this->begin();
 				Iterator itx = x.begin();
 
-				size_t i = 0;
-				while (it != this->end() && i < x.size())
+				while (x.size())
 				{
 					if (comp(*itx,*it))
 						this->splice(it, x, itx);
