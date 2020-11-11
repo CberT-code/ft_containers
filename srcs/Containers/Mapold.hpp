@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/11 10:19:54 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/11 10:13:24 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ namespace ft
 
 			explicit 									map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()){
 				this->_begin = NULL;
+				this->_endsize = NULL;
 				this->_size = 0;
 				this->_al = alloc;
 				this->_comp = comp;
@@ -74,12 +75,14 @@ namespace ft
 				this->_al = alloc;
 				this->_comp = comp;
 				this->_begin = NULL;
+				this->_endsize = NULL;
 				this->_size = 0;
 				insert(first, last);
 			}
 
 			map(const map &objmap){
 				this->_begin = NULL;
+				this->_endsize = NULL;
 				this->_size = 0;
 				operator=(objmap);
 			}
@@ -91,6 +94,7 @@ namespace ft
 			map											&operator=(const map &objmap){
 				this->clear();
 				this->_begin = NULL;
+				this->_endsize = NULL;
 				this->_size = 0;
 				if (this != &objmap){
 					if (objmap._size == 0)
@@ -120,28 +124,22 @@ namespace ft
 				return (tmp);
 			}
 			Iterator									end(){
-				return (this->_begin->prev);
+				return (this->_endsize);
 			}
 			const_Iterator 								end() const{
-				return (this->_begin->prev);
+				return (this->_endsize);
 			}
 			reverse_Iterator							rbegin(){
-				return (this->_begin->prev);
+				return (this->_endsize->prev);
 			}
 			const_reverse_Iterator 						rbegin() const{
-				return (this->_begin->prev);
+				return (this->_endsize->prev);
 			}
 			reverse_Iterator							rend(){
-				maillon<value_type> *tmp = this->_begin;
-				while (tmp && tmp->left != NULL)
-					tmp = tmp->left;
-				return (tmp);
+				return (this->_endsize);
 			}
 			const_reverse_Iterator 						rend() const{
-				maillon<value_type> *tmp = this->_begin;
-				while (tmp && tmp->left != NULL)
-					tmp = tmp->left;
-				return (tmp);
+				return (this->_endsize);
 			}
 	
 			/**************************************************
@@ -149,7 +147,7 @@ namespace ft
 			**************************************************/
 
 			bool										empty(void) const {
-				return (this->size() == 0);
+				return (this->_begin == NULL);
 			}
 
 			size_type									size(void) const {
@@ -412,7 +410,7 @@ namespace ft
 
 		private:
 			maillon<value_type>							*_begin;
-			maillon<value_type>							*_begin;
+			maillon<value_type>							*_endsize;
 			size_t										_size;
 			allocator_type								_al;
 			key_compare									_comp;
