@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/11 11:27:15 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/11 11:28:26 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,7 @@ namespace ft
 					}
 				
 					std::cout << RED << "test ici" << RESET << std::endl;
+					std::cout << RED << this->size() << RESET << std::endl;
 					if (this->size() > 1){
 						maillon<value_type> *cpyTree = this->_begin->next;
 						while (cpyTree->right != tmp && cpyTree->left != tmp)
@@ -234,6 +235,7 @@ namespace ft
 									cpyTree = cpyTree->left;
 							}
 						}
+					std::cout << RED << "test ici" << RESET << std::endl;
 					}
 					position = tmp;
 
