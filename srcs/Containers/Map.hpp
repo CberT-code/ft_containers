@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/11 20:53:19 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/12 09:08:41 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ namespace ft
 		public:
 			typedef Key												key_type;
 			typedef T												mapped_type;
-			typedef std::pair<const key_type, mapped_type> 			    value_type;
+			typedef std::pair<const key_type, mapped_type> 			value_type;
 			typedef Compare											key_compare;
 			typedef Alloc 											allocator_type;
 			typedef BidirectionalIterator<value_type>				Iterator;
@@ -162,10 +162,7 @@ namespace ft
 			}
 
 			size_type									max_size() const{
-						// std::numeric_limits<size_type>::max() / (sizeof(maillon<value_type>))
-						// std::numeric_limits<size_type>::max() / (sizeof(maillon<value_type>) + sizeof(pointer))) / 2;
-
-						return (std::numeric_limits<T>::max() / sizeof(maillon<value_type>));
+						return (std::numeric_limits<size_type>::max() / ((sizeof(maillon<value_type>) + sizeof(value_type)) - sizeof(difference_type)) );
 				
 			}
 

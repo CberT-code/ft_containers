@@ -63,8 +63,10 @@ static void max_size(void)
 	check("m1.max_size() == m2.max_size()", m1.max_size(), m2.max_size());
 	ft::map<std::string, int> m3;
 	std::map<std::string, int> m4;
-	std::cout << m4.max_size() << std::endl;
 	check("m3.max_size() == m4.max_size()", m3.max_size(), m4.max_size());
+	ft::map<std::string, double> m5;
+	std::map<std::string, double> m6;
+	check("m3.max_size() == m4.max_size()", m5.max_size(), m6.max_size());
 }
 
 static void access_operator(void)
@@ -74,7 +76,6 @@ static void access_operator(void)
 	std::map<std::string, int> m2;
 	m1["a"] = 1;
 	m1["b"] = 0;
-	std::cout << "test ici" << std::endl;
 	m1["c"] = 42;
 	m1["d"] = -5;
 	m1["d"] = 11;
