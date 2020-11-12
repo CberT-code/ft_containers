@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 11:50:38 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/12 11:50:44 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/12 12:02:49 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -443,7 +443,6 @@ int vector_main(void) {
 		// erase the first 3 elements:
 		myvector.erase (myvector.begin(),myvector.begin()+3);
 
-// attends mais je l'affiche plus ici, je le met dans res.... hein???
 		res << "myvector contains:";
 		for (unsigned i=0; i<myvector.size(); ++i)
 			res << ' ' << myvector[i];
