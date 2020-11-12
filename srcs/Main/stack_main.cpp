@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_stack.cpp                                     :+:      :+:    :+:   */
+/*   stack_main.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 16:53:54 by user42            #+#    #+#             */
-/*   Updated: 2020/11/05 19:02:28 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/12 10:50:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ int stack_main ()
 	std::cout << "***********************************************************" << std::endl;
 	std::cout << RESET << std::endl << std::endl;
 
-	std::cout << std::endl << BLUE << "***************** Test Constructeur ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "*****************  Constructeur ************" << RESET << std::endl;
 	try{
+		std::stringstream res;
 		std::deque<int> mydeque (3,100);          // deque with 3 elements
   		ft::vector<int> myvector (2,200);        // vector with 2 elements
 
@@ -32,16 +33,18 @@ int stack_main ()
   		ft::stack<int,ft::vector<int> > third;  // empty stack using vector
   		ft::stack<int,ft::vector<int> > fourth (myvector);
 
-		std::cout << "size of first: " << first.size() << '\n';
-		std::cout << "size of second: " << second.size() << '\n';
-		std::cout << "size of third: " << third.size() << '\n';
-		std::cout << "size of fourth: " << fourth.size() << '\n';
+		res << "size of first: " << first.size() << '\n';
+		res << "size of second: " << second.size() << '\n';
+		res << "size of third: " << third.size() << '\n';
+		res << "size of fourth: " << fourth.size() << '\n';
 
+		compare_result(res.str(), "size of first: 0\nsize of second: 3\nsize of third: 0\nsize of fourth: 2\n");
 	}catch(const std::exception &e){};
 
 
-std::cout << std::endl << BLUE << "***************** Test Empty ************" << RESET << std::endl;
+std::cout << std::endl << BLUE << "*****************  Empty ************" << RESET << std::endl;
 	try{
+		std::stringstream res;
 		ft::stack<int> mystack;
 		int sum (0);
 
@@ -53,27 +56,31 @@ std::cout << std::endl << BLUE << "***************** Test Empty ************" <<
 			mystack.pop();
 		}
 
-		std::cout << "total: " << sum << '\n';
+		res << "total: " << sum << '\n';
 
+		compare_result(res.str(), "total: 55\n");
 	}catch(const std::exception &e){};
 
 
-std::cout << std::endl << BLUE << "***************** Test Size ************" << RESET << std::endl;
+std::cout << std::endl << BLUE << "*****************  Size ************" << RESET << std::endl;
 	try{
+		std::stringstream res;
 		ft::stack<int> myints;
-		std::cout << "0. size: " << myints.size() << '\n';
+		res << "0. size: " << myints.size() << '\n';
 
 		for (int i=0; i<5; i++) myints.push(i);
-		std::cout << "1. size: " << myints.size() << '\n';
+		res << "1. size: " << myints.size() << '\n';
 
 		myints.pop();
-		std::cout << "2. size: " << myints.size() << '\n';
+		res << "2. size: " << myints.size() << '\n';
 
+		compare_result(res.str(), "0. size: 0\n1. size: 5\n2. size: 4\n");
 	}catch(const std::exception &e){};
 
 
-std::cout << std::endl << BLUE << "***************** Test Top ************" << RESET << std::endl;
+std::cout << std::endl << BLUE << "*****************  Top ************" << RESET << std::endl;
 	try{
+		std::stringstream res;
 		ft::stack<int> mystack;
 
 		mystack.push(10);
@@ -81,46 +88,52 @@ std::cout << std::endl << BLUE << "***************** Test Top ************" << R
 
 		mystack.top() -= 5;
 
-		std::cout << "mystack.top() is now " << mystack.top() << '\n';
+		res << "mystack.top() is now " << mystack.top() << '\n';
 
+		compare_result(res.str(), "mystack.top() is now 15\n");
 	}catch(const std::exception &e){};
 
 
-std::cout << std::endl << BLUE << "***************** Test Push ************" << RESET << std::endl;
+std::cout << std::endl << BLUE << "*****************  Push ************" << RESET << std::endl;
 	try{
+		std::stringstream res;
 		ft::stack<int> mystack;
 
 		for (int i=0; i<5; ++i) mystack.push(i);
 
-		std::cout << "Popping out elements...";
+		res << "Popping out elements...";
 		while (!mystack.empty())
 		{
-			std::cout << ' ' << mystack.top();
+			res << ' ' << mystack.top();
 			mystack.pop();
 		}
-		std::cout << '\n';
+		res << '\n';
 
+		compare_result(res.str(), "Popping out elements... 4 3 2 1 0\n");
 	}catch(const std::exception &e){};
 
 
-std::cout << std::endl << BLUE << "***************** Test Pop ************" << RESET << std::endl;
+std::cout << std::endl << BLUE << "*****************  Pop ************" << RESET << std::endl;
 	try{
+		std::stringstream res;
 		ft::stack<int> mystack;
 
 		for (int i=0; i<5; ++i) mystack.push(i);
 
-		std::cout << "Popping out elements...";
+		res << "Popping out elements...";
 		while (!mystack.empty())
 		{
-			std::cout << ' ' << mystack.top();
+			res << ' ' << mystack.top();
 			mystack.pop();
 		}
-		std::cout << '\n';
+		res << '\n';
 
+		compare_result(res.str(), "Popping out elements... 4 3 2 1 0\n");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Test Operators ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "*****************  Operators ************" << RESET << std::endl;
 	try{
+		std::stringstream res;
 		ft::stack<int> a;
 		a.push(10);
 		a.push(20);
@@ -134,12 +147,13 @@ std::cout << std::endl << BLUE << "***************** Test Pop ************" << R
 		c.push(20);
 		c.push(10);
 
-		if (a==b) std::cout << "a and b are equal\n";
-		if (b!=c) std::cout << "b and c are not equal\n";
-		if (b<c) std::cout << "b is less than c\n";
-		if (c>b) std::cout << "c is greater than b\n";
-		if (a<=b) std::cout << "a is less than or equal to b\n";
-		if (a>=b) std::cout << "a is greater than or equal to b\n";
+		if (a==b) res << "a and b are equal\n";
+		if (b!=c) res << "b and c are not equal\n";
+		if (b<c) res << "b is less than c\n";
+		if (c>b) res << "c is greater than b\n";
+		if (a<=b) res << "a is less than or equal to b\n";
+		if (a>=b) res << "a is greater than or equal to b\n";
+		compare_result(res.str(), "a and b are equal\nb and c are not equal\nb is less than c\nc is greater than b\na is less than or equal to b\na is greater than or equal to b\n");
 	}catch(const std::exception &e){};
 
 	return 0;
