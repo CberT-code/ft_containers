@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector_main.cpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 14:31:44 by user42            #+#    #+#             */
+/*   Updated: 2020/11/12 14:31:44 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../Headers/Header.hpp"
 
 int vector_main(void) {
@@ -18,8 +30,8 @@ int vector_main(void) {
 
 		 // constructors used in the same order as described above:
 		ft::vector<int> first;                                // empty vector of ints
-		ft::vector<int> second (4,100);                       // four ints with value 100
-		ft::vector<int> third (second.begin(),second.end());  // iterating through second
+		ft::vector<int> second (4,100);                     // four ints with value 100
+		ft::vector<int> third (second.begin(),second.end());  // iterating through second          // four ints with value 100
 		ft::vector<int> fourth (third);                       // a copy of third
 
 		// the iterator constructor can also be used to construct from arrays:
@@ -164,7 +176,7 @@ int vector_main(void) {
 
 		compare_result(res.str(), "size: 100");
 		compare_result(res1.str(), "capacity: 128");
-		compare_result(res2.str(), "max_size: 1073741823");
+		compare_result(res2.str(), "max_size: 4611686018427387903");
 	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "**********       Resize        **********" << RESET << std::endl;
@@ -201,7 +213,7 @@ int vector_main(void) {
 		res2 << "max_size: " << (int) myvector.max_size();
 		compare_result(res.str(), "size: 100");
 		compare_result(res1.str(), "capacity: 128");
-		compare_result(res2.str(), "max_size: 1073741823");
+		compare_result(res2.str(), "max_size: -1");
 	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "**********        Empty        **********" << RESET << std::endl;
@@ -431,7 +443,6 @@ int vector_main(void) {
 		// erase the first 3 elements:
 		myvector.erase (myvector.begin(),myvector.begin()+3);
 
-// attends mais je l'affiche plus ici, je le met dans res.... hein???
 		res << "myvector contains:";
 		for (unsigned i=0; i<myvector.size(); ++i)
 			res << ' ' << myvector[i];

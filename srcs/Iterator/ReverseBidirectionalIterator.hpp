@@ -1,9 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ReverseBidirectionalIterator.hpp                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 11:42:49 by cbertola          #+#    #+#             */
+/*   Updated: 2020/11/12 11:42:53 by cbertola         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef REVERSEBIDIRECTIONALITERATOR_H
 #define REVERSEBIDIRECTIONALITERATOR_H
 
-#include "./Iterator.hpp"
-
+#include "../Headers/Header.hpp"
 template <typename T>
 class ReverseBidirectionalIterator : public ReverseForwardIterator<T>
 {
@@ -14,7 +24,6 @@ class ReverseBidirectionalIterator : public ReverseForwardIterator<T>
 		**************************************************/
 
 		ReverseBidirectionalIterator(void){}
-		
 		ReverseBidirectionalIterator(ReverseBidirectionalIterator const &src){
 			operator=(src);
 		}
@@ -25,11 +34,9 @@ class ReverseBidirectionalIterator : public ReverseForwardIterator<T>
 			return (*this);
 		}
 		virtual ~ReverseBidirectionalIterator(void){}
-
 		ReverseBidirectionalIterator(maillon<T> *src){
 			this->it = src;
 		}
-
 
 		/**************************************************
 		********* operator '--a' 'a--' '*a--' *************

@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   OutputIterator.hpp                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 11:42:37 by cbertola          #+#    #+#             */
+/*   Updated: 2020/11/12 11:42:40 by cbertola         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef OUTPUTITERATOR_H
 #define OUTPUTITERATOR_H
 
-#include "./Iterator.hpp"
+#include "../Headers/Header.hpp"
 
 template <typename T>
 class OutputIterator

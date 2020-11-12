@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   RandomAccessIterator.hpp                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 11:42:58 by cbertola          #+#    #+#             */
+/*   Updated: 2020/11/12 11:43:01 by cbertola         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef RANDOMACCESSITERATOR_H
 #define RANDOMACCESSITERATOR_H
 
-#include "./Iterator.hpp"
+#include "../Headers/Header.hpp"
 
 template <typename T>
 class RandomAccessIterator
@@ -108,7 +119,6 @@ class RandomAccessIterator
 		bool								operator<=(const RandomAccessIterator& rhs) const {
 			return (this->_array <= rhs._array);
 		}
-		
 		bool								operator>=(const RandomAccessIterator& rhs) const {
 			return (this->_array >= rhs._array);
 		}

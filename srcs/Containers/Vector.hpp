@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Vector.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 14:31:01 by user42            #+#    #+#             */
+/*   Updated: 2020/11/12 14:31:03 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef VECTOR_H
 #define VECTOR_H
@@ -36,23 +47,24 @@ namespace ft
 			}
 			explicit 							vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()){
 				this->_al = alloc;
-				this->_array = new T[1];
-				this->_capacity = 1;
+				this->_array = NULL;
 				this->_size = 0;
+				this->_capacity = 0;
 				assign(n, val);
 			}
 			explicit 							vector (int n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()){
 				this->_al = alloc;
-				this->_array = new T[1];
-				this->_capacity = 1;
+				this->_array = NULL;
 				this->_size = 0;
+				this->_capacity = 0;
 				assign(n, val);
 			}
 			template <class InputIterator>
 												vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()){
 				this->_al = alloc;
-				this->_array = new value_type[1];
+				this->_array = NULL;
 				this->_size = 0;
+				this->_capacity = 0;
 				this->assign(first, last);
 			}
 			vector(const vector& x){
@@ -68,8 +80,10 @@ namespace ft
 				this->clear();
 				if (this != &src){
 					this->_array = new T[src._capacity];
+					assign(src.begin(), src.end());
 					this->_capacity = src._capacity;
 					this->_size = src._size;
+					this->_al = src._al;
 				}
 				return (*this);
 			}
@@ -111,7 +125,8 @@ namespace ft
 				return (this->_size);
 			}
 			size_type							max_size() const{
-				return (1073741823);
+				size_type res = (pow(2, 64) / sizeof(value_type));
+                return (res - 1);
 			}
 			void								resize (size_type n, value_type val = value_type()){
 				if (n <= this->_size)

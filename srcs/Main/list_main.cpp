@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   list_main.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 09:22:09 by moi          #+#    #+#             */
-/*   Updated: 2020/10/30 18:24:12 by user42           ###   ########.fr       */
+/*   Created: 2020/11/12 14:31:15 by user42            #+#    #+#             */
+/*   Updated: 2020/11/12 14:31:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,18 +173,18 @@ int list_main()
 
 	}catch(const std::exception &e){};
 
-	// std::cout << std::endl << BLUE << "*********** max_size *  **********" << RESET << std::endl;
-	// try{
-	// 	size_t i;
-	// 	ft::list<int> mylist;
+	std::cout << std::endl << BLUE << "***********      max_size       **********" << RESET << std::endl;
+	try{
+		size_t i;
+		ft::list<int> mylist;
 
-	// 	std::cout << "Enter number of elements: ";
-	// 	std::cin >> i;
+		std::cout << "Enter number of elements: ";
+		std::cin >> i;
 
-	// 	if (i < mylist.max_size()) 
-	// 		mylist.resize(i);
-	// 	else std::cout << "That size exceeds the limit.\n";
-	// }catch(const std::exception &e){};
+		if (i < mylist.max_size()) 
+			mylist.resize(i);
+		else std::cout << "That size exceeds the limit.\n";
+	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "**********        front         **********" << RESET << std::endl;
 	try{
@@ -651,17 +651,17 @@ int list_main()
 	std::cout << std::endl << BLUE << "**********  SWAP NON MEMBER     **********" << RESET << std::endl;
 	try{
 		std::stringstream res, res1;
-		std::list<int> foo (3,100);   // three ints with a value of 100
-		std::list<int> bar (5,200);   // five ints with a value of 200
+		ft::list<int> foo (3,100);   // three ints with a value of 100
+		ft::list<int> bar (5,200);   // five ints with a value of 200
 
 		foo.swap(bar);
 
 		res << "foo contains:";
-		for (std::list<int>::iterator it = foo.begin(); it!=foo.end(); ++it)
+		for (ft::list<int>::Iterator it = foo.begin(); it!=foo.end(); ++it)
 			res << ' ' << *it;
 
 		res1 << "bar contains:";
-		for (std::list<int>::iterator it = bar.begin(); it!=bar.end(); ++it)
+		for (ft::list<int>::Iterator it = bar.begin(); it!=bar.end(); ++it)
 			res1 << ' ' << *it;
 		compare_result(res.str(), "foo contains: 200 200 200 200 200");
 		compare_result(res1.str(), "bar contains: 100 100 100");

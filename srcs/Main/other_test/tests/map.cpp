@@ -30,7 +30,6 @@ static void constructors(void)
 	check("(copy) m5 == m6", (m3 == m4));
 	ft::map<int, int> m7;
 	std::map<int, int> m8;
-	std::cout << "test ici" << std::endl;
 	m7[0] = 1;
 	m7[1] = 2;
 	m7[2] = 3;
@@ -65,6 +64,9 @@ static void max_size(void)
 	ft::map<std::string, int> m3;
 	std::map<std::string, int> m4;
 	check("m3.max_size() == m4.max_size()", m3.max_size(), m4.max_size());
+	ft::map<std::string, double> m5;
+	std::map<std::string, double> m6;
+	check("m3.max_size() == m4.max_size()", m5.max_size(), m6.max_size());
 }
 
 static void access_operator(void)
@@ -74,7 +76,6 @@ static void access_operator(void)
 	std::map<std::string, int> m2;
 	m1["a"] = 1;
 	m1["b"] = 0;
-	std::cout << "test ici" << std::endl;
 	m1["c"] = 42;
 	m1["d"] = -5;
 	m1["d"] = 11;
@@ -131,9 +132,11 @@ static void erase(void)
 	check("m1 == m2", m1 == m2);
 	m1.erase(++m1.begin(), --m1.end());
 	m2.erase(++m2.begin(), --m2.end());
-	check("m1 == m2", m1 == m2);
+
 	m1.erase("a");
 	m2.erase("a");
+
+	check("m1 == m2", m1 == m2);
 	check("m1 == m2", m1 == m2);
 }
 

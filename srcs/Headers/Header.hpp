@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Header.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 17:16:44 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/11 10:29:46 by cbertola         ###   ########.fr       */
+/*   Created: 2020/11/12 14:30:13 by user42            #+#    #+#             */
+/*   Updated: 2020/11/12 14:30:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ struct maillon
 	maillon					*left;
 	T						*ptr;		
 };
-
 
 # define RESET   		"\033[0m"
 # define BLACK   		"\033[30m"				/* Black */
@@ -48,7 +47,6 @@ struct maillon
 #include <iostream>
 #include <iomanip>
 #include <limits>
-#include <list>
 #include <memory>
 #include <sstream>
 #include <string>
@@ -57,7 +55,6 @@ struct maillon
 #include <tgmath.h>
 #include <utility>
 #include <variant>
-
 
 #include "../Iterator/InputIterator.hpp"
 #include "../Iterator/OutputIterator.hpp"
@@ -68,7 +65,6 @@ struct maillon
 #include "../Iterator/ReverseForwardIterator.hpp"
 #include "../Iterator/ReverseBidirectionalIterator.hpp"
 #include "../Iterator/ReverseRandomAccessIterator.hpp"
-
 
 #include "../Containers/List.hpp"
 #include "../Containers/Vector.hpp"

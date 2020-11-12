@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   map_main.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 09:22:09 by moi          #+#    #+#             */
-/*   Updated: 2020/10/30 18:24:12 by user42           ###   ########.fr       */
+/*   Created: 2020/11/12 14:31:25 by user42            #+#    #+#             */
+/*   Updated: 2020/11/12 14:31:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,30 @@
 
 int map_main()
 {
-	// std::cout << std::endl << std::endl << YELLOW;
-	// std::cout << "***********************************************************" << std::endl;
-	// std::cout << "*****************             MAP         *****************" << std::endl;
-	// std::cout << "***********************************************************" << std::endl;
-	// std::cout << RESET << std::endl << std::endl;
+	std::cout << std::endl << std::endl << YELLOW;
+	std::cout << "***********************************************************" << std::endl;
+	std::cout << "*****************             MAP         *****************" << std::endl;
+	std::cout << "***********************************************************" << std::endl;
+	std::cout << RESET << std::endl << std::endl;
 
-	// std::cout << std::endl << BLUE << "**********     Constructor      **********" << RESET << std::endl;
-	// try{
-	// 	std::stringstream 	res;
-	// 	ft::map<char,int> first;
+	std::cout << std::endl << BLUE << "**********     Constructor      **********" << RESET << std::endl;
+	try{
+		ft::map<char,int> first;
 
-	// 	first['a']=10;
-	// 	first['b']=30;
-	// 	first['c']=50;
-	// 	first['d']=70;
+		first['a']=10;
+		first['b']=30;
+		first['c']=50;
+		first['d']=70;
 
-	// 	ft::map<char,int> second (first.begin(),first.end());
+		ft::map<char,int> second (first.begin(),first.end());
 
-	// 	ft::map<char,int> third (second);
+		ft::map<char,int> third (second);
 
-	// 	ft::map<char,int,classcomp> fourth;                 // class as Compare
+		ft::map<char,int,classcomp> fourth;                 // class as Compare
 
-	// 	bool(*fn_pt)(char,char) = fncomp;
-	// 	ft::map<char,int,bool(*)(char,char)> fifth (fn_pt); 
-	// 	compare_result(res.str(), "The contents of fifth are: 16 2 77 29");
-	// }catch(const std::exception &e){};
+		bool(*fn_pt)(char,char) = fncomp;
+		ft::map<char,int,bool(*)(char,char)> fifth (fn_pt);
+	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "**********       Operator=        **********" << RESET << std::endl;
 	try{
@@ -134,7 +132,7 @@ int map_main()
 	std::cout << std::endl << BLUE << "**********          Empty        **********" << RESET << std::endl;
 	try{
 		std::stringstream 	res;
-		std::map<char,int> mymap;
+		ft::map<char,int> mymap;
 		
 		mymap['a']=10;
 		mymap['b']=20;
@@ -163,14 +161,15 @@ int map_main()
 	std::cout << std::endl << BLUE << "**********        Max_size      **********" << RESET << std::endl;
 	try{
 		int i;
+		std::stringstream 	res;
 		ft::map<int,int> mymap;
-
 		if (mymap.max_size()>1000)
 		{
 			for (i=0; i<1000; i++) mymap[i]=0;
-			std::cout << "The map contains 1000 elements.\n";
+			res << "The map contains 1000 elements.";
 		}
-		else std::cout << "The map could not hold 1000 elements.\n";
+		else res << "The map could not hold 1000 elements.\n";
+		compare_result(res.str(), "The map contains 1000 elements.");
 	}catch(const std::exception &e){};
 
 	std::cout << std::endl << BLUE << "**********        Operator[]     **********" << RESET << std::endl;
@@ -438,8 +437,8 @@ int map_main()
 	std::cout << std::endl << BLUE << "**********      Upper_bound      **********" << RESET << std::endl;
 	try{
 		std::stringstream 	res;
-		std::map<char,int> mymap;
-		std::map<char,int>::iterator itlow,itup;
+		ft::map<char,int> mymap;
+		ft::map<char,int>::Iterator itlow,itup;
 
 		mymap['a']=20;
 		mymap['b']=40;
@@ -453,7 +452,7 @@ int map_main()
 		mymap.erase(itlow,itup);        // erases [itlow,itup)
 
 		// print content:
-		for (std::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+		for (ft::map<char,int>::Iterator it=mymap.begin(); it!=mymap.end(); ++it)
 			res << it->first << " => " << it->second << '\n';
 		compare_result(res.str(), "a => 20\ne => 100\n");
 	}catch(const std::exception &e){};
@@ -461,13 +460,13 @@ int map_main()
 	std::cout << std::endl << BLUE << "**********      equal_range      **********" << RESET << std::endl;
 	try{
 		std::stringstream 	res;
-		std::map<char,int> mymap;
+		ft::map<char,int> mymap;
 
 		mymap['a']=10;
 		mymap['b']=20;
 		mymap['c']=30;
 
-		std::pair<std::map<char,int>::iterator,std::map<char,int>::iterator> ret;
+		std::pair<ft::map<char,int>::Iterator,ft::map<char,int>::Iterator> ret;
 		ret = mymap.equal_range('b');
 
 		res << "lower bound points to: ";

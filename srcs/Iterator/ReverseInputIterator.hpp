@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ReverseInputIterator.hpp                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 11:43:14 by cbertola          #+#    #+#             */
+/*   Updated: 2020/11/12 11:44:05 by cbertola         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef REVERSEINPUTITERATOR_H
 #define REVERSEINPUTITERATOR_H
@@ -21,15 +32,12 @@ class ReverseInputIterator
 				this->it = src.it;
 			return (*this);
 		}
-		
 		virtual ~ReverseInputIterator(void){}
 		
 		/**************************************************
 		*************** operator '==' '!=' ****************
 		**************************************************/
 		bool					operator==(const ReverseInputIterator &src) const{
-			// std::cout << "it = " << this->it << std::endl;
-			// std::cout << "tata.end() = " << src.it << std::endl;
 			if (src.it == this->it)
 				return (true);
 			return (false);
@@ -37,7 +45,6 @@ class ReverseInputIterator
 		bool					operator!=(const ReverseInputIterator &src) const{
 			return (!operator==(src));
 		}
-		
 
 		/**************************************************
 		************* operator '*a' 'a->m' ****************
@@ -69,7 +76,5 @@ class ReverseInputIterator
 	protected :
 		maillon<T>				*it;
 };
-
-#include "./Iterator.hpp"
 
 #endif

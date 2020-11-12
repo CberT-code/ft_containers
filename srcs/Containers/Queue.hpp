@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Queue.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 14:30:43 by user42            #+#    #+#             */
+/*   Updated: 2020/11/12 14:30:44 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef QUEUE_HPP
 # define QUEUE_HPP
@@ -14,27 +25,19 @@ namespace ft
 		typedef T					value_type;
 		typedef Container			container_type;
 		typedef size_t				size_type;
-
 	
 		/**************************************************
-		****************** Forme Coplien*******************
+		****************** Form Coplien *******************
 		**************************************************/
 
-		explicit 			queue (const container_type& ctnr = container_type())
-		{
+		explicit 					queue (const container_type& ctnr = container_type()){
 			this->_container = ctnr;
 		}
-
-		~queue(void)
-		{
-		}
-
-							queue(const queue& x){
+		~queue(void){}
+		queue(const queue& x){
 			operator=(x);
 		}
-
-		queue				&operator=(const queue &src)
-		{
+		queue						&operator=(const queue &src){
 			this->_container = src._container;
 			return (*this);
 		}
@@ -43,14 +46,10 @@ namespace ft
 		******************* empty size ********************
 		**************************************************/
 
-		bool				empty(void) const
-		{
+		bool						empty(void) const{
 			return (this->_container.empty());
 		}
-
-
-		size_type			size(void) const
-		{
+		size_type					size(void) const{
 			return (this->_container.size());
 		}
 
@@ -58,26 +57,16 @@ namespace ft
 		******************** front back *******************
 		**************************************************/
 
-		value_type			&front(void)
-		{
+		value_type					&front(void){
 			return (this->_container.front());
 		}
-
-
-		const value_type	&front(void) const
-		{
+		const value_type			&front(void) const{
 			return (this->_container.front());
 		}
-
-
-		value_type			&back(void)
-		{
+		value_type					&back(void){
 			return (this->_container.back());
 		}
-
-
-		const value_type	&back(void) const
-		{
+		const value_type			&back(void) const{
 			return (this->_container.back());
 		}
 
@@ -85,17 +74,12 @@ namespace ft
 		******************** push pop *********************
 		**************************************************/
 
-		void				push(const value_type &val)
-		{
+		void						push(const value_type &val){
 			return (this->_container.push_back(val));
 		}
-
-
-		void				pop(void)
-		{
+		void						pop(void){
 			return (this->_container.pop_front());
 		}
-
 
 	private:
 		container_type				_container;
@@ -116,38 +100,27 @@ namespace ft
 
 
 template <class T, class Container>
-	bool		operator==(const ft::queue<T,Container> &lhs, const ft::queue<T,Container> &rhs)
-	{
+	bool		operator==(const ft::queue<T,Container> &lhs, const ft::queue<T,Container> &rhs){
 		return (lhs._container == rhs._container);
 	}
-
 template <class T, class Container>
-	bool		operator!=(const ft::queue<T,Container> &lhs, const ft::queue<T,Container> &rhs)
-	{
+	bool		operator!=(const ft::queue<T,Container> &lhs, const ft::queue<T,Container> &rhs){
 		return (lhs._container != rhs._container);
 	}
-
 template <class T, class Container>
-	bool		operator<(const ft::queue<T,Container> &lhs, const ft::queue<T,Container> &rhs)
-	{
+	bool		operator<(const ft::queue<T,Container> &lhs, const ft::queue<T,Container> &rhs){
 		return (lhs._container < rhs._container);
 	}
-
 template <class T, class Container>
-	bool		operator<=(const ft::queue<T,Container> &lhs, const ft::queue<T,Container> &rhs)
-	{
+	bool		operator<=(const ft::queue<T,Container> &lhs, const ft::queue<T,Container> &rhs){
 		return (lhs._container <= rhs._container);
 	}
-
 template <class T, class Container>
-	bool		operator>(const ft::queue<T,Container> &lhs, const ft::queue<T,Container> &rhs)
-	{
+	bool		operator>(const ft::queue<T,Container> &lhs, const ft::queue<T,Container> &rhs){
 		return (lhs._container > rhs._container);
 	}
-
 template <class T, class Container>
-	bool		operator>=(const ft::queue<T,Container> &lhs, const ft::queue<T,Container> &rhs)
-	{
+	bool		operator>=(const ft::queue<T,Container> &lhs, const ft::queue<T,Container> &rhs){
 		return (lhs._container >= rhs._container);
 	}
 
