@@ -143,9 +143,7 @@ namespace ft
 				return (this->_size);
 			}
 			size_type							max_size() const{
-				if (sizeof(value_type) == 32)
-					return (384307168202282325);
-				return (768614336404564650);
+				return (std::numeric_limits<std::size_t>::max() / sizeof(this->_begin));
 			}
 
 			/**************************************************
@@ -390,12 +388,12 @@ namespace ft
 
 				while (start != end){
 					while (start != end){
-						if (comp(*end->ptr, *start->ptr)){
+						if (comp(*end->ptr, *start->ptr) == true){
 							std::swap(start->ptr, end->ptr);
 							end = end->prev;
 						}
 						else{
-						end = end->prev;
+							end = end->prev;
 						}
 					}
 					end = this->_begin->prev;
@@ -479,12 +477,13 @@ namespace ft
 
 				while (x.size())
 				{
-					if (comp(*itx,*it) || (it == this->end()))
+					if (comp(*itx,*it) || it == this->end())
 						this->splice(it, x, itx);
 					else
 						it++;
 					itx = x.begin();
 				}
+				//this->sort(comp);
 			}
 			void 								reverse(void){
 
