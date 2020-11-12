@@ -14,7 +14,6 @@ class ReverseBidirectionalIterator : public ReverseForwardIterator<T>
 		**************************************************/
 
 		ReverseBidirectionalIterator(void){}
-		
 		ReverseBidirectionalIterator(ReverseBidirectionalIterator const &src){
 			operator=(src);
 		}
@@ -25,11 +24,9 @@ class ReverseBidirectionalIterator : public ReverseForwardIterator<T>
 			return (*this);
 		}
 		virtual ~ReverseBidirectionalIterator(void){}
-
 		ReverseBidirectionalIterator(maillon<T> *src){
 			this->it = src;
 		}
-
 
 		/**************************************************
 		********* operator '--a' 'a--' '*a--' *************

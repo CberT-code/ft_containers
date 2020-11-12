@@ -36,23 +36,24 @@ namespace ft
 			}
 			explicit 							vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()){
 				this->_al = alloc;
-				this->_array = new T[1];
-				this->_capacity = 1;
+				this->_array = NULL;
 				this->_size = 0;
+				this->_capacity = 0;
 				assign(n, val);
 			}
 			explicit 							vector (int n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()){
 				this->_al = alloc;
-				this->_array = new T[1];
-				this->_capacity = 1;
+				this->_array = NULL;
 				this->_size = 0;
+				this->_capacity = 0;
 				assign(n, val);
 			}
 			template <class InputIterator>
 												vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()){
 				this->_al = alloc;
-				this->_array = new value_type[1];
+				this->_array = NULL;
 				this->_size = 0;
+				this->_capacity = 0;
 				this->assign(first, last);
 			}
 			vector(const vector& x){

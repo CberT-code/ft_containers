@@ -21,7 +21,6 @@ class ReverseInputIterator
 				this->it = src.it;
 			return (*this);
 		}
-		
 		virtual ~ReverseInputIterator(void){}
 		
 		/**************************************************
@@ -37,7 +36,6 @@ class ReverseInputIterator
 		bool					operator!=(const ReverseInputIterator &src) const{
 			return (!operator==(src));
 		}
-		
 
 		/**************************************************
 		************* operator '*a' 'a->m' ****************

@@ -13,8 +13,6 @@ struct ReverseForwardIterator : public ReverseInputIterator<T>
 	public :
 		ReverseForwardIterator(void){}
 
-	
-
 };
 
 #endif

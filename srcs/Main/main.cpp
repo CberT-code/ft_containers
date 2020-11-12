@@ -11,15 +11,12 @@ void 			compare_result(std::string res1, std::string res2)
 }
 
 int main(void) {
-	list_main();
 	
-	// std::system("clear");
+	std::system("clear");
+	list_main();
 	vector_main();
-	// std::system("clear");
 	queue_main();
-	// std::system("clear");
 	stack_main();
-	// std::system("clear");
 	map_main();
 	return (1);
 }

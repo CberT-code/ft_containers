@@ -108,7 +108,6 @@ class RandomAccessIterator
 		bool								operator<=(const RandomAccessIterator& rhs) const {
 			return (this->_array <= rhs._array);
 		}
-		
 		bool								operator>=(const RandomAccessIterator& rhs) const {
 			return (this->_array >= rhs._array);
 		}
