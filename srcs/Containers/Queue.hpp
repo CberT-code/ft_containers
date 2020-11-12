@@ -1,4 +1,3 @@
-
 #ifndef QUEUE_HPP
 # define QUEUE_HPP
 #include "../Headers/Header.hpp"

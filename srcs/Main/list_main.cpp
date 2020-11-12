@@ -173,7 +173,7 @@ int list_main()
 
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*********** max_size *  **********" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "***********      max_size       **********" << RESET << std::endl;
 	try{
 		size_t i;
 		ft::list<int> mylist;
