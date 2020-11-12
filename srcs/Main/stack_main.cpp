@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_main.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/04 16:53:54 by user42            #+#    #+#             */
-/*   Updated: 2020/11/12 10:50:04 by user42           ###   ########.fr       */
+/*   Created: 2020/11/12 11:50:31 by cbertola          #+#    #+#             */
+/*   Updated: 2020/11/12 11:58:20 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int stack_main ()
 	std::cout << "***********************************************************" << std::endl;
 	std::cout << RESET << std::endl << std::endl;
 
-	std::cout << std::endl << BLUE << "*****************  Constructeur ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********     Constructor      **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		std::deque<int> mydeque (3,100);          // deque with 3 elements
@@ -42,7 +42,7 @@ int stack_main ()
 	}catch(const std::exception &e){};
 
 
-std::cout << std::endl << BLUE << "*****************  Empty ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        Empty         **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::stack<int> mystack;
@@ -62,7 +62,7 @@ std::cout << std::endl << BLUE << "*****************  Empty ************" << RES
 	}catch(const std::exception &e){};
 
 
-std::cout << std::endl << BLUE << "*****************  Size ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********         Size         **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::stack<int> myints;
@@ -78,7 +78,7 @@ std::cout << std::endl << BLUE << "*****************  Size ************" << RESE
 	}catch(const std::exception &e){};
 
 
-std::cout << std::endl << BLUE << "*****************  Top ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********         Top          **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::stack<int> mystack;
@@ -93,8 +93,7 @@ std::cout << std::endl << BLUE << "*****************  Top ************" << RESET
 		compare_result(res.str(), "mystack.top() is now 15\n");
 	}catch(const std::exception &e){};
 
-
-std::cout << std::endl << BLUE << "*****************  Push ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********         Push         **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::stack<int> mystack;
@@ -113,7 +112,7 @@ std::cout << std::endl << BLUE << "*****************  Push ************" << RESE
 	}catch(const std::exception &e){};
 
 
-std::cout << std::endl << BLUE << "*****************  Pop ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********         Pop          **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::stack<int> mystack;
@@ -131,7 +130,7 @@ std::cout << std::endl << BLUE << "*****************  Pop ************" << RESET
 		compare_result(res.str(), "Popping out elements... 4 3 2 1 0\n");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "*****************  Operators ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********      Operators       **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::stack<int> a;

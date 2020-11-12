@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Queue.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 11:40:10 by cbertola          #+#    #+#             */
+/*   Updated: 2020/11/12 11:40:13 by cbertola         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef QUEUE_HPP
 # define QUEUE_HPP
 #include "../Headers/Header.hpp"
@@ -18,14 +30,14 @@ namespace ft
 		****************** Form Coplien *******************
 		**************************************************/
 
-		explicit 			queue (const container_type& ctnr = container_type()){
+		explicit 					queue (const container_type& ctnr = container_type()){
 			this->_container = ctnr;
 		}
 		~queue(void){}
 		queue(const queue& x){
 			operator=(x);
 		}
-		queue				&operator=(const queue &src){
+		queue						&operator=(const queue &src){
 			this->_container = src._container;
 			return (*this);
 		}
@@ -34,10 +46,10 @@ namespace ft
 		******************* empty size ********************
 		**************************************************/
 
-		bool				empty(void) const{
+		bool						empty(void) const{
 			return (this->_container.empty());
 		}
-		size_type			size(void) const{
+		size_type					size(void) const{
 			return (this->_container.size());
 		}
 
@@ -45,16 +57,16 @@ namespace ft
 		******************** front back *******************
 		**************************************************/
 
-		value_type			&front(void){
+		value_type					&front(void){
 			return (this->_container.front());
 		}
-		const value_type	&front(void) const{
+		const value_type			&front(void) const{
 			return (this->_container.front());
 		}
-		value_type			&back(void){
+		value_type					&back(void){
 			return (this->_container.back());
 		}
-		const value_type	&back(void) const{
+		const value_type			&back(void) const{
 			return (this->_container.back());
 		}
 
@@ -62,10 +74,10 @@ namespace ft
 		******************** push pop *********************
 		**************************************************/
 
-		void				push(const value_type &val){
+		void						push(const value_type &val){
 			return (this->_container.push_back(val));
 		}
-		void				pop(void){
+		void						pop(void){
 			return (this->_container.pop_front());
 		}
 

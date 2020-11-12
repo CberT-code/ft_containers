@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   InputIterator.hpp                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 11:41:21 by cbertola          #+#    #+#             */
+/*   Updated: 2020/11/12 11:43:53 by cbertola         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef INPUTITERATOR_H
 #define INPUTITERATOR_H
@@ -69,7 +80,5 @@ class InputIterator
 		maillon<T>					*it;
 
 };
-
-#include "./Iterator.hpp"
 
 #endif

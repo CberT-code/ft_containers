@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector_main.cpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 11:50:38 by cbertola          #+#    #+#             */
+/*   Updated: 2020/11/12 11:50:44 by cbertola         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../Headers/Header.hpp"
 
 int vector_main(void) {
@@ -18,10 +30,8 @@ int vector_main(void) {
 
 		 // constructors used in the same order as described above:
 		ft::vector<int> first;                                // empty vector of ints
-		ft::vector<int> second (4,100);            
-		std::cout << "test ici" << std::endl;           // four ints with value 100
-		ft::vector<int> third (second.begin(),second.end());  // iterating through second
-		std::cout << "test ici" << std::endl;           // four ints with value 100
+		ft::vector<int> second (4,100);                     // four ints with value 100
+		ft::vector<int> third (second.begin(),second.end());  // iterating through second          // four ints with value 100
 		ft::vector<int> fourth (third);                       // a copy of third
 
 		// the iterator constructor can also be used to construct from arrays:

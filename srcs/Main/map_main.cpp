@@ -132,7 +132,7 @@ int map_main()
 	std::cout << std::endl << BLUE << "**********          Empty        **********" << RESET << std::endl;
 	try{
 		std::stringstream 	res;
-		std::map<char,int> mymap;
+		ft::map<char,int> mymap;
 		
 		mymap['a']=10;
 		mymap['b']=20;
@@ -437,8 +437,8 @@ int map_main()
 	std::cout << std::endl << BLUE << "**********      Upper_bound      **********" << RESET << std::endl;
 	try{
 		std::stringstream 	res;
-		std::map<char,int> mymap;
-		std::map<char,int>::iterator itlow,itup;
+		ft::map<char,int> mymap;
+		ft::map<char,int>::Iterator itlow,itup;
 
 		mymap['a']=20;
 		mymap['b']=40;
@@ -452,7 +452,7 @@ int map_main()
 		mymap.erase(itlow,itup);        // erases [itlow,itup)
 
 		// print content:
-		for (std::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+		for (ft::map<char,int>::Iterator it=mymap.begin(); it!=mymap.end(); ++it)
 			res << it->first << " => " << it->second << '\n';
 		compare_result(res.str(), "a => 20\ne => 100\n");
 	}catch(const std::exception &e){};
@@ -460,13 +460,13 @@ int map_main()
 	std::cout << std::endl << BLUE << "**********      equal_range      **********" << RESET << std::endl;
 	try{
 		std::stringstream 	res;
-		std::map<char,int> mymap;
+		ft::map<char,int> mymap;
 
 		mymap['a']=10;
 		mymap['b']=20;
 		mymap['c']=30;
 
-		std::pair<std::map<char,int>::iterator,std::map<char,int>::iterator> ret;
+		std::pair<ft::map<char,int>::Iterator,ft::map<char,int>::Iterator> ret;
 		ret = mymap.equal_range('b');
 
 		res << "lower bound points to: ";

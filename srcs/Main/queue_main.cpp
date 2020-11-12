@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   queue_main.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 09:22:09 by moi          #+#    #+#             */
-/*   Updated: 2020/10/30 18:24:12 by user42           ###   ########.fr       */
+/*   Created: 2020/11/12 11:50:14 by cbertola          #+#    #+#             */
+/*   Updated: 2020/11/12 11:56:28 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int queue_main()
 	std::cout << "***********************************************************" << std::endl;
 	std::cout << RESET << std::endl << std::endl;
 
-	std::cout << std::endl << BLUE << "***************** Constructeur ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********     Constructor      **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		std::deque<int> mydeck (3,100);        // deque with 3 elements
@@ -42,7 +42,7 @@ int queue_main()
 	}catch(const std::exception &e){};
 
 
-std::cout << std::endl << BLUE << "***************** Empty ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        empty         **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::queue<int> myqueue;
@@ -62,7 +62,7 @@ std::cout << std::endl << BLUE << "***************** Empty ************" << RESE
 		compare_result(res.str(), "total: 55\n");
 	}catch(const std::exception &e){};
 
-std::cout << std::endl << BLUE << "***************** Size ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        size          **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::queue<int> myints;
@@ -78,7 +78,7 @@ std::cout << std::endl << BLUE << "***************** Size ************" << RESET
 		compare_result(res.str(), "0. size: 0\n1. size: 5\n2. size: 4\n");
 	}catch(const std::exception &e){};
 
-std::cout << std::endl << BLUE << "***************** Front ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        front         **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::queue<int> myqueue;
@@ -95,7 +95,7 @@ std::cout << std::endl << BLUE << "***************** Front ************" << RESE
 		compare_result(res.str(), "myqueue.front() is now 61\n");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Back ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        back          **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::queue<int> myqueue;
@@ -112,7 +112,7 @@ std::cout << std::endl << BLUE << "***************** Front ************" << RESE
 		compare_result(res.str(), "myqueue.back() is now 63\n");
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Push ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********         push         **********" << RESET << std::endl;
 	try{
 		ft::queue<int> myqueue;
   		int myint;
@@ -133,7 +133,7 @@ std::cout << std::endl << BLUE << "***************** Front ************" << RESE
 
 	}catch(const std::exception &e){};
 
-	std::cout << std::endl << BLUE << "***************** Pop ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********          pop         **********" << RESET << std::endl;
 	try{
 		ft::queue<int> myqueue;
 		int myint;
@@ -157,7 +157,7 @@ std::cout << std::endl << BLUE << "***************** Front ************" << RESE
 	}catch(const std::exception &e){};
 
 	
-	std::cout << std::endl << BLUE << "*****************  Operators ************" << RESET << std::endl;
+	std::cout << std::endl << BLUE << "**********        Operators      **********" << RESET << std::endl;
 	try{
 		std::stringstream res;
 		ft::queue<int> a;

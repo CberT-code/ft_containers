@@ -6,10 +6,9 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:25:32 by cbertola          #+#    #+#             */
-/*   Updated: 2020/11/12 09:08:41 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/11/12 11:40:51 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MAP_HPP
 #define MAP_HPP
@@ -68,7 +67,6 @@ namespace ft
 				this->_al = alloc;
 				this->_comp = comp;
 			}
-
 			template<class InputIterator>
 			map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()){
 				this->_al = alloc;
@@ -78,19 +76,15 @@ namespace ft
 				this->_size = 0;
 				insert(first, last);
 			}
-
 			map(const map &objmap){
 				this->_begin = NULL;
 				this->_endsize = NULL;
 				this->_size = 0;
 				operator=(objmap);
 			}
-
 			~map(void){
 				clear();
-
 			}
-
 			map											&operator=(const map &objmap){
 				this->clear();
 				this->_begin = NULL;
@@ -152,7 +146,7 @@ namespace ft
 			**************************************************/
 
 			bool										empty(void) const {
-				return (this->_begin == NULL);
+				return (this->_size < 2);
 			}
 
 			size_type									size(void) const {
